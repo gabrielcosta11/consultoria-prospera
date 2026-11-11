@@ -1,0 +1,499 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Def_planejamento_ferias" targetNamespace="https://prospera.local/processos/rh/planejamento_ferias" name="RH — Planejamento e concessão de férias" exporter="Documentação de processos Próspera" exporterVersion="1.0">
+  <bpmn:process id="planejamento_ferias_ASIS_Process" name="AS-IS — Planejamento e concessão de férias" isExecutable="false">
+    <bpmn:documentation>Objetivo: acompanhar férias de funcionários, articular datas com a capacidade da área e registrar o período aprovado no sistema contábil. Limites: necessidade de planejamento/acompanhamento até lançamento das datas e geração dos avisos/documentos; gozo, pagamento, retorno, assinatura e arquivamento não foram detalhados. Descanso PJ não equivale a férias CLT e fica fora deste fluxo: condições e aprovação devem ser conferidas contrato a contrato (ver ../contratacao_pj/contratacao_pj.xml).
+Responsabilidades atuais relatadas: Ronaldo consulta o relatório; equipe RH propõe e coordena; líderes dão aval conforme a capacidade; colaboradores confirmam; sistema contábil gera avisos e documentos após lançamento. Entradas: relatório de períodos vencidos/a vencer, dias disponíveis e prazo limite, propostas de datas e capacidade da equipe. Saídas: datas aprovadas/confirmadas e aviso/documentos gerados.
+Dificuldades: planejamento concentrado no RH e tardio, visualização coletiva limitada, pouca antecipação da capacidade, sobreposição de ausências e remarcações por demanda; sistema não notifica automaticamente RH ou funcionário. Origem: seção 7 e notas do board.
+Divergência D-FER-01: nota 3458764683995247715 diz RH define as férias, não os líderes; a seção 7 descreve proposta do RH seguida de aval dos líderes e confirmação dos funcionários. O AS-IS modela a sequência detalhada da transcrição sem tratar a nota como exclusão definitiva do líder; confirmar com o setor a autoridade efetiva e a prática de cada área. A centralização do planejamento no RH é convergente nas duas fontes.
+Identificação de sistema: nota 3458764683994924148 nomeia Contmatic; a transcrição não nomeia o sistema contábil e pede confirmar nomes e recursos. Referência Contmatic proveniente apenas do board, a validar; não se modela integração comprovada.
+Regras e limites: relatório possui dias e prazo limite, mas não foram fornecidas fórmulas, regras de fracionamento, prazos de aviso ou pagamento. Não inferir regras legais. Dois ou três meses de antecedência são ideia discutida, não SLA ou temporizador aprovado.
+Pendências: papéis e autoridade final por área; rotina de consulta; dados/fórmulas e limites aplicáveis; tratamento de férias vencidas; critérios de capacidade; preferência/recusa/remarcação; assinatura, entrega e guarda dos avisos; responsáveis e formato de eventual troca de dados com sistema contábil; validação contratual dos descansos PJ.
+
+Estado: prática relatada na reunião, com a divergência de papéis registrada acima. O ramo sem aval encerra apenas este recorte de proposta; o procedimento após recusa não foi detalhado e não se presume cancelamento do direito ou do acompanhamento. Confirmação do funcionário é atividade relatada, sem decisão negativa presumida.
+Fonte: ../transcricao.md, seção 7 — Planejamento e concessão de férias; 1 — Sistemas e panorama do RH; 11 — Pontos para validação; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683994923967 (grupo Férias), 3458764683994924390, 3458764683994924148, 3458764683995060645, 3458764683995157475, 3458764683995247332, 3458764683995247715, 3458764683995427945. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+    <bpmn:laneSet id="planejamento_ferias_ASIS_Lanes">
+      <bpmn:lane id="planejamento_ferias_ASIS_Lane_0" name="RH / Ronaldo">
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Consultar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Propor</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Lancar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Documentos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Fim</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="planejamento_ferias_ASIS_Lane_1" name="Líder da área">
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Analisar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Aval</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_SemAval</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="planejamento_ferias_ASIS_Lane_2" name="Colaborador">
+        <bpmn:flowNodeRef>planejamento_ferias_ASIS_Confirmar</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="planejamento_ferias_ASIS_Inicio" name="Necessidade de acompanhar férias">
+      <bpmn:documentation>Não foi descrita periodicidade fixa nem alerta automático; o evento é necessidade de consulta/planejamento do RH. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683994924390. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="planejamento_ferias_ASIS_Consultar" name="Consultar relatório de vencimentos e dias">
+      <bpmn:documentation>Ronaldo consulta relatório do sistema contábil: férias vencidas ou a vencer, dias disponíveis e prazo limite. Nome Contmatic está somente no board e deve ser confirmado. Fonte: ../transcricao.md, seção 7; 1; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683994924390, 3458764683994924148. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_0</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_ASIS_Propor" name="Propor períodos de férias">
+      <bpmn:documentation>Equipe RH propõe datas, concentrando hoje boa parte do planejamento. Conversas tardias e baixa visibilidade causam dificuldades. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683995247715. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_ASIS_Analisar" name="Conversar com líder e obter aval">
+      <bpmn:documentation>Líder avalia capacidade da equipe e autoriza o período segundo a transcrição. Divergência com a nota RH define, não líderes deve ser validada; não foi removida silenciosamente. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683995247715, 3458764683995157475, 3458764683995247332. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="planejamento_ferias_ASIS_Aval" name="Período recebeu aval do líder?">
+      <bpmn:documentation>Obtenção de aval foi relatada. Critérios e tratamento da recusa não foram descritos; este gateway não acrescenta regra de capacidade numérica. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_3</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_4</bpmn:outgoing>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="planejamento_ferias_ASIS_SemAval" name="Sem aval; continuidade da proposta não detalhada">
+      <bpmn:documentation>Limite documental para proposta não autorizada. Como rever datas ou escalar divergência deve ser confirmado; não é encerramento do acompanhamento de férias. Fonte: ../transcricao.md, seção 7; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="planejamento_ferias_ASIS_Confirmar" name="Confirmar datas com funcionário">
+      <bpmn:documentation>Depois do aval do líder, RH confirma com o funcionário. Forma de confirmação e procedimento em discordância não detalhados. Raia representa participação do colaborador; articulação pelo RH. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_4</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_ASIS_Lancar" name="Lançar datas aprovadas no sistema">
+      <bpmn:documentation>RH lança as datas aprovadas no sistema contábil. Integração automática não comprovada. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_6</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_ASIS_Documentos" name="Gerar aviso e documentos no sistema">
+      <bpmn:documentation>O sistema contábil gera aviso e documentos necessários. Tarefa na raia RH indica sua utilização pelo setor, não geração manual. Assinatura e entrega não detalhadas. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_7</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_ASIS_Flow_8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="planejamento_ferias_ASIS_Fim" name="Período registrado e documentos gerados">
+      <bpmn:documentation>Limite do recorte: não representa pagamento, gozo, retorno ou quitação de obrigações. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_ASIS_Flow_8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_0" sourceRef="planejamento_ferias_ASIS_Inicio" targetRef="planejamento_ferias_ASIS_Consultar" />
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_1" sourceRef="planejamento_ferias_ASIS_Consultar" targetRef="planejamento_ferias_ASIS_Propor" />
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_2" sourceRef="planejamento_ferias_ASIS_Propor" targetRef="planejamento_ferias_ASIS_Analisar" />
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_3" sourceRef="planejamento_ferias_ASIS_Analisar" targetRef="planejamento_ferias_ASIS_Aval" />
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_4" sourceRef="planejamento_ferias_ASIS_Aval" targetRef="planejamento_ferias_ASIS_Confirmar" name="Sim" />
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_5" sourceRef="planejamento_ferias_ASIS_Aval" targetRef="planejamento_ferias_ASIS_SemAval" name="Não" />
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_6" sourceRef="planejamento_ferias_ASIS_Confirmar" targetRef="planejamento_ferias_ASIS_Lancar" />
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_7" sourceRef="planejamento_ferias_ASIS_Lancar" targetRef="planejamento_ferias_ASIS_Documentos" />
+    <bpmn:sequenceFlow id="planejamento_ferias_ASIS_Flow_8" sourceRef="planejamento_ferias_ASIS_Documentos" targetRef="planejamento_ferias_ASIS_Fim" />
+  </bpmn:process>
+  <bpmn:process id="planejamento_ferias_TOBE_Process" name="TO-BE — Planejamento de férias com antecedência (proposta não validada)" isExecutable="false">
+    <bpmn:documentation>Objetivo: acompanhar férias de funcionários, articular datas com a capacidade da área e registrar o período aprovado no sistema contábil. Limites: necessidade de planejamento/acompanhamento até lançamento das datas e geração dos avisos/documentos; gozo, pagamento, retorno, assinatura e arquivamento não foram detalhados. Descanso PJ não equivale a férias CLT e fica fora deste fluxo: condições e aprovação devem ser conferidas contrato a contrato (ver ../contratacao_pj/contratacao_pj.xml).
+Responsabilidades atuais relatadas: Ronaldo consulta o relatório; equipe RH propõe e coordena; líderes dão aval conforme a capacidade; colaboradores confirmam; sistema contábil gera avisos e documentos após lançamento. Entradas: relatório de períodos vencidos/a vencer, dias disponíveis e prazo limite, propostas de datas e capacidade da equipe. Saídas: datas aprovadas/confirmadas e aviso/documentos gerados.
+Dificuldades: planejamento concentrado no RH e tardio, visualização coletiva limitada, pouca antecipação da capacidade, sobreposição de ausências e remarcações por demanda; sistema não notifica automaticamente RH ou funcionário. Origem: seção 7 e notas do board.
+Divergência D-FER-01: nota 3458764683995247715 diz RH define as férias, não os líderes; a seção 7 descreve proposta do RH seguida de aval dos líderes e confirmação dos funcionários. O AS-IS modela a sequência detalhada da transcrição sem tratar a nota como exclusão definitiva do líder; confirmar com o setor a autoridade efetiva e a prática de cada área. A centralização do planejamento no RH é convergente nas duas fontes.
+Identificação de sistema: nota 3458764683994924148 nomeia Contmatic; a transcrição não nomeia o sistema contábil e pede confirmar nomes e recursos. Referência Contmatic proveniente apenas do board, a validar; não se modela integração comprovada.
+Regras e limites: relatório possui dias e prazo limite, mas não foram fornecidas fórmulas, regras de fracionamento, prazos de aviso ou pagamento. Não inferir regras legais. Dois ou três meses de antecedência são ideia discutida, não SLA ou temporizador aprovado.
+Pendências: papéis e autoridade final por área; rotina de consulta; dados/fórmulas e limites aplicáveis; tratamento de férias vencidas; critérios de capacidade; preferência/recusa/remarcação; assinatura, entrega e guarda dos avisos; responsáveis e formato de eventual troca de dados com sistema contábil; validação contratual dos descansos PJ.
+
+Mudanças propostas: avisos antecipados para RH/líder/colaborador; disponibilização de saldo/dias e preferência de datas pelo colaborador; análise do líder com calendário coletivo por área; validação final do RH; registro de proposta, aprovações, recusas justificadas, confirmação e envio ao sistema contábil.
+Estado: proposta não aprovada formalmente. O diagrama organiza as ideias como sequência para discussão; regras de capacidade, de validação e de retomada após recusa ainda não foram definidas. As saídas de recusa encerram apenas a preferência analisada, não o direito a férias ou o dever de acompanhamento. Os avisos podem ser coordenados por RH; automação e integração técnica são dependências, não implementações.
+Resultados esperados: melhorar antecipação e visibilidade das ausências e reduzir remarcações; não há meta quantitativa aprovada.
+Fonte: ../transcricao.md, seção 7 — Planejamento e concessão de férias; 1 — Sistemas e panorama do RH; 11 — Pontos para validação; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683994923967 (grupo Férias), 3458764683994924390, 3458764683994924148, 3458764683995060645, 3458764683995157475, 3458764683995247332, 3458764683995247715, 3458764683995427945. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+    <bpmn:laneSet id="planejamento_ferias_TOBE_Lanes">
+      <bpmn:lane id="planejamento_ferias_TOBE_Lane_0" name="RH — coordenação e validação">
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Alertar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Saldo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_ValidarRH</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_AprovarRH</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_RecusaRH</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Enviar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Documentos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Fim</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="planejamento_ferias_TOBE_Lane_1" name="Líder da área">
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Calendario</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_AprovarLider</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Recusa</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_RecusaFim</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="planejamento_ferias_TOBE_Lane_2" name="Colaborador">
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Preferencia</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>planejamento_ferias_TOBE_Confirmar</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="planejamento_ferias_TOBE_Inicio" name="Período a vencer ou decisão pendente">
+      <bpmn:documentation>Proposta de acompanhar necessidades com antecedência; calendário, periodicidade e gatilhos concretos a definir. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="planejamento_ferias_TOBE_Alertar" name="Avisar partes com antecedência">
+      <bpmn:documentation>Avisar RH, líderes e colaboradores. Dois ou três meses foram citados como ideia, não regra validada. Não há timer automático estabelecido. Fonte: ../transcricao.md, seção 7 — Dificuldades e ideias levantadas; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683995060645. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_0</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_TOBE_Saldo" name="Disponibilizar dias e limites aplicáveis">
+      <bpmn:documentation>Proposta de mostrar dias disponíveis ao colaborador. Origem dos dados, critérios e integração com sistema contábil dependem de confirmação. Fonte: ../transcricao.md, seção 7; 1; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_TOBE_Preferencia" name="Indicar preferência de datas">
+      <bpmn:documentation>Colaborador indicaria preferências dentro dos limites aplicáveis; preferência não é aprovação. Regras para quem não responde não detalhadas. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_TOBE_Calendario" name="Analisar preferência no calendário da área">
+      <bpmn:documentation>Líder visualizaria sobreposições e capacidade em calendário coletivo filtrável por área. Critério mínimo de capacidade não definido. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683995157475, 3458764683995247332. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_3</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="planejamento_ferias_TOBE_AprovarLider" name="Líder aprova preferência?">
+      <bpmn:documentation>Proposta segue análise do líder. Não se assume aprovação tácita ou prazo de decisão. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_4</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_5</bpmn:outgoing>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="planejamento_ferias_TOBE_ValidarRH" name="Validar período proposto">
+      <bpmn:documentation>Proposta de validação final do RH após análise do líder. Critérios, documentos e limites deverão ser definidos com o setor. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_5</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="planejamento_ferias_TOBE_AprovarRH" name="RH valida o período?">
+      <bpmn:documentation>Validação final mencionada como proposta. Tratamento de divergências entre RH e líder não foi detalhado. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_7</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_8</bpmn:outgoing>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="planejamento_ferias_TOBE_Recusa" name="Registrar recusa do líder com justificativa">
+      <bpmn:documentation>Proposta de registrar eventual recusa com justificativa. Líder registra sua decisão; nova preferência e escalonamento a definir. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_6</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_11</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_TOBE_RecusaRH" name="Registrar recusa do RH com justificativa">
+      <bpmn:documentation>Proposta de registrar eventual recusa com justificativa. RH registra a decisão de sua validação final; nova preferência e resolução de divergências a definir. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_9</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="planejamento_ferias_TOBE_RecusaFim" name="Preferência recusada registrada">
+      <bpmn:documentation>Encerra a análise desta preferência; continuidade do planejamento deve ser definida e não cancela acompanhamento de férias. Fonte: ../transcricao.md, seção 7; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_10</bpmn:incoming>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_11</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="planejamento_ferias_TOBE_Confirmar" name="Confirmar período com colaborador">
+      <bpmn:documentation>Proposta prevê registro de confirmação do colaborador. Forma de aceite, discordância e remarcação permanecem pendentes. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_8</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_TOBE_Enviar" name="Registrar aprovação e enviar ao contábil">
+      <bpmn:documentation>Registrar proposta e aprovações e enviar período confirmado ao sistema contábil. Modo de envio, integração e responsabilidade de conferência a validar. Fonte: ../transcricao.md, seção 7; 1; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_12</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_13</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_ferias_TOBE_Documentos" name="Gerar aviso e documentos necessários">
+      <bpmn:documentation>Função atual do sistema contábil mantida como referência de continuidade. Não há proposta de substituir cálculos ou comunicação obrigatória. Fonte: ../transcricao.md, seção 7; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_13</bpmn:incoming>
+      <bpmn:outgoing>planejamento_ferias_TOBE_Flow_14</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="planejamento_ferias_TOBE_Fim" name="Período confirmado e encaminhado ao contábil">
+      <bpmn:documentation>Fim do recorte futuro disponível; entrega/assinatura de aviso, pagamento, gozo e retorno não foram redesenhados na reunião. Fonte: ../transcricao.md, seção 7; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>planejamento_ferias_TOBE_Flow_14</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_0" sourceRef="planejamento_ferias_TOBE_Inicio" targetRef="planejamento_ferias_TOBE_Alertar" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_1" sourceRef="planejamento_ferias_TOBE_Alertar" targetRef="planejamento_ferias_TOBE_Saldo" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_2" sourceRef="planejamento_ferias_TOBE_Saldo" targetRef="planejamento_ferias_TOBE_Preferencia" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_3" sourceRef="planejamento_ferias_TOBE_Preferencia" targetRef="planejamento_ferias_TOBE_Calendario" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_4" sourceRef="planejamento_ferias_TOBE_Calendario" targetRef="planejamento_ferias_TOBE_AprovarLider" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_5" sourceRef="planejamento_ferias_TOBE_AprovarLider" targetRef="planejamento_ferias_TOBE_ValidarRH" name="Sim" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_6" sourceRef="planejamento_ferias_TOBE_AprovarLider" targetRef="planejamento_ferias_TOBE_Recusa" name="Não" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_7" sourceRef="planejamento_ferias_TOBE_ValidarRH" targetRef="planejamento_ferias_TOBE_AprovarRH" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_8" sourceRef="planejamento_ferias_TOBE_AprovarRH" targetRef="planejamento_ferias_TOBE_Confirmar" name="Sim" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_9" sourceRef="planejamento_ferias_TOBE_AprovarRH" targetRef="planejamento_ferias_TOBE_RecusaRH" name="Não" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_10" sourceRef="planejamento_ferias_TOBE_RecusaRH" targetRef="planejamento_ferias_TOBE_RecusaFim" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_11" sourceRef="planejamento_ferias_TOBE_Recusa" targetRef="planejamento_ferias_TOBE_RecusaFim" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_12" sourceRef="planejamento_ferias_TOBE_Confirmar" targetRef="planejamento_ferias_TOBE_Enviar" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_13" sourceRef="planejamento_ferias_TOBE_Enviar" targetRef="planejamento_ferias_TOBE_Documentos" />
+    <bpmn:sequenceFlow id="planejamento_ferias_TOBE_Flow_14" sourceRef="planejamento_ferias_TOBE_Documentos" targetRef="planejamento_ferias_TOBE_Fim" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="planejamento_ferias_ASIS_Diagram" name="AS-IS — Planejamento e concessão de férias">
+    <bpmndi:BPMNPlane id="planejamento_ferias_ASIS_Plane" bpmnElement="planejamento_ferias_ASIS_Process">
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_LaneShape_0" bpmnElement="planejamento_ferias_ASIS_Lane_0" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2083.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_LaneShape_1" bpmnElement="planejamento_ferias_ASIS_Lane_1" isHorizontal="true">
+        <dc:Bounds x="40" y="220" width="2083.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_LaneShape_2" bpmnElement="planejamento_ferias_ASIS_Lane_2" isHorizontal="true">
+        <dc:Bounds x="40" y="400" width="2083.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Inicio_Shape" bpmnElement="planejamento_ferias_ASIS_Inicio">
+        <dc:Bounds x="177.0" y="107.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="129.0" y="148.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Consultar_Shape" bpmnElement="planejamento_ferias_ASIS_Consultar">
+        <dc:Bounds x="340.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Propor_Shape" bpmnElement="planejamento_ferias_ASIS_Propor">
+        <dc:Bounds x="570.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Analisar_Shape" bpmnElement="planejamento_ferias_ASIS_Analisar">
+        <dc:Bounds x="800.0" y="260.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Aval_Shape" bpmnElement="planejamento_ferias_ASIS_Aval">
+        <dc:Bounds x="1090.0" y="280.0" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1042.0" y="335.0" width="146" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_SemAval_Shape" bpmnElement="planejamento_ferias_ASIS_SemAval">
+        <dc:Bounds x="1327.0" y="287.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1279.0" y="328.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Confirmar_Shape" bpmnElement="planejamento_ferias_ASIS_Confirmar">
+        <dc:Bounds x="1260.0" y="440.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Lancar_Shape" bpmnElement="planejamento_ferias_ASIS_Lancar">
+        <dc:Bounds x="1490.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Documentos_Shape" bpmnElement="planejamento_ferias_ASIS_Documentos">
+        <dc:Bounds x="1720.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_ASIS_Fim_Shape" bpmnElement="planejamento_ferias_ASIS_Fim">
+        <dc:Bounds x="2017.0" y="107.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1969.0" y="148.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_0" bpmnElement="planejamento_ferias_ASIS_Flow_0">
+        <di:waypoint x="213.0" y="125.0" />
+        <di:waypoint x="276.5" y="125.0" />
+        <di:waypoint x="276.5" y="125.0" />
+        <di:waypoint x="340.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_1" bpmnElement="planejamento_ferias_ASIS_Flow_1">
+        <di:waypoint x="510.0" y="125.0" />
+        <di:waypoint x="570.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_2" bpmnElement="planejamento_ferias_ASIS_Flow_2">
+        <di:waypoint x="740.0" y="125.0" />
+        <di:waypoint x="770.0" y="125.0" />
+        <di:waypoint x="770.0" y="305.0" />
+        <di:waypoint x="800.0" y="305.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_3" bpmnElement="planejamento_ferias_ASIS_Flow_3">
+        <di:waypoint x="970.0" y="305.0" />
+        <di:waypoint x="1030.0" y="305.0" />
+        <di:waypoint x="1030.0" y="305.0" />
+        <di:waypoint x="1090.0" y="305.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_4" bpmnElement="planejamento_ferias_ASIS_Flow_4">
+        <di:waypoint x="1140.0" y="305.0" />
+        <di:waypoint x="1200.0" y="305.0" />
+        <di:waypoint x="1200.0" y="485.0" />
+        <di:waypoint x="1260.0" y="485.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1135.0" y="281.0" width="110" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_5" bpmnElement="planejamento_ferias_ASIS_Flow_5">
+        <di:waypoint x="1140.0" y="305.0" />
+        <di:waypoint x="1233.5" y="305.0" />
+        <di:waypoint x="1233.5" y="305.0" />
+        <di:waypoint x="1327.0" y="305.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1151.75" y="281.0" width="110" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_6" bpmnElement="planejamento_ferias_ASIS_Flow_6">
+        <di:waypoint x="1430.0" y="485.0" />
+        <di:waypoint x="1460.0" y="485.0" />
+        <di:waypoint x="1460.0" y="125.0" />
+        <di:waypoint x="1490.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_7" bpmnElement="planejamento_ferias_ASIS_Flow_7">
+        <di:waypoint x="1660.0" y="125.0" />
+        <di:waypoint x="1720.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_ASIS_Edge_8" bpmnElement="planejamento_ferias_ASIS_Flow_8">
+        <di:waypoint x="1890.0" y="125.0" />
+        <di:waypoint x="1953.5" y="125.0" />
+        <di:waypoint x="1953.5" y="125.0" />
+        <di:waypoint x="2017.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="planejamento_ferias_TOBE_Diagram" name="TO-BE — Planejamento de férias com antecedência (proposta não validada)">
+    <bpmndi:BPMNPlane id="planejamento_ferias_TOBE_Plane" bpmnElement="planejamento_ferias_TOBE_Process">
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_LaneShape_0" bpmnElement="planejamento_ferias_TOBE_Lane_0" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2773.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_LaneShape_1" bpmnElement="planejamento_ferias_TOBE_Lane_1" isHorizontal="true">
+        <dc:Bounds x="40" y="220" width="2773.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_LaneShape_2" bpmnElement="planejamento_ferias_TOBE_Lane_2" isHorizontal="true">
+        <dc:Bounds x="40" y="400" width="2773.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Inicio_Shape" bpmnElement="planejamento_ferias_TOBE_Inicio">
+        <dc:Bounds x="177.0" y="107.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="129.0" y="148.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Alertar_Shape" bpmnElement="planejamento_ferias_TOBE_Alertar">
+        <dc:Bounds x="340.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Saldo_Shape" bpmnElement="planejamento_ferias_TOBE_Saldo">
+        <dc:Bounds x="570.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Preferencia_Shape" bpmnElement="planejamento_ferias_TOBE_Preferencia">
+        <dc:Bounds x="800.0" y="440.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Calendario_Shape" bpmnElement="planejamento_ferias_TOBE_Calendario">
+        <dc:Bounds x="1030.0" y="260.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_AprovarLider_Shape" bpmnElement="planejamento_ferias_TOBE_AprovarLider">
+        <dc:Bounds x="1320.0" y="280.0" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1272.0" y="335.0" width="146" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_ValidarRH_Shape" bpmnElement="planejamento_ferias_TOBE_ValidarRH">
+        <dc:Bounds x="1490.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_AprovarRH_Shape" bpmnElement="planejamento_ferias_TOBE_AprovarRH">
+        <dc:Bounds x="1780.0" y="100.0" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1732.0" y="155.0" width="146" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Recusa_Shape" bpmnElement="planejamento_ferias_TOBE_Recusa">
+        <dc:Bounds x="1950.0" y="260.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_RecusaRH_Shape" bpmnElement="planejamento_ferias_TOBE_RecusaRH">
+        <dc:Bounds x="1950.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_RecusaFim_Shape" bpmnElement="planejamento_ferias_TOBE_RecusaFim">
+        <dc:Bounds x="2247.0" y="287.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2199.0" y="328.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Confirmar_Shape" bpmnElement="planejamento_ferias_TOBE_Confirmar">
+        <dc:Bounds x="1950.0" y="440.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Enviar_Shape" bpmnElement="planejamento_ferias_TOBE_Enviar">
+        <dc:Bounds x="2180.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Documentos_Shape" bpmnElement="planejamento_ferias_TOBE_Documentos">
+        <dc:Bounds x="2410.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_ferias_TOBE_Fim_Shape" bpmnElement="planejamento_ferias_TOBE_Fim">
+        <dc:Bounds x="2707.0" y="107.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2659.0" y="148.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_0" bpmnElement="planejamento_ferias_TOBE_Flow_0">
+        <di:waypoint x="213.0" y="125.0" />
+        <di:waypoint x="276.5" y="125.0" />
+        <di:waypoint x="276.5" y="125.0" />
+        <di:waypoint x="340.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_1" bpmnElement="planejamento_ferias_TOBE_Flow_1">
+        <di:waypoint x="510.0" y="125.0" />
+        <di:waypoint x="570.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_2" bpmnElement="planejamento_ferias_TOBE_Flow_2">
+        <di:waypoint x="740.0" y="125.0" />
+        <di:waypoint x="770.0" y="125.0" />
+        <di:waypoint x="770.0" y="485.0" />
+        <di:waypoint x="800.0" y="485.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_3" bpmnElement="planejamento_ferias_TOBE_Flow_3">
+        <di:waypoint x="970.0" y="485.0" />
+        <di:waypoint x="1000.0" y="485.0" />
+        <di:waypoint x="1000.0" y="305.0" />
+        <di:waypoint x="1030.0" y="305.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_4" bpmnElement="planejamento_ferias_TOBE_Flow_4">
+        <di:waypoint x="1200.0" y="305.0" />
+        <di:waypoint x="1260.0" y="305.0" />
+        <di:waypoint x="1260.0" y="305.0" />
+        <di:waypoint x="1320.0" y="305.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_5" bpmnElement="planejamento_ferias_TOBE_Flow_5">
+        <di:waypoint x="1370.0" y="305.0" />
+        <di:waypoint x="1430.0" y="305.0" />
+        <di:waypoint x="1430.0" y="125.0" />
+        <di:waypoint x="1490.0" y="125.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1365.0" y="281.0" width="110" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_6" bpmnElement="planejamento_ferias_TOBE_Flow_6">
+        <di:waypoint x="1370.0" y="305.0" />
+        <di:waypoint x="1660.0" y="305.0" />
+        <di:waypoint x="1660.0" y="305.0" />
+        <di:waypoint x="1950.0" y="305.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1480.0" y="281.0" width="110" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_7" bpmnElement="planejamento_ferias_TOBE_Flow_7">
+        <di:waypoint x="1660.0" y="125.0" />
+        <di:waypoint x="1720.0" y="125.0" />
+        <di:waypoint x="1720.0" y="125.0" />
+        <di:waypoint x="1780.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_8" bpmnElement="planejamento_ferias_TOBE_Flow_8">
+        <di:waypoint x="1830.0" y="125.0" />
+        <di:waypoint x="1890.0" y="125.0" />
+        <di:waypoint x="1890.0" y="485.0" />
+        <di:waypoint x="1950.0" y="485.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1825.0" y="101.0" width="110" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_9" bpmnElement="planejamento_ferias_TOBE_Flow_9">
+        <di:waypoint x="1830.0" y="125.0" />
+        <di:waypoint x="1890.0" y="125.0" />
+        <di:waypoint x="1890.0" y="125.0" />
+        <di:waypoint x="1950.0" y="125.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1825.0" y="101.0" width="110" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_10" bpmnElement="planejamento_ferias_TOBE_Flow_10">
+        <di:waypoint x="2120.0" y="125.0" />
+        <di:waypoint x="2145.0" y="125.0" />
+        <di:waypoint x="2145.0" y="305.0" />
+        <di:waypoint x="2247.0" y="305.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_11" bpmnElement="planejamento_ferias_TOBE_Flow_11">
+        <di:waypoint x="2120.0" y="305.0" />
+        <di:waypoint x="2183.5" y="305.0" />
+        <di:waypoint x="2183.5" y="305.0" />
+        <di:waypoint x="2247.0" y="305.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_12" bpmnElement="planejamento_ferias_TOBE_Flow_12">
+        <di:waypoint x="2120.0" y="485.0" />
+        <di:waypoint x="2150.0" y="485.0" />
+        <di:waypoint x="2150.0" y="125.0" />
+        <di:waypoint x="2180.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_13" bpmnElement="planejamento_ferias_TOBE_Flow_13">
+        <di:waypoint x="2350.0" y="125.0" />
+        <di:waypoint x="2410.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_ferias_TOBE_Edge_14" bpmnElement="planejamento_ferias_TOBE_Flow_14">
+        <di:waypoint x="2580.0" y="125.0" />
+        <di:waypoint x="2643.5" y="125.0" />
+        <di:waypoint x="2643.5" y="125.0" />
+        <di:waypoint x="2707.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

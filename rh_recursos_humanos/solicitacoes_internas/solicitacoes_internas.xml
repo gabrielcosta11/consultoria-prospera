@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_solicitacoes_internas" targetNamespace="https://prospera.local/documentacao/rh/solicitacoes_internas" exporter="Documentação de processos Próspera" exporterVersion="1">
+  <bpmn:process id="solicitacoes_internas_ASIS" name="AS-IS — Recebimento de pedidos pelo RH (evidência parcial)" isExecutable="false">
+    <bpmn:documentation>Triagem de solicitações internas
+Objetivo do recorte: registrar a concentração de pedidos no RH. Início: colaborador faz pedido. Fim: RH recebe, sem sequência de atendimento evidenciada. Entradas: pedidos variados. Saída conhecida: pedido recebido; canal, registro, classificação e resolução atuais não detalhados. Papéis: colaborador e RH. Dificuldade: concentração de demandas heterogêneas. Não há evidência suficiente para modelar aprovações, atendimento ou prazos atuais.
+Fontes: ../transcricao.md, seção 10 (EPIs e solicitações internas) e seção 11; ../fontes/miro/area_5.svg, widgets 3458764683996769117 (chamados/sugestão de recursos) e 3458764683996907209 (todo mundo pede tudo para RH). Board: https://miro.com/app/board/uXjVHmYGPIM=/ .
+Consulta das fontes: 05/11/2026 (America/Sao_Paulo). Data da reunião não informada. Nenhum processo foi validado pelo setor nesta documentação. Fluxos descritivos, não executáveis. A ordem das propostas organiza a leitura; não representa aprovação de procedimento, prazo ou integração técnica.</bpmn:documentation>
+    <bpmn:startEvent id="solicitacoes_internas_ASIS_s" name="Colaborador apresenta pedido">
+      <bpmn:documentation>Responsável: Colaborador. Pedidos variados relatados; não definir canal único atual.</bpmn:documentation>
+      <bpmn:outgoing>solicitacoes_internas_ASIS_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="solicitacoes_internas_ASIS_receber" name="Receber pedido">
+      <bpmn:documentation>Responsável: RH. Board: todo mundo pede tudo para RH. Encaminhamento e conclusão atuais não detalhados.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_ASIS_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_ASIS_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="solicitacoes_internas_ASIS_e" name="Pedido recebido (limite da evidência)">
+      <bpmn:documentation>Responsável: RH. Não significa pedido resolvido.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_ASIS_Flow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="solicitacoes_internas_ASIS_Flow_1" sourceRef="solicitacoes_internas_ASIS_s" targetRef="solicitacoes_internas_ASIS_receber">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_ASIS_Flow_2" sourceRef="solicitacoes_internas_ASIS_receber" targetRef="solicitacoes_internas_ASIS_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:process id="solicitacoes_internas_TOBE" name="TO-BE — Categorizar, triar e encaminhar (proposta não validada)" isExecutable="false">
+    <bpmn:documentation>Triagem de solicitações internas
+Objetivo: organizar solicitações e permitir aceitar, recusar ou encaminhar com comentário/justificativa. Início: pedido registrado. Fim do recorte: decisão registrada ou encaminhamento, não resolução do atendimento. Categorias sugeridas: férias, benefícios, atestados, EPIs, equipamentos e sugestões; problemas de tecnologia seguiriam diretamente para TI. Entradas: descrição e categoria. Saídas: decisão, justificativa/comentário e histórico para analisar recorrências. Papéis: solicitante, RH, TI e responsáveis por categoria ainda a combinar. Não há SLA, escalonamento, aprovadores ou procedimento de resolução definidos. Denúncias/sugestões anônimas foram citadas, mas receptor, sigilo, acesso e tratamento precisam de fluxo específico antes do uso: não encaminhar automaticamente denúncias pelo fluxo genérico. Impacto esperado: facilitar triagem e percepção de reclamações recorrentes.
+Fontes: ../transcricao.md, seção 10 (EPIs e solicitações internas) e seção 11; ../fontes/miro/area_5.svg, widgets 3458764683996769117 (chamados/sugestão de recursos) e 3458764683996907209 (todo mundo pede tudo para RH). Board: https://miro.com/app/board/uXjVHmYGPIM=/ .
+Consulta das fontes: 05/11/2026 (America/Sao_Paulo). Data da reunião não informada. Nenhum processo foi validado pelo setor nesta documentação. Fluxos descritivos, não executáveis. A ordem das propostas organiza a leitura; não representa aprovação de procedimento, prazo ou integração técnica.</bpmn:documentation>
+    <bpmn:startEvent id="solicitacoes_internas_TOBE_s" name="Necessidade de solicitação">
+      <bpmn:documentation>Responsável: Colaborador. Não inclui denúncias sensíveis sem definição de tratamento específico.</bpmn:documentation>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="solicitacoes_internas_TOBE_registro" name="Registrar pedido e categoria">
+      <bpmn:documentation>Responsável: Solicitante. Categorias sugeridas, catálogo e campos pendentes.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="solicitacoes_internas_TOBE_tipo" name="Problema de tecnologia?">
+      <bpmn:documentation>Responsável: Classificação; responsável a definir. TI sugerida para computador ou sistema lento; restante passa pelo RH.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_3</bpmn:outgoing>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="solicitacoes_internas_TOBE_ti" name="Direcionar pedido à TI">
+      <bpmn:documentation>Responsável: Agente de encaminhamento e mecanismo a definir; destinatário: TI. Tratamento, prazo e resolução não descritos. Este recorte termina no encaminhamento.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_3</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="solicitacoes_internas_TOBE_triagem" name="Triar pedido e registrar decisão">
+      <bpmn:documentation>Responsável: RH. Pode aceitar, recusar ou encaminhar; registrar justificativa ou comentário conforme caso.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_4</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="solicitacoes_internas_TOBE_decisao" name="Qual encaminhamento?">
+      <bpmn:documentation>Responsável: RH. Alçadas por categoria e responsabilidade final ainda não definidas.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_6</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_7</bpmn:outgoing>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_8</bpmn:outgoing>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="solicitacoes_internas_TOBE_aceitar" name="Registrar aceite e comentário">
+      <bpmn:documentation>Responsável: RH. Aceite não comprova execução ou concessão do benefício/pedido.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_7</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="solicitacoes_internas_TOBE_recusar" name="Registrar recusa e justificativa">
+      <bpmn:documentation>Responsável: RH. Critérios de recusa a definir.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_8</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_11</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="solicitacoes_internas_TOBE_encaminhar" name="Encaminhar ao responsável com comentário">
+      <bpmn:documentation>Responsável: RH; destinatário conforme categoria a definir. Férias, benefícios e EPIs têm fluxos próprios; não duplicar suas aprovações.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_9</bpmn:incoming>
+      <bpmn:outgoing>solicitacoes_internas_TOBE_Flow_12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="solicitacoes_internas_TOBE_e" name="Decisão ou encaminhamento registrado">
+      <bpmn:documentation>Responsável: RH / TI / responsável por categoria. Fim do recorte proposto, sem afirmar solução.</bpmn:documentation>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_5</bpmn:incoming>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_10</bpmn:incoming>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_11</bpmn:incoming>
+      <bpmn:incoming>solicitacoes_internas_TOBE_Flow_12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_1" sourceRef="solicitacoes_internas_TOBE_s" targetRef="solicitacoes_internas_TOBE_registro">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_2" sourceRef="solicitacoes_internas_TOBE_registro" targetRef="solicitacoes_internas_TOBE_tipo">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_3" sourceRef="solicitacoes_internas_TOBE_tipo" targetRef="solicitacoes_internas_TOBE_ti" name="Sim">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Sim. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_4" sourceRef="solicitacoes_internas_TOBE_tipo" targetRef="solicitacoes_internas_TOBE_triagem" name="Não">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Não. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_5" sourceRef="solicitacoes_internas_TOBE_ti" targetRef="solicitacoes_internas_TOBE_e" name="Encaminhado à TI">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Encaminhado à TI. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_6" sourceRef="solicitacoes_internas_TOBE_triagem" targetRef="solicitacoes_internas_TOBE_decisao">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_7" sourceRef="solicitacoes_internas_TOBE_decisao" targetRef="solicitacoes_internas_TOBE_aceitar" name="Aceitar">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Aceitar. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_8" sourceRef="solicitacoes_internas_TOBE_decisao" targetRef="solicitacoes_internas_TOBE_recusar" name="Recusar">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Recusar. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_9" sourceRef="solicitacoes_internas_TOBE_decisao" targetRef="solicitacoes_internas_TOBE_encaminhar" name="Encaminhar">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Encaminhar. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_10" sourceRef="solicitacoes_internas_TOBE_aceitar" targetRef="solicitacoes_internas_TOBE_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_11" sourceRef="solicitacoes_internas_TOBE_recusar" targetRef="solicitacoes_internas_TOBE_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="solicitacoes_internas_TOBE_Flow_12" sourceRef="solicitacoes_internas_TOBE_encaminhar" targetRef="solicitacoes_internas_TOBE_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="solicitacoes_internas_ASIS_Diagram" name="AS-IS — Recebimento de pedidos pelo RH (evidência parcial)">
+    <bpmndi:BPMNPlane id="solicitacoes_internas_ASIS_Plane" bpmnElement="solicitacoes_internas_ASIS">
+      <bpmndi:BPMNShape id="solicitacoes_internas_ASIS_s_di" bpmnElement="solicitacoes_internas_ASIS_s">
+        <dc:Bounds x="100" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="45" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_ASIS_receber_di" bpmnElement="solicitacoes_internas_ASIS_receber">
+        <dc:Bounds x="360" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_ASIS_e_di" bpmnElement="solicitacoes_internas_ASIS_e">
+        <dc:Bounds x="620" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="565" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_ASIS_Flow_1_di" bpmnElement="solicitacoes_internas_ASIS_Flow_1">
+        <di:waypoint x="140" y="200.0" />
+        <di:waypoint x="360" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_ASIS_Flow_2_di" bpmnElement="solicitacoes_internas_ASIS_Flow_2">
+        <di:waypoint x="540" y="230.0" />
+        <di:waypoint x="620" y="200.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="solicitacoes_internas_TOBE_Diagram" name="TO-BE — Categorizar, triar e encaminhar (proposta não validada)">
+    <bpmndi:BPMNPlane id="solicitacoes_internas_TOBE_Plane" bpmnElement="solicitacoes_internas_TOBE">
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_s_di" bpmnElement="solicitacoes_internas_TOBE_s">
+        <dc:Bounds x="100" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="45" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_registro_di" bpmnElement="solicitacoes_internas_TOBE_registro">
+        <dc:Bounds x="360" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_tipo_di" bpmnElement="solicitacoes_internas_TOBE_tipo">
+        <dc:Bounds x="620" y="180" width="60" height="60" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="565" y="248" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_ti_di" bpmnElement="solicitacoes_internas_TOBE_ti">
+        <dc:Bounds x="880" y="580" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_triagem_di" bpmnElement="solicitacoes_internas_TOBE_triagem">
+        <dc:Bounds x="880" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_decisao_di" bpmnElement="solicitacoes_internas_TOBE_decisao">
+        <dc:Bounds x="1140" y="180" width="60" height="60" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1085" y="248" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_aceitar_di" bpmnElement="solicitacoes_internas_TOBE_aceitar">
+        <dc:Bounds x="1400" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_recusar_di" bpmnElement="solicitacoes_internas_TOBE_recusar">
+        <dc:Bounds x="1400" y="380" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_encaminhar_di" bpmnElement="solicitacoes_internas_TOBE_encaminhar">
+        <dc:Bounds x="1400" y="580" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="solicitacoes_internas_TOBE_e_di" bpmnElement="solicitacoes_internas_TOBE_e">
+        <dc:Bounds x="1660" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1605" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_1_di" bpmnElement="solicitacoes_internas_TOBE_Flow_1">
+        <di:waypoint x="140" y="200.0" />
+        <di:waypoint x="360" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_2_di" bpmnElement="solicitacoes_internas_TOBE_Flow_2">
+        <di:waypoint x="540" y="230.0" />
+        <di:waypoint x="620" y="210.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_3_di" bpmnElement="solicitacoes_internas_TOBE_Flow_3">
+        <di:waypoint x="680" y="210.0" />
+        <di:waypoint x="780.0" y="210.0" />
+        <di:waypoint x="780.0" y="630.0" />
+        <di:waypoint x="880" y="630.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="720.0" y="395.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_4_di" bpmnElement="solicitacoes_internas_TOBE_Flow_4">
+        <di:waypoint x="680" y="210.0" />
+        <di:waypoint x="880" y="230.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="720.0" y="195.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_5_di" bpmnElement="solicitacoes_internas_TOBE_Flow_5">
+        <di:waypoint x="970.0" y="680" />
+        <di:waypoint x="970.0" y="780" />
+        <di:waypoint x="1680.0" y="780" />
+        <di:waypoint x="1680.0" y="220" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1265.0" y="425.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_6_di" bpmnElement="solicitacoes_internas_TOBE_Flow_6">
+        <di:waypoint x="1060" y="230.0" />
+        <di:waypoint x="1140" y="210.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_7_di" bpmnElement="solicitacoes_internas_TOBE_Flow_7">
+        <di:waypoint x="1200" y="210.0" />
+        <di:waypoint x="1400" y="230.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1240.0" y="195.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_8_di" bpmnElement="solicitacoes_internas_TOBE_Flow_8">
+        <di:waypoint x="1200" y="210.0" />
+        <di:waypoint x="1300.0" y="210.0" />
+        <di:waypoint x="1300.0" y="430.0" />
+        <di:waypoint x="1400" y="430.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1240.0" y="295.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_9_di" bpmnElement="solicitacoes_internas_TOBE_Flow_9">
+        <di:waypoint x="1200" y="210.0" />
+        <di:waypoint x="1300.0" y="210.0" />
+        <di:waypoint x="1300.0" y="630.0" />
+        <di:waypoint x="1400" y="630.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1240.0" y="395.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_10_di" bpmnElement="solicitacoes_internas_TOBE_Flow_10">
+        <di:waypoint x="1580" y="230.0" />
+        <di:waypoint x="1660" y="200.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_11_di" bpmnElement="solicitacoes_internas_TOBE_Flow_11">
+        <di:waypoint x="1580" y="430.0" />
+        <di:waypoint x="1620.0" y="430.0" />
+        <di:waypoint x="1620.0" y="200.0" />
+        <di:waypoint x="1660" y="200.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="solicitacoes_internas_TOBE_Flow_12_di" bpmnElement="solicitacoes_internas_TOBE_Flow_12">
+        <di:waypoint x="1580" y="630.0" />
+        <di:waypoint x="1620.0" y="630.0" />
+        <di:waypoint x="1620.0" y="200.0" />
+        <di:waypoint x="1660" y="200.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_planejamento_endomarketing" targetNamespace="https://prospera.local/documentacao/rh/planejamento_endomarketing" exporter="Documentação de processos Próspera" exporterVersion="1.0">
+  <bpmn:process id="planejamento_endomarketing_ASIS" name="AS-IS — Planejamento anual de endomarketing" isExecutable="false">
+    <bpmn:documentation>Convenção: modelo descritivo não executável; AS-IS registra a prática relatada, e TO-BE é proposta pendente de validação, sem implementação de sistema.
+
+Objetivo: planejar ações internas e o orçamento do próximo ano, incluindo feriados e pontos facultativos.
+Limites: início na virada do ano; encerramento deste recorte quando o orçamento e o planejamento estão encaminhados à execução. A execução é detalhada em ../acoes_brindes/acoes_brindes.xml e ../dinamicas_equipe/dinamicas_equipe.xml; essas referências não pressupõem execução automática.
+Responsáveis: Isa/RH levanta datas e custos; CEO avalia os valores. O responsável final por decidir funcionamento ou emendas não foi identificado na fonte.
+Entradas: datas comemorativas, campanhas, ações internas, feriados, número de colaboradores e distribuição mensal. Saídas: planejamento anual e orçamento aprovado; decisões de funcionamento/emenda quando definidas.
+Regras relatadas: estimar gasto com base no número de colaboradores e distribuição por mês; acrescentar folga quando necessário; justificar ação que ultrapasse o valor aprovado. O board mostra orçamento não aprovado levando a redefinição; o retorno à avaliação é uma conexão de fechamento do ciclo modelada para representar a reapresentação, sem número de tentativas definido.
+Dificuldades: desejo de consultar histórico de custos/ações dos anos anteriores; nenhuma base histórica consolidada foi demonstrada.
+Pendências: confirmar formulário, critérios de rateio, limites da folga, responsáveis pelo calendário de funcionamento e tratamento de ações não aprovadas. Não há alçada adicional, valores ou prazo estabelecidos.
+Rastreabilidade: ../transcricao.md §9/Planejamento anual; board widgets 3458764683995428750 (final do ano), 3458764683995525358 (planejamento), 3458764683995591084 (custos), 3458764683995591180 (rateio), 3458764683995591436 (CEO), 3458764683995591577 (redefinir), 3458764683995687562 (feriados), 3458764683995894560 (execução).
+
+Fontes: ../transcricao.md, seção 9 — Endomarketing e eventos internos; seção 11 — Pontos para validação na próxima conversa. Documento original: https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit . Data da reunião não informada. Board RH: https://miro.com/app/board/uXjVHmYGPIM=/ ; grupo Endomarketing (3458764683995428445), cópia de consulta em ../fontes/miro/area_1.svg, consulta em 2026-11-05. As fontes registram relatos e propostas; não há evidência de aprovação final dos processos futuros.</bpmn:documentation>
+    <bpmn:startEvent id="planejamento_endomarketing_ASIS_inicio" name="Virada do ano">
+      <bpmn:documentation>Gatilho anual explicitado no board 3458764683995428750 e transcrição §9; não foi definida data exata.</bpmn:documentation>
+      <bpmn:outgoing>planejamento_endomarketing_ASIS_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="planejamento_endomarketing_ASIS_calendario" name="Levantar ações e calendário de feriados">
+      <bpmn:documentation>Isa/RH identifica datas comemorativas, campanhas e ações para o ano seguinte e contempla feriados/pontos facultativos. A relação entre os dois ramos do board é agregada neste levantamento, sem impor aprovação pelo CEO às decisões de funcionamento. Fontes: §9/Planejamento anual; widgets 3458764683995525358 e 3458764683995687562.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_ASIS_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_ASIS_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_endomarketing_ASIS_custos" name="Estimar custos e distribuição mensal">
+      <bpmn:documentation>Isa/RH estima gasto pelo número de colaboradores e distribui os valores ao longo dos meses; acrescenta folga quando necessário. O board anota rateio sem fórmula; não se presume rateio por área ou centro de custo. Saída: proposta de orçamento. §9/Planejamento anual; widgets 3458764683995591084 e 3458764683995591180.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_ASIS_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_ASIS_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_endomarketing_ASIS_ceo" name="Apresentar valores ao CEO">
+      <bpmn:documentation>Isa/RH apresenta os valores e CEO avalia. Não há evidência de teto, SLA ou etapas financeiras adicionais. Transcrição §9; widget 3458764683995591436.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_ASIS_Flow_3</bpmn:incoming>
+      <bpmn:incoming>planejamento_endomarketing_ASIS_Flow_7</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_ASIS_Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="planejamento_endomarketing_ASIS_aprovado" name="CEO aprovou os valores?">
+      <bpmn:documentation>Decisão sobre orçamento explícita no board 3458764683995591436. Saída Sim encaminha à execução; saída Não redefine o orçamento. Não se confunde aprovação dos valores com aprovação final desta documentação.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_ASIS_Flow_4</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_ASIS_Flow_5</bpmn:outgoing>
+      <bpmn:outgoing>planejamento_endomarketing_ASIS_Flow_6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="planejamento_endomarketing_ASIS_redefinir" name="Redefinir orçamento">
+      <bpmn:documentation>Revisar orçamento recusado, conforme widget 3458764683995591577. O ator de revisão é RH/Isa por contexto do planejamento; confirmar forma de negociação e limite de revisões. Retorna à apresentação dos valores para nova avaliação.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_ASIS_Flow_6</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_ASIS_Flow_7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="planejamento_endomarketing_ASIS_fim" name="Planejamento encaminhado à execução">
+      <bpmn:documentation>Fim deste recorte documental. Execução das ações é um fluxo próprio. O board conecta aprovação a Execução (3458764683995894560); detalhes de lançamento do planejamento não foram relatados.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_ASIS_Flow_5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="planejamento_endomarketing_ASIS_Flow_1" sourceRef="planejamento_endomarketing_ASIS_inicio" targetRef="planejamento_endomarketing_ASIS_calendario" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_ASIS_Flow_2" sourceRef="planejamento_endomarketing_ASIS_calendario" targetRef="planejamento_endomarketing_ASIS_custos" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_ASIS_Flow_3" sourceRef="planejamento_endomarketing_ASIS_custos" targetRef="planejamento_endomarketing_ASIS_ceo" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_ASIS_Flow_4" sourceRef="planejamento_endomarketing_ASIS_ceo" targetRef="planejamento_endomarketing_ASIS_aprovado" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_ASIS_Flow_5" sourceRef="planejamento_endomarketing_ASIS_aprovado" targetRef="planejamento_endomarketing_ASIS_fim" name="Sim" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_ASIS_Flow_6" sourceRef="planejamento_endomarketing_ASIS_aprovado" targetRef="planejamento_endomarketing_ASIS_redefinir" name="Não" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_ASIS_Flow_7" sourceRef="planejamento_endomarketing_ASIS_redefinir" targetRef="planejamento_endomarketing_ASIS_ceo" name="Reapresentar" />
+    <bpmn:textAnnotation id="planejamento_endomarketing_ASIS_Note_1">
+      <bpmn:text>AS-IS relatado. Feriados/pontos facultativos fazem parte do planejamento, mas a alçada para decidir emendas não foi informada.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="planejamento_endomarketing_ASIS_Note_2">
+      <bpmn:text>Excedente de uma ação exige justificativa segundo §9. Limites, destinatário e aprovação dessa justificativa permanecem pendentes.</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmn:process id="planejamento_endomarketing_TOBE" name="TO-BE — Planejamento com consulta ao histórico (proposta)" isExecutable="false">
+    <bpmn:documentation>Convenção: modelo descritivo não executável; AS-IS registra a prática relatada, e TO-BE é proposta pendente de validação, sem implementação de sistema.
+
+Proposta pendente de validação, sem evidência de implantação. Objetivo: apoiar a estimativa anual com consulta a ações e custos de anos anteriores, preservando a avaliação de valores pelo CEO.
+Limites: virada do ano até planejamento encaminhado à execução; não inclui implementação de módulo, integração contábil, aprovação eletrônica nem mecanismos de lançamento de despesas.
+Mudança em relação ao AS-IS: consulta acessível ao histórico para embasar o planejamento, necessidade expressa na transcrição §9/Planejamento anual. Histórico é entrada desejada; sua existência consolidada não foi confirmada.
+Responsáveis: Isa/RH consulta e planeja; CEO continua avaliando orçamento, sem alteração de alçada. Entradas: histórico quando disponível, calendário, número de colaboradores; saídas: proposta embasada e valores aprovados.
+Regras e exceções: continuam as regras relatadas do AS-IS; recusa leva à revisão; excedentes exigem justificativa. Nenhum novo limite ou prazo é proposto pelas fontes.
+Impacto esperado, inferido da melhoria: tornar custos de referência mais acessíveis e apoiar estimativas. Não há meta quantitativa validada.
+Pendências: localização e completude do histórico, responsabilidade por sua manutenção, categorias de custo/rateio e nível de registro. As fontes não definem sequência detalhada de manutenção do histórico; por isso não foi inventado um ciclo de prestação de contas.
+Rastreabilidade: transcrição §9/Planejamento anual (desejo de consultar histórico); board 3458764683995525358, 3458764683995591436, 3458764683995591577 e 3458764683995687562. A posição da consulta antes da estimativa é organização documental proposta, a validar.
+
+Fontes: ../transcricao.md, seção 9 — Endomarketing e eventos internos; seção 11 — Pontos para validação na próxima conversa. Documento original: https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit . Data da reunião não informada. Board RH: https://miro.com/app/board/uXjVHmYGPIM=/ ; grupo Endomarketing (3458764683995428445), cópia de consulta em ../fontes/miro/area_1.svg, consulta em 2026-11-05. As fontes registram relatos e propostas; não há evidência de aprovação final dos processos futuros.</bpmn:documentation>
+    <bpmn:startEvent id="planejamento_endomarketing_TOBE_inicio" name="Virada do ano">
+      <bpmn:documentation>Mesmo gatilho anual do AS-IS; nenhuma data específica validada.</bpmn:documentation>
+      <bpmn:outgoing>planejamento_endomarketing_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="planejamento_endomarketing_TOBE_historico" name="Consultar histórico de ações e custos">
+      <bpmn:documentation>Proposta da transcrição §9: consultar ações e custos de anos anteriores para subsidiar planejamento. A base e o responsável por mantê-la precisam ser definidos; não se presume histórico completo.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_endomarketing_TOBE_calendario" name="Planejar ações, feriados e orçamento">
+      <bpmn:documentation>Isa/RH utiliza calendário, número de colaboradores e referências históricas disponíveis para estimar custos mensais e folga quando necessária. Agrupa atividades atuais; não altera responsáveis por decisões de funcionamento, ainda pendentes. §9/Planejamento anual; widgets 3458764683995525358 e 3458764683995687562.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_TOBE_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_TOBE_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="planejamento_endomarketing_TOBE_ceo" name="Apresentar valores ao CEO">
+      <bpmn:documentation>Preserva a aprovação atual pelo CEO. A proposta não define workflow eletrônico nem alçada adicional. Widget 3458764683995591436 e §9.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_TOBE_Flow_3</bpmn:incoming>
+      <bpmn:incoming>planejamento_endomarketing_TOBE_Flow_7</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_TOBE_Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="planejamento_endomarketing_TOBE_aprovado" name="CEO aprovou os valores?">
+      <bpmn:documentation>Aprovação de orçamento proposta conforme prática atual; ambas as saídas documentadas. Critérios de aprovação não detalhados.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_TOBE_Flow_4</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_TOBE_Flow_5</bpmn:outgoing>
+      <bpmn:outgoing>planejamento_endomarketing_TOBE_Flow_6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="planejamento_endomarketing_TOBE_redefinir" name="Rever orçamento proposto">
+      <bpmn:documentation>Em caso de recusa do CEO, RH redefine valores para reapresentação; preserva ciclo do board 3458764683995591577. Sem limite de tentativas.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_TOBE_Flow_6</bpmn:incoming>
+      <bpmn:outgoing>planejamento_endomarketing_TOBE_Flow_7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="planejamento_endomarketing_TOBE_fim" name="Planejamento encaminhado à execução">
+      <bpmn:documentation>Fim do recorte proposto; execução em arquivos próprios, sem acionamento automático modelado.</bpmn:documentation>
+      <bpmn:incoming>planejamento_endomarketing_TOBE_Flow_5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="planejamento_endomarketing_TOBE_Flow_1" sourceRef="planejamento_endomarketing_TOBE_inicio" targetRef="planejamento_endomarketing_TOBE_historico" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_TOBE_Flow_2" sourceRef="planejamento_endomarketing_TOBE_historico" targetRef="planejamento_endomarketing_TOBE_calendario" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_TOBE_Flow_3" sourceRef="planejamento_endomarketing_TOBE_calendario" targetRef="planejamento_endomarketing_TOBE_ceo" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_TOBE_Flow_4" sourceRef="planejamento_endomarketing_TOBE_ceo" targetRef="planejamento_endomarketing_TOBE_aprovado" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_TOBE_Flow_5" sourceRef="planejamento_endomarketing_TOBE_aprovado" targetRef="planejamento_endomarketing_TOBE_fim" name="Sim" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_TOBE_Flow_6" sourceRef="planejamento_endomarketing_TOBE_aprovado" targetRef="planejamento_endomarketing_TOBE_redefinir" name="Não" />
+    <bpmn:sequenceFlow id="planejamento_endomarketing_TOBE_Flow_7" sourceRef="planejamento_endomarketing_TOBE_redefinir" targetRef="planejamento_endomarketing_TOBE_ceo" name="Reapresentar" />
+    <bpmn:textAnnotation id="planejamento_endomarketing_TOBE_Note_1">
+      <bpmn:text>TO-BE: proposta pendente de validação. Melhoria descrita: acesso ao histórico de ações e custos; não há meta ou integração aprovada.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="planejamento_endomarketing_TOBE_Note_2">
+      <bpmn:text>Confirmar critérios de rateio, manutenção do histórico e alçada de feriados/emendas. Justificativa de excedente não tem fluxo de aprovação detalhado.</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="planejamento_endomarketing_ASIS_Diagram" name="AS-IS — Planejamento anual de endomarketing">
+    <bpmndi:BPMNPlane id="planejamento_endomarketing_ASIS_Plane" bpmnElement="planejamento_endomarketing_ASIS">
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_inicio_Shape" bpmnElement="planejamento_endomarketing_ASIS_inicio">
+        <dc:Bounds x="80" y="167" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="33" y="211" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_calendario_Shape" bpmnElement="planejamento_endomarketing_ASIS_calendario">
+        <dc:Bounds x="200" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_custos_Shape" bpmnElement="planejamento_endomarketing_ASIS_custos">
+        <dc:Bounds x="440" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_ceo_Shape" bpmnElement="planejamento_endomarketing_ASIS_ceo">
+        <dc:Bounds x="680" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_aprovado_Shape" bpmnElement="planejamento_endomarketing_ASIS_aprovado" isMarkerVisible="true">
+        <dc:Bounds x="920" y="160" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="873" y="218" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_redefinir_Shape" bpmnElement="planejamento_endomarketing_ASIS_redefinir">
+        <dc:Bounds x="680" y="330" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_fim_Shape" bpmnElement="planejamento_endomarketing_ASIS_fim">
+        <dc:Bounds x="1080" y="167" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1033" y="211" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_ASIS_Flow_1_Edge" bpmnElement="planejamento_endomarketing_ASIS_Flow_1">
+        <di:waypoint x="116" y="185.0" />
+        <di:waypoint x="200" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_ASIS_Flow_2_Edge" bpmnElement="planejamento_endomarketing_ASIS_Flow_2">
+        <di:waypoint x="390" y="185.0" />
+        <di:waypoint x="440" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_ASIS_Flow_3_Edge" bpmnElement="planejamento_endomarketing_ASIS_Flow_3">
+        <di:waypoint x="630" y="185.0" />
+        <di:waypoint x="680" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_ASIS_Flow_4_Edge" bpmnElement="planejamento_endomarketing_ASIS_Flow_4">
+        <di:waypoint x="870" y="185.0" />
+        <di:waypoint x="920" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_ASIS_Flow_5_Edge" bpmnElement="planejamento_endomarketing_ASIS_Flow_5">
+        <di:waypoint x="970" y="185.0" />
+        <di:waypoint x="1080" y="185.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="990.0" y="161.0" width="100" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_ASIS_Flow_6_Edge" bpmnElement="planejamento_endomarketing_ASIS_Flow_6">
+        <di:waypoint x="945" y="210" />
+        <di:waypoint x="945" y="375" />
+        <di:waypoint x="870" y="375" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="910.0" y="268.5" width="100" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_ASIS_Flow_7_Edge" bpmnElement="planejamento_endomarketing_ASIS_Flow_7">
+        <di:waypoint x="775" y="330" />
+        <di:waypoint x="775" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="740.0" y="256.0" width="100" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_Note_1_Shape" bpmnElement="planejamento_endomarketing_ASIS_Note_1">
+        <dc:Bounds x="100" y="490" width="440" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_ASIS_Note_2_Shape" bpmnElement="planejamento_endomarketing_ASIS_Note_2">
+        <dc:Bounds x="570" y="490" width="440" height="130" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="planejamento_endomarketing_TOBE_Diagram" name="TO-BE — Planejamento com consulta ao histórico (proposta)">
+    <bpmndi:BPMNPlane id="planejamento_endomarketing_TOBE_Plane" bpmnElement="planejamento_endomarketing_TOBE">
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_inicio_Shape" bpmnElement="planejamento_endomarketing_TOBE_inicio">
+        <dc:Bounds x="80" y="167" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="33" y="211" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_historico_Shape" bpmnElement="planejamento_endomarketing_TOBE_historico">
+        <dc:Bounds x="200" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_calendario_Shape" bpmnElement="planejamento_endomarketing_TOBE_calendario">
+        <dc:Bounds x="440" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_ceo_Shape" bpmnElement="planejamento_endomarketing_TOBE_ceo">
+        <dc:Bounds x="680" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_aprovado_Shape" bpmnElement="planejamento_endomarketing_TOBE_aprovado" isMarkerVisible="true">
+        <dc:Bounds x="920" y="160" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="873" y="218" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_redefinir_Shape" bpmnElement="planejamento_endomarketing_TOBE_redefinir">
+        <dc:Bounds x="680" y="330" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_fim_Shape" bpmnElement="planejamento_endomarketing_TOBE_fim">
+        <dc:Bounds x="1080" y="167" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1033" y="211" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_TOBE_Flow_1_Edge" bpmnElement="planejamento_endomarketing_TOBE_Flow_1">
+        <di:waypoint x="116" y="185.0" />
+        <di:waypoint x="200" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_TOBE_Flow_2_Edge" bpmnElement="planejamento_endomarketing_TOBE_Flow_2">
+        <di:waypoint x="390" y="185.0" />
+        <di:waypoint x="440" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_TOBE_Flow_3_Edge" bpmnElement="planejamento_endomarketing_TOBE_Flow_3">
+        <di:waypoint x="630" y="185.0" />
+        <di:waypoint x="680" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_TOBE_Flow_4_Edge" bpmnElement="planejamento_endomarketing_TOBE_Flow_4">
+        <di:waypoint x="870" y="185.0" />
+        <di:waypoint x="920" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_TOBE_Flow_5_Edge" bpmnElement="planejamento_endomarketing_TOBE_Flow_5">
+        <di:waypoint x="970" y="185.0" />
+        <di:waypoint x="1080" y="185.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="990.0" y="161.0" width="100" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_TOBE_Flow_6_Edge" bpmnElement="planejamento_endomarketing_TOBE_Flow_6">
+        <di:waypoint x="945" y="210" />
+        <di:waypoint x="945" y="375" />
+        <di:waypoint x="870" y="375" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="910.0" y="268.5" width="100" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="planejamento_endomarketing_TOBE_Flow_7_Edge" bpmnElement="planejamento_endomarketing_TOBE_Flow_7">
+        <di:waypoint x="775" y="330" />
+        <di:waypoint x="775" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="740.0" y="256.0" width="100" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_Note_1_Shape" bpmnElement="planejamento_endomarketing_TOBE_Note_1">
+        <dc:Bounds x="100" y="490" width="440" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="planejamento_endomarketing_TOBE_Note_2_Shape" bpmnElement="planejamento_endomarketing_TOBE_Note_2">
+        <dc:Bounds x="570" y="490" width="440" height="130" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

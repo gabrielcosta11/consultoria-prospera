@@ -1,0 +1,195 @@
+{
+  "board": "https://miro.com/app/board/uXjVHmYGPIM=/",
+  "data_consulta": "2026-11-05",
+  "observacao": "Leitura do board, sem alterações. SVGs preservam os rótulos originais. skipped_count dos recortes indica conectores cujo outro extremo não pertence à seleção, e não ausência de conteúdo interno.",
+  "overview": {
+    "total_items": 109,
+    "total_results": 6,
+    "item_types": {
+      "sticky": 38,
+      "connector": 33,
+      "stencil": 28,
+      "g": 5,
+      "shape": 5
+    },
+    "overview": {
+      "container_count": 5,
+      "loose_content": {
+        "items": 4,
+        "regions": 1,
+        "isolated": 0
+      }
+    },
+    "results": [
+      {
+        "id": "3458764683991367825",
+        "type": "g",
+        "item_count": 21,
+        "samples": [
+          "Lider que é o anjo. Hoje funciona",
+          "Teste 1 semana a 15 dias (pagamento frela)",
+          "não há um lugar para o funcionario acompanahar os beneficios"
+        ],
+        "scope": {
+          "x": -480,
+          "y": -560,
+          "width": 3160,
+          "height": 901
+        }
+      },
+      {
+        "id": "3458764683995428445",
+        "type": "g",
+        "item_count": 20,
+        "samples": [
+          "Faz planejamento e levatamento de todos eventos internos.",
+          "Planejar dinamica Qual dinâmica, duração e o motivo",
+          "Planejamento de feriados obrigatórios e facultativos"
+        ],
+        "scope": {
+          "x": -1120,
+          "y": 1756,
+          "width": 1410,
+          "height": 2025
+        }
+      },
+      {
+        "id": "3458764683993991973",
+        "type": "g",
+        "item_count": 14,
+        "samples": [
+          "Levantamento da documentação",
+          "feedback do funcionário",
+          "limitar acessos previamente a demissão"
+        ],
+        "scope": {
+          "x": -3113,
+          "y": -274,
+          "width": 2287,
+          "height": 464
+        }
+      },
+      {
+        "id": "3458764683993500858",
+        "type": "g",
+        "item_count": 9,
+        "samples": [
+          "Solicitação do gestor",
+          "problemas de tempo habil para contratação",
+          "pagamento via recibo toda sexta"
+        ],
+        "scope": {
+          "x": -520,
+          "y": 640,
+          "width": 1800,
+          "height": 620
+        }
+      },
+      {
+        "id": "3458764683994923967",
+        "type": "g",
+        "item_count": 8,
+        "samples": [
+          "não há notificação para o funcionário que vai sair de férias",
+          "rh define as férias, não os líderes",
+          "não há um controle prévio de capacidade. reativo"
+        ],
+        "scope": {
+          "x": -2661,
+          "y": 540,
+          "width": 983,
+          "height": 649
+        }
+      },
+      {
+        "type": "spatial_region",
+        "item_count": 4,
+        "samples": [
+          "Chamados / sugestão de recursos gerais (cadeira, máquinas)",
+          "Todo mundo pede tudo para o RH",
+          "não plano de carreira"
+        ],
+        "scope": {
+          "x": 554,
+          "y": -995,
+          "width": 980,
+          "height": 163
+        }
+      }
+    ]
+  },
+  "leituras": [
+    {
+      "arquivo": "area_0.svg",
+      "success": true,
+      "message": "Read 31 managed + 0 foreign items, 23 connectors left out because an end is not in this read, 1 carrying rendered bounds (selected 1 of 1 requested widgets)",
+      "item_count": 31,
+      "skipped_count": 23,
+      "miro_url": "https://miro.com/app/board/uXjVHmYGPIM=/",
+      "scope_x": null,
+      "scope_y": null,
+      "scope_width": null,
+      "scope_height": null
+    },
+    {
+      "arquivo": "area_1.svg",
+      "success": true,
+      "message": "Read 33 managed + 0 foreign items, 20 connectors left out because an end is not in this read, 1 carrying rendered bounds (selected 1 of 1 requested widgets)",
+      "item_count": 33,
+      "skipped_count": 20,
+      "miro_url": "https://miro.com/app/board/uXjVHmYGPIM=/",
+      "scope_x": null,
+      "scope_y": null,
+      "scope_width": null,
+      "scope_height": null
+    },
+    {
+      "arquivo": "area_2.svg",
+      "success": true,
+      "message": "Read 20 managed + 0 foreign items, 27 connectors left out because an end is not in this read, 1 carrying rendered bounds (selected 1 of 1 requested widgets)",
+      "item_count": 20,
+      "skipped_count": 27,
+      "miro_url": "https://miro.com/app/board/uXjVHmYGPIM=/",
+      "scope_x": null,
+      "scope_y": null,
+      "scope_width": null,
+      "scope_height": null
+    },
+    {
+      "arquivo": "area_3.svg",
+      "success": true,
+      "message": "Read 12 managed + 0 foreign items, 30 connectors left out because an end is not in this read, 1 carrying rendered bounds (selected 1 of 1 requested widgets)",
+      "item_count": 12,
+      "skipped_count": 30,
+      "miro_url": "https://miro.com/app/board/uXjVHmYGPIM=/",
+      "scope_x": null,
+      "scope_y": null,
+      "scope_width": null,
+      "scope_height": null
+    },
+    {
+      "arquivo": "area_4.svg",
+      "success": true,
+      "message": "Read 9 managed + 0 foreign items, 32 connectors left out because an end is not in this read, 1 carrying rendered bounds (selected 1 of 1 requested widgets)",
+      "item_count": 9,
+      "skipped_count": 32,
+      "miro_url": "https://miro.com/app/board/uXjVHmYGPIM=/",
+      "scope_x": null,
+      "scope_y": null,
+      "scope_width": null,
+      "scope_height": null
+    },
+    {
+      "arquivo": "area_5.svg",
+      "success": true,
+      "message": "Read 4 managed + 0 foreign items",
+      "item_count": 4,
+      "skipped_count": 0,
+      "miro_url": "https://miro.com/app/board/uXjVHmYGPIM=/",
+      "scope_x": 554,
+      "scope_y": -995,
+      "scope_width": 980,
+      "scope_height": 163
+    }
+  ]
+}

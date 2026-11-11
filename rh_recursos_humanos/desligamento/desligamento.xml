@@ -1,0 +1,385 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_desligamento" targetNamespace="https://prospera.local/processos/rh/desligamento" name="Desligamento" exporter="Documentação de processos Próspera">
+  <bpmn:process id="desligamento_asis" name="Desligamento — AS-IS — situação atual relatada" isExecutable="false">
+    <bpmn:documentation>Objetivo: registrar avaliação de desligamentos por iniciativa da empresa e processamento de pedidos do colaborador até tratamento documental, financeiro e dos itens envolvidos. Entradas: pedido do líder, motivos e conversas; carta de próprio punho no pedido do colaborador segundo relato; dados do vínculo, documentos e registros do sistema contábil. Saídas: decisão revertida ou rescisão/documentos/pagamentos tratados e pendências registradas, sem presumir prazos legais ou quitação validada. Responsáveis: líder expõe motivos e impacto; RH conversa, avalia e orienta; Ronaldo prepara documentos e rescisão no sistema contábil; colaborador participa de conversas, assina e trata devolução. Responsável técnico e momento de bloqueios de acesso não definidos. Fontes: ../transcricao.md §6 (Desligamento), §8 e §11; Miro grupo Demissão 3458764683993991973, recorte ../fontes/miro/area_2.svg. 
+Fontes consultadas em 05/11/2026 (America/Sao_Paulo); data da reunião não informada. Transcrição revisada de reunião, não literal. Board: https://miro.com/app/board/uXjVHmYGPIM=/; cópias dos recortes em ../fontes/miro/. Modelos descritivos e não executáveis. AS-IS é relato sujeito à validação do setor; TO-BE é proposta não validada. Prazos e condições contratuais citados não foram validados como regras legais ou SLAs.
+
+Fontes: ../transcricao.md §6 (Desligamento), §8 e §11; Miro grupo Demissão 3458764683993991973, recorte ../fontes/miro/area_2.svg. AS-IS — situação atual relatada. O líder costuma solicitar; RH avalia motivo e impacto com ele e, em alguns casos, conversa com a pessoa para possível reversão. O sistema anterior de erros era aplicado de forma desigual e não constitui matriz consistente. Se confirmado, Ronaldo prepara rescisão e documentos no sistema contábil e define aviso conforme caso. RH conversa com a pessoa, obtém assinaturas, orienta devolução e trata pagamentos. Pedido do colaborador envolve carta de próprio punho, segundo relato; composição de verbas difere, sem cálculos descritos.
+DIVERGÊNCIA: o board (3458764683994572199) contém Liberação do pagamento mediante devolução do uniforme. O §6 registra explicitamente que essa ideia foi discutida e rejeitada pela própria equipe: não foi tratada como regra. O BPMN não condiciona pagamento à devolução. Os ramos independentes apenas evitam representar essa condição; não afirmam execução simultânea observada. Ordem fina e prazos de pagamento precisam ser validados pelos responsáveis. O board também diz não há feedbacks (3458764683994213097), enquanto §8 informa conversas informais sem ciclo documentado; aqui a lacuna é de padronização/registro, não ausência absoluta de conversa. A preocupação com encerramento de acessos surgiu após exclusão de dados por pessoa desligada. Não há evidência de rotina já padronizada de bloqueio antes da demissão; portanto permanece na documentação e no TO-BE, não como atividade AS-IS consolidada. A sequência do board até assinaturas foi preservada e complementada pelo pedido voluntário do §6. O ramo de decisão negativa ausente no board é documentado pelo relato de reversão.
+Pendências: tipos de desligamento, critérios e alçadas decisórias, modelos, comunicação, aviso e verbas segundo cada caso, responsáveis/prazos de pagamentos, tratamento das devoluções e acessos, comprovantes e retenção de documentos. O fim indica limite do recorte narrado, não auditoria de conclusão ou validação jurídica.</bpmn:documentation>
+    <bpmn:startEvent id="desligamento_asis_inicio" name="Pedido de desligamento recebido">
+      <bpmn:documentation>Pode vir da liderança ou do próprio colaborador. Miro 3458764683993992167; transcrição §6.</bpmn:documentation>
+      <bpmn:outgoing>desligamento_asis_f0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="desligamento_asis_origem" name="Iniciativa da empresa?">
+      <bpmn:documentation>Distingue as duas situações do §6; composição de verbas é diferente segundo relato, sem regras de cálculo especificadas.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f0</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f1</bpmn:outgoing>
+      <bpmn:outgoing>desligamento_asis_f2</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="desligamento_asis_avaliar" name="RH avalia motivo e impacto com líder">
+      <bpmn:documentation>Conversar sobre pertinência, motivo e operação; quando apropriado ouvir colaborador. Pedidos podem decorrer de problema pontual. Transcrição §6; Miro 3458764683994267457, 3458764683993992828, 3458764683994106348.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f1</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="desligamento_asis_confirmar" name="Desligamento confirmado?">
+      <bpmn:documentation>Transcrição §6 descreve continuidade ou reversão. Board 3458764683994339483 só desenha saída Sim.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f3</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f4</bpmn:outgoing>
+      <bpmn:outgoing>desligamento_asis_f5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="desligamento_asis_reverter" name="Decisão revertida neste momento">
+      <bpmn:documentation>Resultado descrito no §6 após conversa; acompanhamento posterior não detalhado nesta decisão.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="desligamento_asis_carta" name="Receber carta do colaborador">
+      <bpmn:documentation>Carta de próprio punho conforme relato da reunião, não regra legal verificada. Transcrição §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f2</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="desligamento_asis_documentos" name="Ronaldo prepara documentos e rescisão">
+      <bpmn:documentation>Sistema contábil, aviso conforme caso e dados necessários. Não se fixam alíquotas, direitos, valores ou prazos. Miro 3458764683994339601; transcrição §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f4</bpmn:incoming>
+      <bpmn:incoming>desligamento_asis_f6</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="desligamento_asis_assinar" name="RH conversa e providencia assinaturas">
+      <bpmn:documentation>RH orienta e colaborador assina documentos. Miro 3458764683994572645; transcrição §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f7</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="desligamento_asis_providencias" name="Tratar providências independentes">
+      <bpmn:documentation>Decomposição documental para não condicionar pagamento ao uniforme. Paralelismo é escolha de representação da independência, não constatação de simultaneidade.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f8</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f9</bpmn:outgoing>
+      <bpmn:outgoing>desligamento_asis_f10</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="desligamento_asis_uniforme" name="Orientar devolução do uniforme">
+      <bpmn:documentation>RH orienta devolução; há perda de uniformes relatada no board. Não é condição para pagamento. Miro 3458764683994572073 e 3458764683994572462; transcrição §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f9</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f11</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="desligamento_asis_pagar" name="Tratar pagamentos devidos">
+      <bpmn:documentation>RH acerta pagamentos conforme caso. Não vincular ao uniforme; sugestão no Miro 3458764683994572199 foi rejeitada no §6. Responsável financeiro executor e prazos a confirmar.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f10</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="desligamento_asis_juntar" name="Providências narradas tratadas">
+      <bpmn:documentation>Convergência de orientação e tratamento financeiro, sem exigir devolução efetiva para pagar.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f11</bpmn:incoming>
+      <bpmn:incoming>desligamento_asis_f12</bpmn:incoming>
+      <bpmn:outgoing>desligamento_asis_f13</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:endEvent id="desligamento_asis_fim" name="Desligamento tratado no recorte relatado">
+      <bpmn:documentation>Não atesta quitação completa nem acesso encerrado. Rotina de acessos ainda deve ser definida, conforme §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_asis_f13</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="desligamento_asis_f0" sourceRef="desligamento_asis_inicio" targetRef="desligamento_asis_origem"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f1" sourceRef="desligamento_asis_origem" targetRef="desligamento_asis_avaliar" name="Sim — liderança"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f2" sourceRef="desligamento_asis_origem" targetRef="desligamento_asis_carta" name="Não — colaborador"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f3" sourceRef="desligamento_asis_avaliar" targetRef="desligamento_asis_confirmar"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f4" sourceRef="desligamento_asis_confirmar" targetRef="desligamento_asis_documentos" name="Sim"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f5" sourceRef="desligamento_asis_confirmar" targetRef="desligamento_asis_reverter" name="Não"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f6" sourceRef="desligamento_asis_carta" targetRef="desligamento_asis_documentos"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f7" sourceRef="desligamento_asis_documentos" targetRef="desligamento_asis_assinar"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f8" sourceRef="desligamento_asis_assinar" targetRef="desligamento_asis_providencias"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f9" sourceRef="desligamento_asis_providencias" targetRef="desligamento_asis_uniforme"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f10" sourceRef="desligamento_asis_providencias" targetRef="desligamento_asis_pagar"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f11" sourceRef="desligamento_asis_uniforme" targetRef="desligamento_asis_juntar"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f12" sourceRef="desligamento_asis_pagar" targetRef="desligamento_asis_juntar"/>
+    <bpmn:sequenceFlow id="desligamento_asis_f13" sourceRef="desligamento_asis_juntar" targetRef="desligamento_asis_fim"/>
+  </bpmn:process>
+  <bpmn:process id="desligamento_tobe" name="Desligamento — TO-BE — proposta não validada" isExecutable="false">
+    <bpmn:documentation>Objetivo: registrar avaliação de desligamentos por iniciativa da empresa e processamento de pedidos do colaborador até tratamento documental, financeiro e dos itens envolvidos. Entradas: pedido do líder, motivos e conversas; carta de próprio punho no pedido do colaborador segundo relato; dados do vínculo, documentos e registros do sistema contábil. Saídas: decisão revertida ou rescisão/documentos/pagamentos tratados e pendências registradas, sem presumir prazos legais ou quitação validada. Responsáveis: líder expõe motivos e impacto; RH conversa, avalia e orienta; Ronaldo prepara documentos e rescisão no sistema contábil; colaborador participa de conversas, assina e trata devolução. Responsável técnico e momento de bloqueios de acesso não definidos. Fontes: ../transcricao.md §6 (Desligamento), §8 e §11; Miro grupo Demissão 3458764683993991973, recorte ../fontes/miro/area_2.svg. 
+Fontes consultadas em 05/11/2026 (America/Sao_Paulo); data da reunião não informada. Transcrição revisada de reunião, não literal. Board: https://miro.com/app/board/uXjVHmYGPIM=/; cópias dos recortes em ../fontes/miro/. Modelos descritivos e não executáveis. AS-IS é relato sujeito à validação do setor; TO-BE é proposta não validada. Prazos e condições contratuais citados não foram validados como regras legais ou SLAs.
+
+Fontes: ../transcricao.md §6 (Desligamento), §8 e §11; Miro grupo Demissão 3458764683993991973, recorte ../fontes/miro/area_2.svg. TO-BE — proposta não validada. Formalizar solicitação e motivos, conversas e avaliações; adotar critérios consistentes e acompanhamento antes da decisão quando apropriado; entrevista de saída inclusive no pedido do colaborador; checklist de documentos, aviso, devolução/estado de uniformes e equipamentos, acessos e rescisão. Planejar quando bloquear cada acesso; responsável técnico e momento específico ainda não definidos. Considerar consulta posterior a documentos pessoais, como holerites, sem manter acesso operacional indiscriminado. Nenhuma solução técnica implementada.
+DIVERGÊNCIA: o board (3458764683994572199) contém Liberação do pagamento mediante devolução do uniforme. O §6 registra explicitamente que essa ideia foi discutida e rejeitada pela própria equipe: não foi tratada como regra. O BPMN não condiciona pagamento à devolução. Os ramos independentes apenas evitam representar essa condição; não afirmam execução simultânea observada. Ordem fina e prazos de pagamento precisam ser validados pelos responsáveis. O board também diz não há feedbacks (3458764683994213097), enquanto §8 informa conversas informais sem ciclo documentado; aqui a lacuna é de padronização/registro, não ausência absoluta de conversa. O acompanhamento periódico proposto no §8 pertence ao fluxo de desenvolvimento e pode subsidiar a decisão, sem se tornar uma etapa obrigatória prévia em todos os casos. Impactos esperados: decisões contextualizadas, menor perda de itens/dados e evidência das providências. Não há metas quantitativas ou confirmação de implantação. Ramo de devolução registra inclusive pendências; pagamento independe de efetiva devolução. Checklist final não impõe espera da rescisão por devolução. Critérios e prazos de encerramento com pendências requerem validação; nenhum prazo legal foi inventado.
+Ordenação dos acessos: o planejamento é antecipado para depois da confirmação e antes da comunicação. A execução/registro ocorre em ramo independente das assinaturas e demais providências, nos momentos a definir. A representação não estabelece bloqueio prévio universal nem obriga aguardar assinatura para encerrar acessos.</bpmn:documentation>
+    <bpmn:startEvent id="desligamento_tobe_inicio" name="Intenção de desligamento identificada">
+      <bpmn:documentation>Gatilho preservado do AS-IS; transcrição §6.</bpmn:documentation>
+      <bpmn:outgoing>desligamento_tobe_f0</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:task id="desligamento_tobe_registrar" name="Registrar pedido, motivo e evidências">
+      <bpmn:documentation>Proposta: documentar solicitação, conversas e avaliações. No pedido voluntário, registrar carta relatada. Responsável pelo preenchimento e acesso a dados a validar. Transcrição §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f0</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f1</bpmn:outgoing></bpmn:task>
+    <bpmn:exclusiveGateway id="desligamento_tobe_origem" name="Iniciativa da empresa?">
+      <bpmn:documentation>Mantém variante de pedido voluntário, sem presumir avaliação de mérito pelo líder nesse caso. Transcrição §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f1</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f2</bpmn:outgoing><bpmn:outgoing>desligamento_tobe_f3</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:task id="desligamento_tobe_avaliar" name="RH e líder avaliam contexto e registros">
+      <bpmn:documentation>Usar critérios consistentes; considerar conversas prévias quando apropriado e feedback de acompanhamento. Não exige histórico inexistente nem ciclo obrigatório em todo caso. Transcrição §§6 e 8; Miro 3458764683994106348 e 3458764683994213097.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f2</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f4</bpmn:outgoing></bpmn:task>
+    <bpmn:exclusiveGateway id="desligamento_tobe_confirmar" name="Desligamento mantido?">
+      <bpmn:documentation>Preserva possibilidade de reversão descrita no §6. Alçada de decisão final precisa de confirmação.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f4</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f5</bpmn:outgoing><bpmn:outgoing>desligamento_tobe_f6</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:endEvent id="desligamento_tobe_reverter" name="Decisão revertida; acompanhamento a definir">
+      <bpmn:documentation>Não presume abertura automática de PDI ou medida disciplinar.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f6</bpmn:incoming></bpmn:endEvent>
+    <bpmn:task id="desligamento_tobe_documentos" name="Preparar rescisão, aviso e documentação">
+      <bpmn:documentation>Ronaldo mantém preparação no sistema contábil segundo AS-IS; critérios para cada caso e modelos a validar. Checklist proposto no §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_separar_documentos</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f7</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="desligamento_tobe_assinar" name="Conversar com pessoa e formalizar documentos">
+      <bpmn:documentation>RH e colaborador; manter comunicação e assinaturas. Ordem exata em relação aos bloqueios será planejada; não se fixa bloqueio prévio universal. Transcrição §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f7</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f8</bpmn:outgoing></bpmn:task>
+    <bpmn:parallelGateway id="desligamento_tobe_dividir" name="Providências independentes do pagamento">
+      <bpmn:documentation>Paralelismo representa independência entre temas do checklist, não agenda obrigatória de simultaneidade; pagamento não aguarda devolução ou entrevista.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f8</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f9</bpmn:outgoing><bpmn:outgoing>desligamento_tobe_f10</bpmn:outgoing><bpmn:outgoing>desligamento_tobe_f12</bpmn:outgoing></bpmn:parallelGateway>
+    <bpmn:task id="desligamento_tobe_pagar" name="Tratar e registrar pagamentos devidos">
+      <bpmn:documentation>Sem condição de devolução de uniforme/equipamento. Verbas, prazo e executor conforme caso, a confirmar. Transcrição §6 e divergência Miro 3458764683994572199.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f9</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f13</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="desligamento_tobe_itens" name="Registrar devoluções ou pendências de itens">
+      <bpmn:documentation>Checklist de uniforme/equipamentos, estado e pendências. O registro pode indicar item ainda não devolvido; não bloqueia pagamento. Transcrição §6; Miro 3458764683994572073 e 3458764683994572462.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f10</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f14</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="desligamento_tobe_acessos" name="Executar e registrar acessos no momento definido">
+      <bpmn:documentation>Providenciar e registrar encerramento dos acessos conforme momentos planejados, sem fixar bloqueio sempre antes ou depois da comunicação/assinatura. Executor técnico e forma de comprovação ainda a confirmar; RH coordena o tema sem pressupor execução técnica pelo RH. Considerar acesso posterior a holerites/documentos pessoais. Transcrição §6; Miro 3458764683994473828.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_separar_executar_acessos</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f15</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="desligamento_tobe_feedback" name="Realizar e registrar entrevista de saída">
+      <bpmn:documentation>Ouvir avaliação da pessoa, inclusive pedido voluntário; critérios de participação, confidencialidade e registro a definir. Transcrição §6; Miro 3458764683994339861.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f12</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f16</bpmn:outgoing></bpmn:task>
+    <bpmn:parallelGateway id="desligamento_tobe_juntar" name="Registros das providências reunidos">
+      <bpmn:documentation>Reúne tratamento financeiro e registros de itens, acessos e entrevista; não exige devolução efetiva nem condiciona rescisão a ela.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f13</bpmn:incoming><bpmn:incoming>desligamento_tobe_f14</bpmn:incoming><bpmn:incoming>desligamento_tobe_f15</bpmn:incoming><bpmn:incoming>desligamento_tobe_f16</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f17</bpmn:outgoing></bpmn:parallelGateway>
+    <bpmn:task id="desligamento_tobe_checklist" name="RH revisa checklist e registra pendências">
+      <bpmn:documentation>Checklist com documentação, aviso, itens, acessos e conclusão da rescisão. Critérios para fechamento e acompanhamento de pendências não definidos. Transcrição §6.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f17</bpmn:incoming><bpmn:outgoing>desligamento_tobe_f18</bpmn:outgoing></bpmn:task>
+    <bpmn:endEvent id="desligamento_tobe_fim" name="Tratamento documentado; pendências visíveis">
+      <bpmn:documentation>Resultado esperado da proposta; não significa que débitos ou itens pendentes foram quitados. Validação do RH permanece necessária.</bpmn:documentation>
+      <bpmn:incoming>desligamento_tobe_f18</bpmn:incoming></bpmn:endEvent>
+    <bpmn:task id="desligamento_tobe_planejar_acessos" name="Planejar momento e responsáveis pelos acessos"><bpmn:documentation>Proposta da transcrição §6 e post-it 3458764683994473828: após a confirmação do desligamento, planejar o momento de cada bloqueio antes da comunicação com a pessoa. Responsável técnico, interlocutores e momentos específicos permanecem a confirmar. Não se exige bloquear todos os acessos antes da comunicação ou da assinatura; considerar consulta futura a documentos pessoais, como holerites.</bpmn:documentation><bpmn:incoming>desligamento_tobe_f3</bpmn:incoming><bpmn:incoming>desligamento_tobe_f5</bpmn:incoming><bpmn:outgoing>desligamento_tobe_planear_separar</bpmn:outgoing></bpmn:task><bpmn:parallelGateway id="desligamento_tobe_separar_acessos" name="Providências em momentos planejados"><bpmn:documentation>Decomposição de independência entre execução/registro de acessos e tratamento documental/comunicação. Não define simultaneidade obrigatória: o momento de cada acesso vem do planejamento, podendo anteceder ou suceder a comunicação conforme decisão ainda a validar.</bpmn:documentation><bpmn:incoming>desligamento_tobe_planear_separar</bpmn:incoming><bpmn:outgoing>desligamento_tobe_separar_documentos</bpmn:outgoing><bpmn:outgoing>desligamento_tobe_separar_executar_acessos</bpmn:outgoing></bpmn:parallelGateway><bpmn:sequenceFlow id="desligamento_tobe_f0" sourceRef="desligamento_tobe_inicio" targetRef="desligamento_tobe_registrar"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f1" sourceRef="desligamento_tobe_registrar" targetRef="desligamento_tobe_origem"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f2" sourceRef="desligamento_tobe_origem" targetRef="desligamento_tobe_avaliar" name="Sim — liderança"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f3" sourceRef="desligamento_tobe_origem" targetRef="desligamento_tobe_planejar_acessos" name="Não — pedido voluntário"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f4" sourceRef="desligamento_tobe_avaliar" targetRef="desligamento_tobe_confirmar"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f5" sourceRef="desligamento_tobe_confirmar" targetRef="desligamento_tobe_planejar_acessos" name="Sim"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f6" sourceRef="desligamento_tobe_confirmar" targetRef="desligamento_tobe_reverter" name="Não"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f7" sourceRef="desligamento_tobe_documentos" targetRef="desligamento_tobe_assinar"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f8" sourceRef="desligamento_tobe_assinar" targetRef="desligamento_tobe_dividir"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f9" sourceRef="desligamento_tobe_dividir" targetRef="desligamento_tobe_pagar"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f10" sourceRef="desligamento_tobe_dividir" targetRef="desligamento_tobe_itens"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f12" sourceRef="desligamento_tobe_dividir" targetRef="desligamento_tobe_feedback"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f13" sourceRef="desligamento_tobe_pagar" targetRef="desligamento_tobe_juntar"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f14" sourceRef="desligamento_tobe_itens" targetRef="desligamento_tobe_juntar"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f15" sourceRef="desligamento_tobe_acessos" targetRef="desligamento_tobe_juntar"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f16" sourceRef="desligamento_tobe_feedback" targetRef="desligamento_tobe_juntar"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f17" sourceRef="desligamento_tobe_juntar" targetRef="desligamento_tobe_checklist"/>
+    <bpmn:sequenceFlow id="desligamento_tobe_f18" sourceRef="desligamento_tobe_checklist" targetRef="desligamento_tobe_fim"/>
+  <bpmn:sequenceFlow id="desligamento_tobe_planear_separar" sourceRef="desligamento_tobe_planejar_acessos" targetRef="desligamento_tobe_separar_acessos"/><bpmn:sequenceFlow id="desligamento_tobe_separar_documentos" sourceRef="desligamento_tobe_separar_acessos" targetRef="desligamento_tobe_documentos"/><bpmn:sequenceFlow id="desligamento_tobe_separar_executar_acessos" sourceRef="desligamento_tobe_separar_acessos" targetRef="desligamento_tobe_acessos"/></bpmn:process>
+  <bpmndi:BPMNDiagram id="desligamento_asis_diagram" name="Desligamento ASIS">
+    <bpmndi:BPMNPlane id="desligamento_asis_plane" bpmnElement="desligamento_asis">
+      <bpmndi:BPMNShape id="desligamento_asis_inicio_di" bpmnElement="desligamento_asis_inicio">
+        <dc:Bounds x="80" y="325.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="20" y="377.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_origem_di" bpmnElement="desligamento_asis_origem">
+        <dc:Bounds x="340" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="280" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_avaliar_di" bpmnElement="desligamento_asis_avaliar">
+        <dc:Bounds x="600" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_confirmar_di" bpmnElement="desligamento_asis_confirmar">
+        <dc:Bounds x="860" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="800" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_reverter_di" bpmnElement="desligamento_asis_reverter">
+        <dc:Bounds x="1120" y="545.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1060" y="597.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_carta_di" bpmnElement="desligamento_asis_carta">
+        <dc:Bounds x="600" y="80.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_documentos_di" bpmnElement="desligamento_asis_documentos">
+        <dc:Bounds x="1120" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_assinar_di" bpmnElement="desligamento_asis_assinar">
+        <dc:Bounds x="1380" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_providencias_di" bpmnElement="desligamento_asis_providencias">
+        <dc:Bounds x="1640" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1580" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_uniforme_di" bpmnElement="desligamento_asis_uniforme">
+        <dc:Bounds x="1900" y="80.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_pagar_di" bpmnElement="desligamento_asis_pagar">
+        <dc:Bounds x="1900" y="520.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_juntar_di" bpmnElement="desligamento_asis_juntar">
+        <dc:Bounds x="2160" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2100" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_asis_fim_di" bpmnElement="desligamento_asis_fim">
+        <dc:Bounds x="2420" y="325.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2360" y="377.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="desligamento_asis_f0_di" bpmnElement="desligamento_asis_f0">
+        <di:waypoint x="120" y="345.0"/>
+        <di:waypoint x="340" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f1_di" bpmnElement="desligamento_asis_f1">
+        <di:waypoint x="400" y="345.0"/>
+        <di:waypoint x="600" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="520" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f2_di" bpmnElement="desligamento_asis_f2">
+        <di:waypoint x="400" y="345.0"/>
+        <di:waypoint x="500.0" y="345.0"/>
+        <di:waypoint x="500.0" y="125.0"/>
+        <di:waypoint x="600" y="125.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="420.0" y="85.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f3_di" bpmnElement="desligamento_asis_f3">
+        <di:waypoint x="780" y="345.0"/>
+        <di:waypoint x="860" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f4_di" bpmnElement="desligamento_asis_f4">
+        <di:waypoint x="920" y="345.0"/>
+        <di:waypoint x="1120" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1040" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f5_di" bpmnElement="desligamento_asis_f5">
+        <di:waypoint x="920" y="345.0"/>
+        <di:waypoint x="1020.0" y="345.0"/>
+        <di:waypoint x="1020.0" y="565.0"/>
+        <di:waypoint x="1120" y="565.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="940.0" y="525.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f6_di" bpmnElement="desligamento_asis_f6">
+        <di:waypoint x="780" y="125.0"/>
+        <di:waypoint x="950.0" y="125.0"/>
+        <di:waypoint x="950.0" y="345.0"/>
+        <di:waypoint x="1120" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f7_di" bpmnElement="desligamento_asis_f7">
+        <di:waypoint x="1300" y="345.0"/>
+        <di:waypoint x="1380" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f8_di" bpmnElement="desligamento_asis_f8">
+        <di:waypoint x="1560" y="345.0"/>
+        <di:waypoint x="1640" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f9_di" bpmnElement="desligamento_asis_f9">
+        <di:waypoint x="1700" y="345.0"/>
+        <di:waypoint x="1800.0" y="345.0"/>
+        <di:waypoint x="1800.0" y="125.0"/>
+        <di:waypoint x="1900" y="125.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f10_di" bpmnElement="desligamento_asis_f10">
+        <di:waypoint x="1700" y="345.0"/>
+        <di:waypoint x="1800.0" y="345.0"/>
+        <di:waypoint x="1800.0" y="565.0"/>
+        <di:waypoint x="1900" y="565.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f11_di" bpmnElement="desligamento_asis_f11">
+        <di:waypoint x="2080" y="125.0"/>
+        <di:waypoint x="2120.0" y="125.0"/>
+        <di:waypoint x="2120.0" y="345.0"/>
+        <di:waypoint x="2160" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f12_di" bpmnElement="desligamento_asis_f12">
+        <di:waypoint x="2080" y="565.0"/>
+        <di:waypoint x="2120.0" y="565.0"/>
+        <di:waypoint x="2120.0" y="345.0"/>
+        <di:waypoint x="2160" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desligamento_asis_f13_di" bpmnElement="desligamento_asis_f13">
+        <di:waypoint x="2220" y="345.0"/>
+        <di:waypoint x="2420" y="345.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="desligamento_tobe_diagram" name="Desligamento TOBE">
+    <bpmndi:BPMNPlane id="desligamento_tobe_plane" bpmnElement="desligamento_tobe">
+      <bpmndi:BPMNShape id="desligamento_tobe_inicio_di" bpmnElement="desligamento_tobe_inicio">
+        <dc:Bounds x="80" y="325.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="20" y="377.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_registrar_di" bpmnElement="desligamento_tobe_registrar">
+        <dc:Bounds x="340" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_origem_di" bpmnElement="desligamento_tobe_origem">
+        <dc:Bounds x="600" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="540" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_avaliar_di" bpmnElement="desligamento_tobe_avaliar">
+        <dc:Bounds x="860" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_confirmar_di" bpmnElement="desligamento_tobe_confirmar">
+        <dc:Bounds x="1120" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1060" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_reverter_di" bpmnElement="desligamento_tobe_reverter">
+        <dc:Bounds x="1900.0" y="545.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1840.0" y="597.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_documentos_di" bpmnElement="desligamento_tobe_documentos">
+        <dc:Bounds x="1900.0" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_assinar_di" bpmnElement="desligamento_tobe_assinar">
+        <dc:Bounds x="2160.0" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_dividir_di" bpmnElement="desligamento_tobe_dividir">
+        <dc:Bounds x="2420.0" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2360.0" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_pagar_di" bpmnElement="desligamento_tobe_pagar">
+        <dc:Bounds x="2680.0" y="80.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_itens_di" bpmnElement="desligamento_tobe_itens">
+        <dc:Bounds x="2680.0" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_acessos_di" bpmnElement="desligamento_tobe_acessos">
+        <dc:Bounds x="2680.0" y="520.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_feedback_di" bpmnElement="desligamento_tobe_feedback">
+        <dc:Bounds x="2680.0" y="740.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_juntar_di" bpmnElement="desligamento_tobe_juntar">
+        <dc:Bounds x="2940.0" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2880.0" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_checklist_di" bpmnElement="desligamento_tobe_checklist">
+        <dc:Bounds x="3200.0" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_fim_di" bpmnElement="desligamento_tobe_fim">
+        <dc:Bounds x="3460.0" y="325.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3400.0" y="377.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desligamento_tobe_planejar_acessos_di" bpmnElement="desligamento_tobe_planejar_acessos"><dc:Bounds x="1380.0" y="300.0" width="180" height="90"/></bpmndi:BPMNShape><bpmndi:BPMNShape id="desligamento_tobe_separar_acessos_di" bpmnElement="desligamento_tobe_separar_acessos"><dc:Bounds x="1640.0" y="315.0" width="60" height="60"/><bpmndi:BPMNLabel><dc:Bounds x="1580.0" y="387.0" width="180" height="55"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id="desligamento_tobe_f0_di" bpmnElement="desligamento_tobe_f0"><di:waypoint x="120.0" y="345.0"/><di:waypoint x="340.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f1_di" bpmnElement="desligamento_tobe_f1"><di:waypoint x="520.0" y="345.0"/><di:waypoint x="600.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f2_di" bpmnElement="desligamento_tobe_f2"><di:waypoint x="660.0" y="345.0"/><di:waypoint x="860.0" y="345.0"/><bpmndi:BPMNLabel><dc:Bounds x="780.0" y="305.0" width="160" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f3_di" bpmnElement="desligamento_tobe_f3"><di:waypoint x="630.0" y="315.0"/><di:waypoint x="630.0" y="200"/><di:waypoint x="1470.0" y="200"/><di:waypoint x="1470.0" y="300.0"/><bpmndi:BPMNLabel><dc:Bounds x="640.0" y="160" width="180" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f4_di" bpmnElement="desligamento_tobe_f4"><di:waypoint x="1040.0" y="345.0"/><di:waypoint x="1120.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f5_di" bpmnElement="desligamento_tobe_f5"><di:waypoint x="1180.0" y="345.0"/><di:waypoint x="1380.0" y="345.0"/><bpmndi:BPMNLabel><dc:Bounds x="1300.0" y="305.0" width="160" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f6_di" bpmnElement="desligamento_tobe_f6"><di:waypoint x="1150.0" y="375.0"/><di:waypoint x="1150.0" y="450"/><di:waypoint x="1920.0" y="450"/><di:waypoint x="1920.0" y="545.0"/><bpmndi:BPMNLabel><dc:Bounds x="1160.0" y="410" width="180" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f7_di" bpmnElement="desligamento_tobe_f7"><di:waypoint x="2080.0" y="345.0"/><di:waypoint x="2160.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f8_di" bpmnElement="desligamento_tobe_f8"><di:waypoint x="2340.0" y="345.0"/><di:waypoint x="2420.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f9_di" bpmnElement="desligamento_tobe_f9"><di:waypoint x="2480.0" y="345.0"/><di:waypoint x="2580.0" y="345.0"/><di:waypoint x="2580.0" y="125.0"/><di:waypoint x="2680.0" y="125.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f10_di" bpmnElement="desligamento_tobe_f10"><di:waypoint x="2480.0" y="345.0"/><di:waypoint x="2680.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f12_di" bpmnElement="desligamento_tobe_f12"><di:waypoint x="2480.0" y="345.0"/><di:waypoint x="2580.0" y="345.0"/><di:waypoint x="2580.0" y="785.0"/><di:waypoint x="2680.0" y="785.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f13_di" bpmnElement="desligamento_tobe_f13"><di:waypoint x="2860.0" y="125.0"/><di:waypoint x="2900.0" y="125.0"/><di:waypoint x="2900.0" y="345.0"/><di:waypoint x="2940.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f14_di" bpmnElement="desligamento_tobe_f14"><di:waypoint x="2860.0" y="345.0"/><di:waypoint x="2940.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f15_di" bpmnElement="desligamento_tobe_f15"><di:waypoint x="2860.0" y="565.0"/><di:waypoint x="2900.0" y="565.0"/><di:waypoint x="2900.0" y="345.0"/><di:waypoint x="2940.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f16_di" bpmnElement="desligamento_tobe_f16"><di:waypoint x="2860.0" y="785.0"/><di:waypoint x="2900.0" y="785.0"/><di:waypoint x="2900.0" y="345.0"/><di:waypoint x="2940.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f17_di" bpmnElement="desligamento_tobe_f17"><di:waypoint x="3000.0" y="345.0"/><di:waypoint x="3200.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_f18_di" bpmnElement="desligamento_tobe_f18"><di:waypoint x="3380.0" y="345.0"/><di:waypoint x="3460.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_planear_separar_di" bpmnElement="desligamento_tobe_planear_separar"><di:waypoint x="1560.0" y="345.0"/><di:waypoint x="1640.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_separar_documentos_di" bpmnElement="desligamento_tobe_separar_documentos"><di:waypoint x="1700.0" y="345.0"/><di:waypoint x="1900.0" y="345.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="desligamento_tobe_separar_executar_acessos_di" bpmnElement="desligamento_tobe_separar_executar_acessos"><di:waypoint x="1670.0" y="375.0"/><di:waypoint x="1670.0" y="680"/><di:waypoint x="2770.0" y="680"/><di:waypoint x="2770.0" y="610.0"/></bpmndi:BPMNEdge></bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

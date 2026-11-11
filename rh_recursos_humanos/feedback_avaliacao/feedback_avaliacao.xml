@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_feedback_avaliacao" targetNamespace="https://prospera.local/documentacao/rh/feedback_avaliacao" exporter="Documentação de processos Próspera" exporterVersion="1">
+  <bpmn:process id="feedback_avaliacao_ASIS" name="AS-IS — Feedback informal (evidência parcial)" isExecutable="false">
+    <bpmn:documentation>Feedback e avaliação
+Objetivo: registrar a existência de conversas de feedback. Início: ocorrência de uma conversa, cujo gatilho não foi detalhado. Fim: conversa realizada, sem inferir registro ou plano posterior. Papéis: RH, líderes e colaboradores, participação por caso a confirmar. Entradas: dificuldades e avaliações discutidas; instrumentos não informados. Saída: conversa, sem ciclo regular documentado. Dificuldades: critérios históricos de apontamento de erros variavam entre líderes. Divergência D03: o board diz não há feedbacks, enquanto a transcrição afirma que há conversas; o modelo representa a evidência detalhada da transcrição e mantém o conflito para validação. Não há evidência de rotina trimestral atual.
+Fontes: ../transcricao.md, seção 8 (Feedback, desenvolvimento e comunicação), seção 6 (Desligamento) e seção 11 (validações); ../fontes/miro/area_1.svg, widgets 3458764683995894851 (feedback/avaliação) e 3458764683996087000 (PDI); ../fontes/miro/area_2.svg, widgets 3458764683994213097 (não há feedbacks) e 3458764683994106348 (não há matriz de avaliação). Board: https://miro.com/app/board/uXjVHmYGPIM=/ .
+Consulta das fontes: 05/11/2026 (America/Sao_Paulo). Data da reunião não informada. Nenhum processo foi validado pelo setor nesta documentação. Fluxos descritivos, não executáveis. A ordem das propostas organiza a leitura; não representa aprovação de procedimento, prazo ou integração técnica.</bpmn:documentation>
+    <bpmn:startEvent id="feedback_avaliacao_ASIS_s" name="Conversa de feedback ocorre">
+      <bpmn:documentation>Responsável: Participantes a confirmar. Gatilho e periodicidade atuais não informados.</bpmn:documentation>
+      <bpmn:outgoing>feedback_avaliacao_ASIS_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="feedback_avaliacao_ASIS_conversa" name="Conversar sobre feedback">
+      <bpmn:documentation>Responsável: RH, líder e/ou colaborador. Relato de conversas existentes; não implica avaliação padronizada. Fonte: seção 8.</bpmn:documentation>
+      <bpmn:incoming>feedback_avaliacao_ASIS_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>feedback_avaliacao_ASIS_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="feedback_avaliacao_ASIS_e" name="Conversa realizada">
+      <bpmn:documentation>Responsável: Participantes. Fim do recorte conhecido, não comprovação de registro formal.</bpmn:documentation>
+      <bpmn:incoming>feedback_avaliacao_ASIS_Flow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="feedback_avaliacao_ASIS_Flow_1" sourceRef="feedback_avaliacao_ASIS_s" targetRef="feedback_avaliacao_ASIS_conversa">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="feedback_avaliacao_ASIS_Flow_2" sourceRef="feedback_avaliacao_ASIS_conversa" targetRef="feedback_avaliacao_ASIS_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:process id="feedback_avaliacao_TOBE" name="TO-BE — Feedback periódico (proposta não validada)" isExecutable="false">
+    <bpmn:documentation>Feedback e avaliação
+Objetivo proposto: acompanhar evolução e antecipar dificuldades. Início: ocasião de feedback prevista no ciclo desejado; calendário a validar. Fim do recorte: conversa e registro, sem decisão automática de promoção ou desligamento. Entradas: critérios padronizados a definir e avaliação da pessoa. Saídas: feedback registrado com visibilidade por papel. Mudanças: criar regularidade e histórico. Foi sugerido feedback trimestral do líder para cada integrante, acompanhamento do RH com líderes e conversa anual RH com todos; esses são formatos distintos, não etapas obrigatórias consecutivas. Pesquisa de clima foi mencionada como semestral, sem método descrito; não constitui aprovação de PDI. Pendências: calendário, critérios, papéis, acesso, instrumentos e forma de acompanhamento. Impacto esperado, ainda não medido: maior consistência de avaliação e prevenção de dificuldades.
+Fontes: ../transcricao.md, seção 8 (Feedback, desenvolvimento e comunicação), seção 6 (Desligamento) e seção 11 (validações); ../fontes/miro/area_1.svg, widgets 3458764683995894851 (feedback/avaliação) e 3458764683996087000 (PDI); ../fontes/miro/area_2.svg, widgets 3458764683994213097 (não há feedbacks) e 3458764683994106348 (não há matriz de avaliação). Board: https://miro.com/app/board/uXjVHmYGPIM=/ .
+Consulta das fontes: 05/11/2026 (America/Sao_Paulo). Data da reunião não informada. Nenhum processo foi validado pelo setor nesta documentação. Fluxos descritivos, não executáveis. A ordem das propostas organiza a leitura; não representa aprovação de procedimento, prazo ou integração técnica.</bpmn:documentation>
+    <bpmn:startEvent id="feedback_avaliacao_TOBE_s" name="Ocasião do ciclo proposto">
+      <bpmn:documentation>Responsável: Líder / RH. Trimestral líder-equipe e anual RH-todos são ideias; não há timer ou SLA aprovado.</bpmn:documentation>
+      <bpmn:outgoing>feedback_avaliacao_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="feedback_avaliacao_TOBE_conversa" name="Realizar conversa de feedback">
+      <bpmn:documentation>Responsável: Líder e colaborador ou RH e participante. Acompanhamento do RH com líderes também discutido. Usar critérios a padronizar; modalidades não precisam ocorrer na mesma instância.</bpmn:documentation>
+      <bpmn:incoming>feedback_avaliacao_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>feedback_avaliacao_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="feedback_avaliacao_TOBE_registro" name="Registrar feedback com acesso por papel">
+      <bpmn:documentation>Responsável: Responsável pelo registro a definir. Necessidade proposta de histórico e critérios. Matriz de acesso ainda não definida; não expor todos os registros a todos.</bpmn:documentation>
+      <bpmn:incoming>feedback_avaliacao_TOBE_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>feedback_avaliacao_TOBE_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="feedback_avaliacao_TOBE_e" name="Feedback registrado (recorte)">
+      <bpmn:documentation>Responsável: Responsável a definir. Pode subsidiar desenvolvimento e movimentação, sem automatizar decisões. PDI em ../desenvolvimento_pdi/desenvolvimento_pdi.xml.</bpmn:documentation>
+      <bpmn:incoming>feedback_avaliacao_TOBE_Flow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="feedback_avaliacao_TOBE_Flow_1" sourceRef="feedback_avaliacao_TOBE_s" targetRef="feedback_avaliacao_TOBE_conversa">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="feedback_avaliacao_TOBE_Flow_2" sourceRef="feedback_avaliacao_TOBE_conversa" targetRef="feedback_avaliacao_TOBE_registro">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="feedback_avaliacao_TOBE_Flow_3" sourceRef="feedback_avaliacao_TOBE_registro" targetRef="feedback_avaliacao_TOBE_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="feedback_avaliacao_ASIS_Diagram" name="AS-IS — Feedback informal (evidência parcial)">
+    <bpmndi:BPMNPlane id="feedback_avaliacao_ASIS_Plane" bpmnElement="feedback_avaliacao_ASIS">
+      <bpmndi:BPMNShape id="feedback_avaliacao_ASIS_s_di" bpmnElement="feedback_avaliacao_ASIS_s">
+        <dc:Bounds x="100" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="45" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="feedback_avaliacao_ASIS_conversa_di" bpmnElement="feedback_avaliacao_ASIS_conversa">
+        <dc:Bounds x="360" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="feedback_avaliacao_ASIS_e_di" bpmnElement="feedback_avaliacao_ASIS_e">
+        <dc:Bounds x="620" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="565" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="feedback_avaliacao_ASIS_Flow_1_di" bpmnElement="feedback_avaliacao_ASIS_Flow_1">
+        <di:waypoint x="140" y="200.0" />
+        <di:waypoint x="360" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="feedback_avaliacao_ASIS_Flow_2_di" bpmnElement="feedback_avaliacao_ASIS_Flow_2">
+        <di:waypoint x="540" y="230.0" />
+        <di:waypoint x="620" y="200.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="feedback_avaliacao_TOBE_Diagram" name="TO-BE — Feedback periódico (proposta não validada)">
+    <bpmndi:BPMNPlane id="feedback_avaliacao_TOBE_Plane" bpmnElement="feedback_avaliacao_TOBE">
+      <bpmndi:BPMNShape id="feedback_avaliacao_TOBE_s_di" bpmnElement="feedback_avaliacao_TOBE_s">
+        <dc:Bounds x="100" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="45" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="feedback_avaliacao_TOBE_conversa_di" bpmnElement="feedback_avaliacao_TOBE_conversa">
+        <dc:Bounds x="360" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="feedback_avaliacao_TOBE_registro_di" bpmnElement="feedback_avaliacao_TOBE_registro">
+        <dc:Bounds x="620" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="feedback_avaliacao_TOBE_e_di" bpmnElement="feedback_avaliacao_TOBE_e">
+        <dc:Bounds x="880" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="825" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="feedback_avaliacao_TOBE_Flow_1_di" bpmnElement="feedback_avaliacao_TOBE_Flow_1">
+        <di:waypoint x="140" y="200.0" />
+        <di:waypoint x="360" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="feedback_avaliacao_TOBE_Flow_2_di" bpmnElement="feedback_avaliacao_TOBE_Flow_2">
+        <di:waypoint x="540" y="230.0" />
+        <di:waypoint x="620" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="feedback_avaliacao_TOBE_Flow_3_di" bpmnElement="feedback_avaliacao_TOBE_Flow_3">
+        <di:waypoint x="800" y="230.0" />
+        <di:waypoint x="880" y="200.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

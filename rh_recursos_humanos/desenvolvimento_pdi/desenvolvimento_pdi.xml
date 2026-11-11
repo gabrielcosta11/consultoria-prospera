@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_desenvolvimento_pdi" targetNamespace="https://prospera.local/documentacao/rh/desenvolvimento_pdi" exporter="Documentação de processos Próspera" exporterVersion="1">
+  <bpmn:process id="desenvolvimento_pdi_TOBE" name="TO-BE — Registro de PDI (proposta parcial não validada)" isExecutable="false">
+    <bpmn:documentation>Plano de desenvolvimento individual
+Objetivo: permitir registrar necessidades, metas e cursos de interesse e receber sugestões de capacitação. Início: interesse em registrar desenvolvimento; gatilho formal não informado. Fim do recorte: informações e sugestões registradas, sem comprovação de aprovação, matrícula, realização ou avaliação de eficácia. Papéis: colaborador, líder e RH. Entradas: pontos a melhorar, metas e interesses. Saídas: registro de PDI e eventuais sugestões. Sequência gráfica é organização da proposta, não cadeia de aprovação estabelecida. Não há frequência, orçamento de cursos, prazo de metas, aprovador ou vínculo obrigatório com feedback definidos. Candidatura interna, promoções e mudanças de função foram mencionadas como ideias, sem regras suficientes para fluxo próprio. Perfil com nome, foto, função, equipe e avisos de chegada/aniversário é proposta de comunicação sem rotina mapeada. Impacto esperado: apoiar desenvolvimento; não medido.
+Fontes: ../transcricao.md, seção 8 (Feedback, desenvolvimento e comunicação), seção 6 (Desligamento) e seção 11 (validações); ../fontes/miro/area_1.svg, widgets 3458764683995894851 (feedback/avaliação) e 3458764683996087000 (PDI); ../fontes/miro/area_2.svg, widgets 3458764683994213097 (não há feedbacks) e 3458764683994106348 (não há matriz de avaliação). Board: https://miro.com/app/board/uXjVHmYGPIM=/ . Fontes adicionais: ../fontes/miro/area_5.svg, widget 3458764683994267185 (não plano de carreira). AS-IS: não há fluxo de PDI descrito nem plano de carreira demonstrado; nenhum processo AS-IS foi inventado.
+Consulta das fontes: 05/11/2026 (America/Sao_Paulo). Data da reunião não informada. Nenhum processo foi validado pelo setor nesta documentação. Fluxos descritivos, não executáveis. A ordem das propostas organiza a leitura; não representa aprovação de procedimento, prazo ou integração técnica.</bpmn:documentation>
+    <bpmn:startEvent id="desenvolvimento_pdi_TOBE_s" name="Interesse em registrar PDI">
+      <bpmn:documentation>Responsável: Colaborador. Gatilho formal a definir; seção 8.</bpmn:documentation>
+      <bpmn:outgoing>desenvolvimento_pdi_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="desenvolvimento_pdi_TOBE_registro" name="Registrar pontos, metas e cursos de interesse">
+      <bpmn:documentation>Responsável: Colaborador. Ideia explicitamente discutida, sem metas ou cursos prescritos nesta documentação.</bpmn:documentation>
+      <bpmn:incoming>desenvolvimento_pdi_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>desenvolvimento_pdi_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="desenvolvimento_pdi_TOBE_g" name="Há sugestões de capacitação?">
+      <bpmn:documentation>Responsável: Líder / RH. Possibilidade de sugestões, sem aprovação obrigatória do PDI. Condição organiza leitura da proposta.</bpmn:documentation>
+      <bpmn:incoming>desenvolvimento_pdi_TOBE_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>desenvolvimento_pdi_TOBE_Flow_3</bpmn:outgoing>
+      <bpmn:outgoing>desenvolvimento_pdi_TOBE_Flow_4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="desenvolvimento_pdi_TOBE_sugestao" name="Sugerir capacitações">
+      <bpmn:documentation>Responsável: Líder e/ou RH. Sugestão facultativa conforme relato; critérios, custeio e contratação pendentes.</bpmn:documentation>
+      <bpmn:incoming>desenvolvimento_pdi_TOBE_Flow_4</bpmn:incoming>
+      <bpmn:outgoing>desenvolvimento_pdi_TOBE_Flow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="desenvolvimento_pdi_TOBE_e" name="PDI registrado (recorte)">
+      <bpmn:documentation>Responsável: Colaborador / líder / RH. Acompanhamento e encerramento do plano não foram detalhados.</bpmn:documentation>
+      <bpmn:incoming>desenvolvimento_pdi_TOBE_Flow_3</bpmn:incoming>
+      <bpmn:incoming>desenvolvimento_pdi_TOBE_Flow_5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="desenvolvimento_pdi_TOBE_Flow_1" sourceRef="desenvolvimento_pdi_TOBE_s" targetRef="desenvolvimento_pdi_TOBE_registro">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="desenvolvimento_pdi_TOBE_Flow_2" sourceRef="desenvolvimento_pdi_TOBE_registro" targetRef="desenvolvimento_pdi_TOBE_g">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="desenvolvimento_pdi_TOBE_Flow_3" sourceRef="desenvolvimento_pdi_TOBE_g" targetRef="desenvolvimento_pdi_TOBE_e" name="Sem sugestão nesta ocasião">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Sem sugestão nesta ocasião. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="desenvolvimento_pdi_TOBE_Flow_4" sourceRef="desenvolvimento_pdi_TOBE_g" targetRef="desenvolvimento_pdi_TOBE_sugestao" name="Com sugestão">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Com sugestão. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="desenvolvimento_pdi_TOBE_Flow_5" sourceRef="desenvolvimento_pdi_TOBE_sugestao" targetRef="desenvolvimento_pdi_TOBE_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="desenvolvimento_pdi_TOBE_Diagram" name="TO-BE — Registro de PDI (proposta parcial não validada)">
+    <bpmndi:BPMNPlane id="desenvolvimento_pdi_TOBE_Plane" bpmnElement="desenvolvimento_pdi_TOBE">
+      <bpmndi:BPMNShape id="desenvolvimento_pdi_TOBE_s_di" bpmnElement="desenvolvimento_pdi_TOBE_s">
+        <dc:Bounds x="100" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="45" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desenvolvimento_pdi_TOBE_registro_di" bpmnElement="desenvolvimento_pdi_TOBE_registro">
+        <dc:Bounds x="360" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desenvolvimento_pdi_TOBE_g_di" bpmnElement="desenvolvimento_pdi_TOBE_g">
+        <dc:Bounds x="620" y="180" width="60" height="60" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="565" y="248" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desenvolvimento_pdi_TOBE_sugestao_di" bpmnElement="desenvolvimento_pdi_TOBE_sugestao">
+        <dc:Bounds x="880" y="380" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="desenvolvimento_pdi_TOBE_e_di" bpmnElement="desenvolvimento_pdi_TOBE_e">
+        <dc:Bounds x="1140" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1085" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="desenvolvimento_pdi_TOBE_Flow_1_di" bpmnElement="desenvolvimento_pdi_TOBE_Flow_1">
+        <di:waypoint x="140" y="200.0" />
+        <di:waypoint x="360" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desenvolvimento_pdi_TOBE_Flow_2_di" bpmnElement="desenvolvimento_pdi_TOBE_Flow_2">
+        <di:waypoint x="540" y="230.0" />
+        <di:waypoint x="620" y="210.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desenvolvimento_pdi_TOBE_Flow_3_di" bpmnElement="desenvolvimento_pdi_TOBE_Flow_3">
+        <di:waypoint x="680" y="210.0" />
+        <di:waypoint x="1140" y="200.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="850.0" y="180.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desenvolvimento_pdi_TOBE_Flow_4_di" bpmnElement="desenvolvimento_pdi_TOBE_Flow_4">
+        <di:waypoint x="680" y="210.0" />
+        <di:waypoint x="780.0" y="210.0" />
+        <di:waypoint x="780.0" y="430.0" />
+        <di:waypoint x="880" y="430.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="720.0" y="295.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="desenvolvimento_pdi_TOBE_Flow_5_di" bpmnElement="desenvolvimento_pdi_TOBE_Flow_5">
+        <di:waypoint x="1060" y="430.0" />
+        <di:waypoint x="1100.0" y="430.0" />
+        <di:waypoint x="1100.0" y="200.0" />
+        <di:waypoint x="1140" y="200.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

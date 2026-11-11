@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Def_contratacao_pj" targetNamespace="https://prospera.local/processos/rh/contratacao_pj" name="RH — Contratação de prestadores pessoa jurídica" exporter="Documentação de processos Próspera" exporterVersion="1.0">
+  <bpmn:process id="contratacao_pj_ASIS_Process" name="AS-IS — Contratação PJ (recorte parcial relatado)" isExecutable="false">
+    <bpmn:documentation>Objetivo: registrar o recorte conhecido da contratação de prestadores pessoa jurídica, preservando particularidades contratuais. Limites conhecidos: prestador já aprovado, documentação específica, contrato e integração pertinente ao trabalho. Captação, negociação, aprovações, pagamento, duração, encerramento e renovação não foram detalhados para PJ. Não reutilizar automaticamente o fluxo Prestadores do board: diária, indicação e recibo correspondem aos freelancers da seção 4.
+Responsabilidades: a transcrição situa o relato na rotina do RH; responsáveis específicos pela coleta de documentos PJ, formalização, revisão contratual e integração devem ser confirmados. As raias indicam RH como contexto de atendimento e responsável contratual a validar; não estabelecem novas atribuições.
+Entradas: aprovação anterior, documentação específica e condições contratuais. Saídas no recorte: contrato e integração pertinente; lista documental, assinaturas e armazenamento não detalhados.
+Regras relatadas, não generalizações jurídicas: equipe descreveu documentação menor e ausência de etapas de exame admissional, ponto e uniforme previstas para CLT. A nota do board diz PJ não recolhe admissão e não faz exame; a transcrição, por sua vez, menciona documentos próprios e contrato. Não interpretar a nota como ausência de documentação ou obrigação contratual. Condições devem ser verificadas caso a caso.
+Para determinados contratos, foi citado descanso remunerado de 30 dias dentro do ano, sem acumulação da mesma forma que férias CLT. A nota de férias diz PJ tem que tirar dentro do ano; não se adota isso como regra geral para todos os prestadores. Período anual, saldo, remuneração, acumulação, elegibilidade e aprovação dependem da conferência do contrato.
+Dificuldades e riscos de interpretação: evidência parcial e possibilidade de misturar CLT, freelancer e PJ; não foi relatado gargalo específico nem prazo para este fluxo.
+Pendências: quais modalidades PJ existem; documentos por modalidade; responsáveis e aprovações; conteúdo e assinatura do contrato; integração aplicável; condições de descanso; acesso a registros e relação com outros setores. A sequência de documentos, contrato e integração é a organização do recorte textual e requer validação, não um procedimento já homologado.
+
+Estado: relato parcial da reunião, sem evidência de validação formal. Não contém exame, cadastro no ponto ou uniforme como passos obrigatórios. O encerramento representa somente o limite da documentação disponível.
+Fonte: ../transcricao.md, seção 5 — Prestadores pessoa jurídica; 7 — Planejamento e concessão de férias; 11 — Pontos para validação; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683994847182 (nota em Captação / Admissão), 3458764683995427945 (nota em Férias). Consulta das fontes: 2026-11-05.</bpmn:documentation>
+    <bpmn:laneSet id="contratacao_pj_ASIS_Lanes">
+      <bpmn:lane id="contratacao_pj_ASIS_Lane_0" name="RH — atendimento; atribuições específicas a confirmar">
+        <bpmn:flowNodeRef>contratacao_pj_ASIS_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>contratacao_pj_ASIS_Documentos</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="contratacao_pj_ASIS_Lane_1" name="Responsável contratual — a validar">
+        <bpmn:flowNodeRef>contratacao_pj_ASIS_Contrato</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="contratacao_pj_ASIS_Lane_2" name="Prestador PJ e área de destino — integração a confirmar">
+        <bpmn:flowNodeRef>contratacao_pj_ASIS_Integracao</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>contratacao_pj_ASIS_Fim</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="contratacao_pj_ASIS_Inicio" name="Prestador PJ aprovado">
+      <bpmn:documentation>A transcrição começa depois da aprovação. Quem aprova e em qual fluxo é pendência; captação não foi duplicada. Fonte: ../transcricao.md, seção 5; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:outgoing>contratacao_pj_ASIS_Flow_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="contratacao_pj_ASIS_Documentos" name="Solicitar documentação própria de PJ">
+      <bpmn:documentation>A documentação foi descrita como menor que a de funcionário. Lista, coleta, conferência e responsável específicos não detalhados; RH é o contexto do relato. Fonte: ../transcricao.md, seção 5; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683994847182. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>contratacao_pj_ASIS_Flow_0</bpmn:incoming>
+      <bpmn:outgoing>contratacao_pj_ASIS_Flow_1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="contratacao_pj_ASIS_Contrato" name="Formalizar contrato específico">
+      <bpmn:documentation>Há contrato na relação PJ descrita. Responsável, aprovadores, assinaturas, prazos e cláusulas não foram detalhados. A raia sinaliza responsabilidade pendente, sem atribuí-la ao RH ou a outro setor. Fonte: ../transcricao.md, seção 5; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>contratacao_pj_ASIS_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>contratacao_pj_ASIS_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="contratacao_pj_ASIS_Integracao" name="Realizar integração pertinente ao trabalho">
+      <bpmn:documentation>Prestadores participam da integração pertinente, conforme a descrição. Responsável por conduzir, conteúdos e comprovação não detalhados. Ausência de exame, ponto e uniforme refere-se ao relato desses contratos e precisa ser confirmada. Fonte: ../transcricao.md, seção 5; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>contratacao_pj_ASIS_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>contratacao_pj_ASIS_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="contratacao_pj_ASIS_Fim" name="Integração realizada; limite das evidências">
+      <bpmn:documentation>O recorte termina na integração. Não presume prestação concluída, pagamento, vigência encerrada ou direito uniforme ao descanso. Fonte: ../transcricao.md, seção 5; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>contratacao_pj_ASIS_Flow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="contratacao_pj_ASIS_Flow_0" sourceRef="contratacao_pj_ASIS_Inicio" targetRef="contratacao_pj_ASIS_Documentos" />
+    <bpmn:sequenceFlow id="contratacao_pj_ASIS_Flow_1" sourceRef="contratacao_pj_ASIS_Documentos" targetRef="contratacao_pj_ASIS_Contrato" />
+    <bpmn:sequenceFlow id="contratacao_pj_ASIS_Flow_2" sourceRef="contratacao_pj_ASIS_Contrato" targetRef="contratacao_pj_ASIS_Integracao" />
+    <bpmn:sequenceFlow id="contratacao_pj_ASIS_Flow_3" sourceRef="contratacao_pj_ASIS_Integracao" targetRef="contratacao_pj_ASIS_Fim" />
+  </bpmn:process>
+  <bpmn:process id="contratacao_pj_TOBE_Process" name="TO-BE — Registro das particularidades PJ (proposta parcial não validada)" isExecutable="false">
+    <bpmn:documentation>Objetivo: registrar o recorte conhecido da contratação de prestadores pessoa jurídica, preservando particularidades contratuais. Limites conhecidos: prestador já aprovado, documentação específica, contrato e integração pertinente ao trabalho. Captação, negociação, aprovações, pagamento, duração, encerramento e renovação não foram detalhados para PJ. Não reutilizar automaticamente o fluxo Prestadores do board: diária, indicação e recibo correspondem aos freelancers da seção 4.
+Responsabilidades: a transcrição situa o relato na rotina do RH; responsáveis específicos pela coleta de documentos PJ, formalização, revisão contratual e integração devem ser confirmados. As raias indicam RH como contexto de atendimento e responsável contratual a validar; não estabelecem novas atribuições.
+Entradas: aprovação anterior, documentação específica e condições contratuais. Saídas no recorte: contrato e integração pertinente; lista documental, assinaturas e armazenamento não detalhados.
+Regras relatadas, não generalizações jurídicas: equipe descreveu documentação menor e ausência de etapas de exame admissional, ponto e uniforme previstas para CLT. A nota do board diz PJ não recolhe admissão e não faz exame; a transcrição, por sua vez, menciona documentos próprios e contrato. Não interpretar a nota como ausência de documentação ou obrigação contratual. Condições devem ser verificadas caso a caso.
+Para determinados contratos, foi citado descanso remunerado de 30 dias dentro do ano, sem acumulação da mesma forma que férias CLT. A nota de férias diz PJ tem que tirar dentro do ano; não se adota isso como regra geral para todos os prestadores. Período anual, saldo, remuneração, acumulação, elegibilidade e aprovação dependem da conferência do contrato.
+Dificuldades e riscos de interpretação: evidência parcial e possibilidade de misturar CLT, freelancer e PJ; não foi relatado gargalo específico nem prazo para este fluxo.
+Pendências: quais modalidades PJ existem; documentos por modalidade; responsáveis e aprovações; conteúdo e assinatura do contrato; integração aplicável; condições de descanso; acesso a registros e relação com outros setores. A sequência de documentos, contrato e integração é a organização do recorte textual e requer validação, não um procedimento já homologado.
+
+Mudança discutida: cadastro e registros devem refletir a relação contratual específica sem presumir condições iguais a todos os prestadores. Conferir contratos antes de definir cálculo e aprovação do descanso é dependência expressa da proposta.
+Limite do TO-BE: não foi descrita uma nova sequência completa de contratação PJ. O diagrama representa apenas a preparação e o registro das particularidades propostos; não substitui nem declara redesenhados os passos atuais. A ordem das duas atividades é uma representação da dependência entre conferência e registro, sem nova regra de aprovação. Continuidade da contratação e do descanso permanece pendente.
+Resultado esperado: reduzir mistura entre modalidades e permitir análise das condições de cada contrato; não há benefício quantitativo validado.
+Fonte: ../transcricao.md, seção 5 — Prestadores pessoa jurídica; 7 — Planejamento e concessão de férias; 11 — Pontos para validação; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683994847182 (nota em Captação / Admissão), 3458764683995427945 (nota em Férias). Consulta das fontes: 2026-11-05.</bpmn:documentation>
+    <bpmn:laneSet id="contratacao_pj_TOBE_Lanes">
+      <bpmn:lane id="contratacao_pj_TOBE_Lane_0" name="RH — registro; responsabilidade a confirmar">
+        <bpmn:flowNodeRef>contratacao_pj_TOBE_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>contratacao_pj_TOBE_Registrar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>contratacao_pj_TOBE_Fim</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="contratacao_pj_TOBE_Lane_1" name="Responsável pela conferência contratual — a validar">
+        <bpmn:flowNodeRef>contratacao_pj_TOBE_Conferir</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="contratacao_pj_TOBE_Inicio" name="Necessidade de distinguir condições PJ">
+      <bpmn:documentation>Proposta identificada na reunião: refletir a relação contratual específica no cadastro. Fonte: ../transcricao.md, seção 5; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:outgoing>contratacao_pj_TOBE_Flow_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="contratacao_pj_TOBE_Conferir" name="Conferir condições de cada contrato">
+      <bpmn:documentation>Dependência expressa: confirmar documentos, particularidades e descanso remunerado contrato a contrato antes de qualquer cálculo. Não se fixa 30 dias a todos nem se cria aprovação não relatada. Responsável pendente. Fonte: ../transcricao.md, seção 5; 7; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/ ; widgets 3458764683995427945. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>contratacao_pj_TOBE_Flow_0</bpmn:incoming>
+      <bpmn:outgoing>contratacao_pj_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="contratacao_pj_TOBE_Registrar" name="Registrar particularidades da relação PJ">
+      <bpmn:documentation>Proposta parcial: cadastro e registros próprios por relação contratual; campos, visibilidade, responsáveis e suporte ainda pendentes. Não é implementação de tela ou software. Fonte: ../transcricao.md, seção 5; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>contratacao_pj_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>contratacao_pj_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="contratacao_pj_TOBE_Fim" name="Condições registradas; continuidade a validar">
+      <bpmn:documentation>Limite da proposta disponível; não foi definido fluxo futuro completo de contratação, descanso ou encerramento PJ. Fonte: ../transcricao.md, seção 5; 7; 11; documento https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit (data da reunião não informada). Board https://miro.com/app/board/uXjVHmYGPIM=/. Consulta das fontes: 2026-11-05.</bpmn:documentation>
+      <bpmn:incoming>contratacao_pj_TOBE_Flow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="contratacao_pj_TOBE_Flow_0" sourceRef="contratacao_pj_TOBE_Inicio" targetRef="contratacao_pj_TOBE_Conferir" />
+    <bpmn:sequenceFlow id="contratacao_pj_TOBE_Flow_1" sourceRef="contratacao_pj_TOBE_Conferir" targetRef="contratacao_pj_TOBE_Registrar" />
+    <bpmn:sequenceFlow id="contratacao_pj_TOBE_Flow_2" sourceRef="contratacao_pj_TOBE_Registrar" targetRef="contratacao_pj_TOBE_Fim" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="contratacao_pj_ASIS_Diagram" name="AS-IS — Contratação PJ (recorte parcial relatado)">
+    <bpmndi:BPMNPlane id="contratacao_pj_ASIS_Plane" bpmnElement="contratacao_pj_ASIS_Process">
+      <bpmndi:BPMNShape id="contratacao_pj_ASIS_LaneShape_0" bpmnElement="contratacao_pj_ASIS_Lane_0" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="1163.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_ASIS_LaneShape_1" bpmnElement="contratacao_pj_ASIS_Lane_1" isHorizontal="true">
+        <dc:Bounds x="40" y="220" width="1163.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_ASIS_LaneShape_2" bpmnElement="contratacao_pj_ASIS_Lane_2" isHorizontal="true">
+        <dc:Bounds x="40" y="400" width="1163.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_ASIS_Inicio_Shape" bpmnElement="contratacao_pj_ASIS_Inicio">
+        <dc:Bounds x="177.0" y="107.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="129.0" y="148.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_ASIS_Documentos_Shape" bpmnElement="contratacao_pj_ASIS_Documentos">
+        <dc:Bounds x="340.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_ASIS_Contrato_Shape" bpmnElement="contratacao_pj_ASIS_Contrato">
+        <dc:Bounds x="570.0" y="260.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_ASIS_Integracao_Shape" bpmnElement="contratacao_pj_ASIS_Integracao">
+        <dc:Bounds x="800.0" y="440.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_ASIS_Fim_Shape" bpmnElement="contratacao_pj_ASIS_Fim">
+        <dc:Bounds x="1097.0" y="467.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1049.0" y="508.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="contratacao_pj_ASIS_Edge_0" bpmnElement="contratacao_pj_ASIS_Flow_0">
+        <di:waypoint x="213.0" y="125.0" />
+        <di:waypoint x="276.5" y="125.0" />
+        <di:waypoint x="276.5" y="125.0" />
+        <di:waypoint x="340.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="contratacao_pj_ASIS_Edge_1" bpmnElement="contratacao_pj_ASIS_Flow_1">
+        <di:waypoint x="510.0" y="125.0" />
+        <di:waypoint x="540.0" y="125.0" />
+        <di:waypoint x="540.0" y="305.0" />
+        <di:waypoint x="570.0" y="305.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="contratacao_pj_ASIS_Edge_2" bpmnElement="contratacao_pj_ASIS_Flow_2">
+        <di:waypoint x="740.0" y="305.0" />
+        <di:waypoint x="770.0" y="305.0" />
+        <di:waypoint x="770.0" y="485.0" />
+        <di:waypoint x="800.0" y="485.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="contratacao_pj_ASIS_Edge_3" bpmnElement="contratacao_pj_ASIS_Flow_3">
+        <di:waypoint x="970.0" y="485.0" />
+        <di:waypoint x="1033.5" y="485.0" />
+        <di:waypoint x="1033.5" y="485.0" />
+        <di:waypoint x="1097.0" y="485.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="contratacao_pj_TOBE_Diagram" name="TO-BE — Registro das particularidades PJ (proposta parcial não validada)">
+    <bpmndi:BPMNPlane id="contratacao_pj_TOBE_Plane" bpmnElement="contratacao_pj_TOBE_Process">
+      <bpmndi:BPMNShape id="contratacao_pj_TOBE_LaneShape_0" bpmnElement="contratacao_pj_TOBE_Lane_0" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="933.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_TOBE_LaneShape_1" bpmnElement="contratacao_pj_TOBE_Lane_1" isHorizontal="true">
+        <dc:Bounds x="40" y="220" width="933.0" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_TOBE_Inicio_Shape" bpmnElement="contratacao_pj_TOBE_Inicio">
+        <dc:Bounds x="177.0" y="107.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="129.0" y="148.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_TOBE_Conferir_Shape" bpmnElement="contratacao_pj_TOBE_Conferir">
+        <dc:Bounds x="340.0" y="260.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_TOBE_Registrar_Shape" bpmnElement="contratacao_pj_TOBE_Registrar">
+        <dc:Bounds x="570.0" y="80.0" width="170" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="contratacao_pj_TOBE_Fim_Shape" bpmnElement="contratacao_pj_TOBE_Fim">
+        <dc:Bounds x="867.0" y="107.0" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="819.0" y="148.0" width="132" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="contratacao_pj_TOBE_Edge_0" bpmnElement="contratacao_pj_TOBE_Flow_0">
+        <di:waypoint x="213.0" y="125.0" />
+        <di:waypoint x="276.5" y="125.0" />
+        <di:waypoint x="276.5" y="305.0" />
+        <di:waypoint x="340.0" y="305.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="contratacao_pj_TOBE_Edge_1" bpmnElement="contratacao_pj_TOBE_Flow_1">
+        <di:waypoint x="510.0" y="305.0" />
+        <di:waypoint x="540.0" y="305.0" />
+        <di:waypoint x="540.0" y="125.0" />
+        <di:waypoint x="570.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="contratacao_pj_TOBE_Edge_2" bpmnElement="contratacao_pj_TOBE_Flow_2">
+        <di:waypoint x="740.0" y="125.0" />
+        <di:waypoint x="803.5" y="125.0" />
+        <di:waypoint x="803.5" y="125.0" />
+        <di:waypoint x="867.0" y="125.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

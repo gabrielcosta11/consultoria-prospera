@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_gestao_epis" targetNamespace="https://prospera.local/documentacao/rh/gestao_epis" exporter="Documentação de processos Próspera" exporterVersion="1">
+  <bpmn:process id="gestao_epis_TOBE" name="TO-BE — Controle de entrega/troca de EPIs (proposta parcial)" isExecutable="false">
+    <bpmn:documentation>Entrega e substituição de EPIs
+Objetivo: controlar itens por função, entrega e substituição. Início do recorte: necessidade de entrega/troca identificada; gatilho por vencimento, uso ou pedido a definir. Fim: entrega ou troca confirmada, conforme forma de comprovação ainda pendente. Papéis: RH sugeriu o controle; área responsável e quem entrega não estão definidos. Entradas: função, item aplicável e necessidade de troca. Saídas: registro de entrega/troca. Propostas: lembretes e confirmação; nenhum intervalo ou item obrigatório foi estabelecido. Máscara e protetor auricular na marcenaria são exemplos relatados, não lista técnica de exigências. Pré-condição para aplicar o procedimento: validar itens, periodicidade, responsáveis e comprovação com a área responsável. Impacto esperado: maior rastreabilidade de entregas e trocas, sem indicador ou meta definidos.
+Fontes: ../transcricao.md, seções 3 (itens de admissão), 4 (fornecimento conforme atividade), 10 (EPIs e solicitações internas) e 11 (validação); ../fontes/miro/area_5.svg, widget 3458764683996670729 (vencimento e troca de EPIs). Board: https://miro.com/app/board/uXjVHmYGPIM=/ . AS-IS: há relatos de fornecimento conforme atividade e trocas frequentes na marcenaria, mas não há sequência completa de entrega/substituição. Não se modela uma rotina atual inexistente nas fontes.
+Consulta das fontes: 05/11/2026 (America/Sao_Paulo). Data da reunião não informada. Nenhum processo foi validado pelo setor nesta documentação. Fluxos descritivos, não executáveis. A ordem das propostas organiza a leitura; não representa aprovação de procedimento, prazo ou integração técnica.</bpmn:documentation>
+    <bpmn:startEvent id="gestao_epis_TOBE_s" name="Necessidade de entrega ou troca">
+      <bpmn:documentation>Responsável: Área responsável a definir. Levantada na admissão ou durante trabalho; lembretes sugeridos, sem temporizador definido.</bpmn:documentation>
+      <bpmn:outgoing>gestao_epis_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="gestao_epis_TOBE_item" name="Identificar item aplicável à função">
+      <bpmn:documentation>Responsável: Área responsável a definir; RH participa da proposta. Catálogo, exigências e periodicidade pendentes; não pressupõe atribuição técnica ao RH.</bpmn:documentation>
+      <bpmn:incoming>gestao_epis_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>gestao_epis_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="gestao_epis_TOBE_entrega" name="Entregar ou substituir o item">
+      <bpmn:documentation>Responsável: Responsável pela entrega a definir. A entrega e substituição são objeto da proposta; não criar regra de compras ou estoque sem evidência.</bpmn:documentation>
+      <bpmn:incoming>gestao_epis_TOBE_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>gestao_epis_TOBE_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="gestao_epis_TOBE_confirmar" name="Confirmar entrega ou troca">
+      <bpmn:documentation>Responsável: Responsáveis e comprovação a definir. Forma de registro, eventual assinatura e guarda devem ser combinadas; fonte não define tecnologia.</bpmn:documentation>
+      <bpmn:incoming>gestao_epis_TOBE_Flow_3</bpmn:incoming>
+      <bpmn:outgoing>gestao_epis_TOBE_Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="gestao_epis_TOBE_e" name="Entrega/troca registrada (proposta)">
+      <bpmn:documentation>Responsável: Responsável a definir. Fim do recorte; monitoramento posterior depende de periodicidade ainda não definida.</bpmn:documentation>
+      <bpmn:incoming>gestao_epis_TOBE_Flow_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="gestao_epis_TOBE_Flow_1" sourceRef="gestao_epis_TOBE_s" targetRef="gestao_epis_TOBE_item">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gestao_epis_TOBE_Flow_2" sourceRef="gestao_epis_TOBE_item" targetRef="gestao_epis_TOBE_entrega">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gestao_epis_TOBE_Flow_3" sourceRef="gestao_epis_TOBE_entrega" targetRef="gestao_epis_TOBE_confirmar">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gestao_epis_TOBE_Flow_4" sourceRef="gestao_epis_TOBE_confirmar" targetRef="gestao_epis_TOBE_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="gestao_epis_TOBE_Diagram" name="TO-BE — Controle de entrega/troca de EPIs (proposta parcial)">
+    <bpmndi:BPMNPlane id="gestao_epis_TOBE_Plane" bpmnElement="gestao_epis_TOBE">
+      <bpmndi:BPMNShape id="gestao_epis_TOBE_s_di" bpmnElement="gestao_epis_TOBE_s">
+        <dc:Bounds x="100" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="45" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gestao_epis_TOBE_item_di" bpmnElement="gestao_epis_TOBE_item">
+        <dc:Bounds x="360" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gestao_epis_TOBE_entrega_di" bpmnElement="gestao_epis_TOBE_entrega">
+        <dc:Bounds x="620" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gestao_epis_TOBE_confirmar_di" bpmnElement="gestao_epis_TOBE_confirmar">
+        <dc:Bounds x="880" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gestao_epis_TOBE_e_di" bpmnElement="gestao_epis_TOBE_e">
+        <dc:Bounds x="1140" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1085" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="gestao_epis_TOBE_Flow_1_di" bpmnElement="gestao_epis_TOBE_Flow_1">
+        <di:waypoint x="140" y="200.0" />
+        <di:waypoint x="360" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="gestao_epis_TOBE_Flow_2_di" bpmnElement="gestao_epis_TOBE_Flow_2">
+        <di:waypoint x="540" y="230.0" />
+        <di:waypoint x="620" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="gestao_epis_TOBE_Flow_3_di" bpmnElement="gestao_epis_TOBE_Flow_3">
+        <di:waypoint x="800" y="230.0" />
+        <di:waypoint x="880" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="gestao_epis_TOBE_Flow_4_di" bpmnElement="gestao_epis_TOBE_Flow_4">
+        <di:waypoint x="1060" y="230.0" />
+        <di:waypoint x="1140" y="200.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

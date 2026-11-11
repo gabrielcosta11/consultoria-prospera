@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_acoes_brindes" targetNamespace="https://prospera.local/documentacao/rh/acoes_brindes" exporter="Documentação de processos Próspera" exporterVersion="1.0">
+  <bpmn:process id="acoes_brindes_ASIS" name="AS-IS — Ações internas com brindes" isExecutable="false">
+    <bpmn:documentation>Convenção: modelo descritivo não executável; AS-IS registra a prática relatada, e TO-BE é proposta pendente de validação, sem implementação de sistema.
+
+Objetivo: preparar e distribuir brindes em ações internas dentro do orçamento planejado.
+Limites: evento previsto até distribuição do material; não abrange compras, pagamento ao fornecedor ou gestão de estoque, cujas etapas não foram descritas.
+Responsáveis: RH pesquisa e organiza a distribuição; criação personaliza o material. Não foram identificados comprador, aprovador operacional ou responsável nominal pela entrega.
+Entradas: evento/calendário e orçamento aprovado; saídas: material personalizado e distribuído. Dados de dependentes são relevantes no Dia das Crianças, mas atualização e critérios não foram comprovados.
+Sequência: pesquisar opções dentro do orçamento; acionar criação; organizar distribuição. Se o gasto da ação ultrapassa o aprovado, precisa ser justificado (§9/Planejamento anual); destino e momento da justificativa não foram detalhados, portanto não se inventa uma aprovação financeira no diagrama.
+Dificuldades: saber quem recebeu, especialmente em locais/turnos distintos; correria perto da data; disponibilidade de dados atualizados de dependentes.
+Divergência de detalhamento: widget 3458764683996268714 menciona filhos menores de 13 anos e R$ 100 no Dia das Crianças. A transcrição §9 menciona apenas faixa etária definida pela empresa, sem idade nem valor. Preservar o dado do board como relato específico a confirmar; não constitui política vigente confirmada nem regra universal de brindes.
+Pendências: público e benefício por campanha, idade/data de corte/valor e forma de concessão no Dia das Crianças, forma de entrega por turno/local, evidência de recebimento e tratamento de faltantes. Não há meta ou prazo definido.
+Rastreabilidade: transcrição §9/Execução das ações e §9/Planejamento anual; widgets 3458764683996196146 (evento), 3458764683996196492 (brindes), 3458764683996196872 (criação), 3458764683996268090 (distribuição), 3458764683996268143 (controle de recebimento), 3458764683996268714 (Dia das Crianças).
+
+Fontes: ../transcricao.md, seção 9 — Endomarketing e eventos internos; seção 11 — Pontos para validação na próxima conversa. Documento original: https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit . Data da reunião não informada. Board RH: https://miro.com/app/board/uXjVHmYGPIM=/ ; grupo Endomarketing (3458764683995428445), cópia de consulta em ../fontes/miro/area_1.svg, consulta em 2026-11-05. As fontes registram relatos e propostas; não há evidência de aprovação final dos processos futuros.</bpmn:documentation>
+    <bpmn:startEvent id="acoes_brindes_ASIS_inicio" name="Evento previsto">
+      <bpmn:documentation>Ação interna prevista no calendário; board 3458764683996196146. Relação com ../planejamento_endomarketing/planejamento_endomarketing.xml é documental, sem chamada executável.</bpmn:documentation>
+      <bpmn:outgoing>acoes_brindes_ASIS_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="acoes_brindes_ASIS_opcoes" name="Pesquisar brindes dentro do orçamento">
+      <bpmn:documentation>RH pesquisa opções usando o orçamento da ação. Se houver excedente, é necessária justificativa conforme §9; responsável por receber/aprovar justificativa e momento não descritos. Sem inferir cotação mínima ou etapa de compra. Widget 3458764683996196492.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_ASIS_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>acoes_brindes_ASIS_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="acoes_brindes_ASIS_criacao" name="Acionar criação para personalizar">
+      <bpmn:documentation>RH aciona a área de criação para personalização do material. Entradas: opção e necessidade da ação; saída: material personalizado. Processo de produção/compra não detalhado e não foi acrescentado. §9/Execução; widget 3458764683996196872.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_ASIS_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>acoes_brindes_ASIS_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="acoes_brindes_ASIS_distribuicao" name="Organizar a distribuição">
+      <bpmn:documentation>RH organiza entrega aos colaboradores. Há dificuldade para identificar entregas pendentes por turno/local; não se presume assinatura ou controle individual atualmente consistente. §9/Execução; widgets 3458764683996268090 e 3458764683996268143.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_ASIS_Flow_3</bpmn:incoming>
+      <bpmn:outgoing>acoes_brindes_ASIS_Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="acoes_brindes_ASIS_fim" name="Distribuição realizada no recorte relatado">
+      <bpmn:documentation>Fim do recorte relatado; não atesta conciliação de todos os recebimentos ou encerramento financeiro, atividades sem evidência.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_ASIS_Flow_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="acoes_brindes_ASIS_Flow_1" sourceRef="acoes_brindes_ASIS_inicio" targetRef="acoes_brindes_ASIS_opcoes" />
+    <bpmn:sequenceFlow id="acoes_brindes_ASIS_Flow_2" sourceRef="acoes_brindes_ASIS_opcoes" targetRef="acoes_brindes_ASIS_criacao" />
+    <bpmn:sequenceFlow id="acoes_brindes_ASIS_Flow_3" sourceRef="acoes_brindes_ASIS_criacao" targetRef="acoes_brindes_ASIS_distribuicao" />
+    <bpmn:sequenceFlow id="acoes_brindes_ASIS_Flow_4" sourceRef="acoes_brindes_ASIS_distribuicao" targetRef="acoes_brindes_ASIS_fim" />
+    <bpmn:textAnnotation id="acoes_brindes_ASIS_Note_1">
+      <bpmn:text>Dia das Crianças: board cita filhos menores de 13 anos e R$ 100; transcrição não confirma idade/valor. Validar a política antes de aplicar qualquer elegibilidade.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="acoes_brindes_ASIS_Note_2">
+      <bpmn:text>AS-IS: não há comprovação de controle completo de recebimentos. Excedente exige justificativa, mas seu fluxo e alçada não foram detalhados.</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmn:process id="acoes_brindes_TOBE" name="TO-BE — Preparação antecipada e controle de brindes (proposta)" isExecutable="false">
+    <bpmn:documentation>Convenção: modelo descritivo não executável; AS-IS registra a prática relatada, e TO-BE é proposta pendente de validação, sem implementação de sistema.
+
+Proposta pendente de validação. Objetivo: preparar ações com antecedência, usar dados de público atualizados e acompanhar distribuição por pessoa, local e turno.
+Limites: lembrete de preparação até distribuição com registro de quem recebeu e quem está pendente. Não se afirma entrega integral ao fim nem se impõe coleta de assinatura ou tecnologia específica.
+Mudanças: lembretes para começar ações em tempo suficiente; dados atualizados de dependentes quando a campanha usar esse critério; controle de recebimentos. São necessidades da transcrição §9 e da nota 3458764683996268143 do board.
+Responsáveis: RH prepara, pesquisa e organiza distribuição; criação personaliza. Responsável pela atualização de dados de dependentes e pelo registro na entrega precisa ser confirmado. Entradas: calendário, orçamento e público da ação; saídas: brindes distribuídos e relação de entregas/pendências.
+Regras e exceções: apenas critérios de campanha aprovados deverão orientar o público; idade e valor do Dia das Crianças permanecem pendentes. Não se usa o relato R$ 100/menores de 13 anos como parâmetro automático. Excedentes continuam exigindo justificativa, cujo fluxo não foi especificado.
+Impactos esperados, inferidos das necessidades: reduzir correria e dar visibilidade às entregas pendentes. Sem indicadores, metas ou antecedência numérica definidos.
+Pendências: antecipação dos lembretes, dados mínimos, responsáveis e acesso a informações de dependentes, política de elegibilidade de cada campanha, forma de registro e encerramento de pendências. A ordem desses passos é organização documental proposta a validar, sem especificação de aplicativo.
+Rastreabilidade: transcrição §9/Execução das ações; board 3458764683996196492, 3458764683996196872, 3458764683996268090, 3458764683996268143 e 3458764683996268714.
+
+Fontes: ../transcricao.md, seção 9 — Endomarketing e eventos internos; seção 11 — Pontos para validação na próxima conversa. Documento original: https://docs.google.com/document/d/15Bmqzj7P4mctLZawF8BEQuLMBYOq9F0_/edit . Data da reunião não informada. Board RH: https://miro.com/app/board/uXjVHmYGPIM=/ ; grupo Endomarketing (3458764683995428445), cópia de consulta em ../fontes/miro/area_1.svg, consulta em 2026-11-05. As fontes registram relatos e propostas; não há evidência de aprovação final dos processos futuros.</bpmn:documentation>
+    <bpmn:startEvent id="acoes_brindes_TOBE_inicio" name="Lembrete para preparar ação">
+      <bpmn:documentation>Melhoria discutida em §9: começar ações com tempo suficiente. Não foi definida antecedência nem canal de aviso; não se configura temporizador numérico.</bpmn:documentation>
+      <bpmn:outgoing>acoes_brindes_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="acoes_brindes_TOBE_publico" name="Conferir público e dados pertinentes">
+      <bpmn:documentation>RH precisa dispor de dados atualizados para a ação. Para Dia das Crianças, conferir dependentes e a faixa etária definida pela empresa. Cadastro, acesso e responsável pela atualização ainda a validar; não aplicar idade ou valor do board sem confirmação. §9 e widget 3458764683996268714.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>acoes_brindes_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="acoes_brindes_TOBE_opcoes" name="Pesquisar brindes dentro do orçamento">
+      <bpmn:documentation>Preserva pesquisa atual pelo RH, tendo como entradas a ação, o público e o orçamento aprovado. Excedente exige justificativa segundo §9; não se presume aprovação adicional automática. Widget 3458764683996196492.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_TOBE_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>acoes_brindes_TOBE_Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="acoes_brindes_TOBE_criacao" name="Acionar criação para personalizar">
+      <bpmn:documentation>Preserva interface RH/criação da prática atual, widget 3458764683996196872. Fornecimento, produção e compra não foram detalhados.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_TOBE_Flow_3</bpmn:incoming>
+      <bpmn:outgoing>acoes_brindes_TOBE_Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="acoes_brindes_TOBE_entregar" name="Distribuir e registrar recebimentos">
+      <bpmn:documentation>Proposta: acompanhar quem recebeu e quem não recebeu, incluindo locais e turnos distintos. Forma de comprovação e responsável por registrar cada entrega a definir; não se presume assinatura. §9 e widget 3458764683996268143.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_TOBE_Flow_4</bpmn:incoming>
+      <bpmn:outgoing>acoes_brindes_TOBE_Flow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="acoes_brindes_TOBE_fim" name="Entregas e pendências identificadas">
+      <bpmn:documentation>Fim do recorte proposto: recebimentos e pendências visíveis. Tratamento de pessoas ausentes e critério de encerramento final ainda devem ser validados.</bpmn:documentation>
+      <bpmn:incoming>acoes_brindes_TOBE_Flow_5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="acoes_brindes_TOBE_Flow_1" sourceRef="acoes_brindes_TOBE_inicio" targetRef="acoes_brindes_TOBE_publico" />
+    <bpmn:sequenceFlow id="acoes_brindes_TOBE_Flow_2" sourceRef="acoes_brindes_TOBE_publico" targetRef="acoes_brindes_TOBE_opcoes" />
+    <bpmn:sequenceFlow id="acoes_brindes_TOBE_Flow_3" sourceRef="acoes_brindes_TOBE_opcoes" targetRef="acoes_brindes_TOBE_criacao" />
+    <bpmn:sequenceFlow id="acoes_brindes_TOBE_Flow_4" sourceRef="acoes_brindes_TOBE_criacao" targetRef="acoes_brindes_TOBE_entregar" />
+    <bpmn:sequenceFlow id="acoes_brindes_TOBE_Flow_5" sourceRef="acoes_brindes_TOBE_entregar" targetRef="acoes_brindes_TOBE_fim" />
+    <bpmn:textAnnotation id="acoes_brindes_TOBE_Note_1">
+      <bpmn:text>TO-BE: proposta pendente de validação. Lembretes não têm prazo definido; o registro de recebimento não pressupõe assinatura ou aplicativo.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="acoes_brindes_TOBE_Note_2">
+      <bpmn:text>Dados de dependentes e critérios da campanha precisam ser confirmados. Pendências de entrega não implicam encerramento definitivo da ação.</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="acoes_brindes_ASIS_Diagram" name="AS-IS — Ações internas com brindes">
+    <bpmndi:BPMNPlane id="acoes_brindes_ASIS_Plane" bpmnElement="acoes_brindes_ASIS">
+      <bpmndi:BPMNShape id="acoes_brindes_ASIS_inicio_Shape" bpmnElement="acoes_brindes_ASIS_inicio">
+        <dc:Bounds x="80" y="167" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="33" y="211" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_ASIS_opcoes_Shape" bpmnElement="acoes_brindes_ASIS_opcoes">
+        <dc:Bounds x="200" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_ASIS_criacao_Shape" bpmnElement="acoes_brindes_ASIS_criacao">
+        <dc:Bounds x="440" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_ASIS_distribuicao_Shape" bpmnElement="acoes_brindes_ASIS_distribuicao">
+        <dc:Bounds x="680" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_ASIS_fim_Shape" bpmnElement="acoes_brindes_ASIS_fim">
+        <dc:Bounds x="970" y="167" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="923" y="211" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="acoes_brindes_ASIS_Flow_1_Edge" bpmnElement="acoes_brindes_ASIS_Flow_1">
+        <di:waypoint x="116" y="185.0" />
+        <di:waypoint x="200" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="acoes_brindes_ASIS_Flow_2_Edge" bpmnElement="acoes_brindes_ASIS_Flow_2">
+        <di:waypoint x="390" y="185.0" />
+        <di:waypoint x="440" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="acoes_brindes_ASIS_Flow_3_Edge" bpmnElement="acoes_brindes_ASIS_Flow_3">
+        <di:waypoint x="630" y="185.0" />
+        <di:waypoint x="680" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="acoes_brindes_ASIS_Flow_4_Edge" bpmnElement="acoes_brindes_ASIS_Flow_4">
+        <di:waypoint x="870" y="185.0" />
+        <di:waypoint x="970" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="acoes_brindes_ASIS_Note_1_Shape" bpmnElement="acoes_brindes_ASIS_Note_1">
+        <dc:Bounds x="100" y="490" width="440" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_ASIS_Note_2_Shape" bpmnElement="acoes_brindes_ASIS_Note_2">
+        <dc:Bounds x="570" y="490" width="440" height="130" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="acoes_brindes_TOBE_Diagram" name="TO-BE — Preparação antecipada e controle de brindes (proposta)">
+    <bpmndi:BPMNPlane id="acoes_brindes_TOBE_Plane" bpmnElement="acoes_brindes_TOBE">
+      <bpmndi:BPMNShape id="acoes_brindes_TOBE_inicio_Shape" bpmnElement="acoes_brindes_TOBE_inicio">
+        <dc:Bounds x="80" y="167" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="33" y="211" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_TOBE_publico_Shape" bpmnElement="acoes_brindes_TOBE_publico">
+        <dc:Bounds x="200" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_TOBE_opcoes_Shape" bpmnElement="acoes_brindes_TOBE_opcoes">
+        <dc:Bounds x="440" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_TOBE_criacao_Shape" bpmnElement="acoes_brindes_TOBE_criacao">
+        <dc:Bounds x="680" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_TOBE_entregar_Shape" bpmnElement="acoes_brindes_TOBE_entregar">
+        <dc:Bounds x="920" y="140" width="190" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_TOBE_fim_Shape" bpmnElement="acoes_brindes_TOBE_fim">
+        <dc:Bounds x="1210" y="167" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1163" y="211" width="130" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="acoes_brindes_TOBE_Flow_1_Edge" bpmnElement="acoes_brindes_TOBE_Flow_1">
+        <di:waypoint x="116" y="185.0" />
+        <di:waypoint x="200" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="acoes_brindes_TOBE_Flow_2_Edge" bpmnElement="acoes_brindes_TOBE_Flow_2">
+        <di:waypoint x="390" y="185.0" />
+        <di:waypoint x="440" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="acoes_brindes_TOBE_Flow_3_Edge" bpmnElement="acoes_brindes_TOBE_Flow_3">
+        <di:waypoint x="630" y="185.0" />
+        <di:waypoint x="680" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="acoes_brindes_TOBE_Flow_4_Edge" bpmnElement="acoes_brindes_TOBE_Flow_4">
+        <di:waypoint x="870" y="185.0" />
+        <di:waypoint x="920" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="acoes_brindes_TOBE_Flow_5_Edge" bpmnElement="acoes_brindes_TOBE_Flow_5">
+        <di:waypoint x="1110" y="185.0" />
+        <di:waypoint x="1210" y="185.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="acoes_brindes_TOBE_Note_1_Shape" bpmnElement="acoes_brindes_TOBE_Note_1">
+        <dc:Bounds x="100" y="490" width="440" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acoes_brindes_TOBE_Note_2_Shape" bpmnElement="acoes_brindes_TOBE_Note_2">
+        <dc:Bounds x="570" y="490" width="440" height="130" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

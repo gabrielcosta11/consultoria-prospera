@@ -1,0 +1,511 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_captacao_admissao" targetNamespace="https://prospera.local/processos/rh/captacao_admissao" name="Captação e admissão" exporter="Documentação de processos Próspera">
+  <bpmn:process id="captacao_admissao_asis" name="Captação e admissão — AS-IS — situação atual relatada" isExecutable="false">
+    <bpmn:documentation>Objetivo: documentar a captação de pessoas, a seleção e a admissão de funcionários e a interface com a contratação PJ. Limites: pedido de vaga até integração e cadastro no ponto, quando aplicável, ou encaminhamento para PJ. Entradas: necessidade da área, requisitos da vaga, currículos, fichas de entrevista, documentos e resultado de exame. Saídas: pessoa integrada/cadastrada ou candidatura não admitida neste percurso; rotina de encerramento de vaga e devolutiva a candidatos não descrita. Responsáveis: gestor solicita e participa da entrevista; RH (Isa e/ou Ronaldo) conduz recrutamento e admissão; líder avalia teste e orienta trabalho; candidato fornece dados; colaboradores experientes podem apoiar integração operacional. Interface: sistema contábil para cadastro e obrigações reportadas, sistema de ponto e fluxo de PJ. Fontes: ../transcricao.md §§1–3, 5 e 11; Miro grupo Captação / Admissão, widget 3458764683991367825, em ../fontes/miro/area_0.svg. 
+Fontes consultadas em 05/11/2026 (America/Sao_Paulo); data da reunião não informada. Transcrição revisada de reunião, não literal. Board: https://miro.com/app/board/uXjVHmYGPIM=/; cópias dos recortes em ../fontes/miro/. Modelos descritivos e não executáveis. AS-IS é relato sujeito à validação do setor; TO-BE é proposta não validada. Prazos e condições contratuais citados não foram validados como regras legais ou SLAs.
+
+Fontes: ../transcricao.md §§1–3, 5 e 11; Miro grupo Captação / Admissão, widget 3458764683991367825, em ../fontes/miro/area_0.svg. AS-IS — situação atual relatada. Pedido verbal e urgente; o formulário existente costuma não ser preenchido. Currículos pela Catho, indicações, busca no LinkedIn e divulgação em redes sociais. Entrevista direta com líder e Isa/Ronaldo, sem triagem autônoma anterior do RH. Histórico de entrevistados pouco acessível e fichas em papel. Referências práticas de cinco opções e cerca de vinte contatos por vaga não são metas aprovadas. Teste operacional pode ocorrer por uma semana, prorrogável para cerca de quinze dias, com pagamento como freelancer; não é uma regra universal de toda produção. A transcrição informa decisão de contratação após avaliação; o board liga o ramo 'Sim' ao teste mas não explicita retorno após ele. O retorno e a decisão desenhados aqui são complementação identificada pela transcrição, não conexão observada no Miro. O destino de não aprovação delimita esta candidatura e não descreve procedimento de arquivamento ou reinício de busca.
+O board desenha documentação → exame → integração → ponto. A transcrição também relata cadastro no sistema contábil e envio ao governo sem fixar uma ordenação fina entre cadastro, exame e transmissão; foram reunidos numa atividade administrativa para não inventar sequência. Há exceção de início do trabalho antes do exame, registrada na tarefa e não convertida em prática recomendada. Integração já existe informalmente: o post-it 'Não tem onboarding' (3458764683992659509) não significa ausência de apresentação, manual ou orientação. PJ segue variante própria: documento menor e contrato; sem exame/ponto/uniforme segundo relato, a conferir por contrato.
+Pendências: modelos de requisição e documentos, critérios de escolha e aprovação, funções sujeitas ao teste, avaliação/prorrogação e situação de reprovados, tratamento de ausências nas entrevistas, responsáveis por itens, evidências de aptidão, ordem e prazos administrativos e nome exato dos sistemas. Todas dependem de validação com o RH; não foram verificadas obrigações trabalhistas.
+Interface PJ: a decisão de aprovação é explicitada no ramo PJ antes do encaminhamento, porque ../transcricao.md §5 descreve contratação depois da aprovação. Critérios, alçada e rotina para não aprovação não foram definidos; não se presume que toda pessoa entrevistada esteja aprovada.</bpmn:documentation>
+    <bpmn:startEvent id="captacao_admissao_asis_inicio" name="Gestor solicita vaga">
+      <bpmn:documentation>Gestor/líder inicia pedido ao RH, geralmente verbal e urgente. Transcrição §2; Miro 3458764683991466028 e 3458764683993091437.</bpmn:documentation>
+      <bpmn:outgoing>captacao_admissao_asis_f0</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:task id="captacao_admissao_asis_detalhar" name="RH levanta detalhes da vaga">
+      <bpmn:documentation>Conversa com gestor para completar os detalhes; há modelo de requisição existente pouco utilizado. Transcrição §2.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f0</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f1</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_asis_captar" name="RH capta currículos e contata candidatos">
+      <bpmn:documentation>Catho, indicações e busca no LinkedIn; redes sociais da Próspera trazem poucos candidatos e há faltas. Sem base histórica sistematizada. Transcrição §2; Miro 3458764683991985570, 3458764683992552432, 3458764683992168943.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f1</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f2</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_asis_entrevistar" name="RH e líder entrevistam candidatos">
+      <bpmn:documentation>Isa, Ronaldo ou ambos com líder. Fichas de papel; não há triagem separada anterior do RH. Transcrição §2; Miro 3458764683992067828, 3458764683992246840.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f2</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f3</bpmn:outgoing></bpmn:task>
+    <bpmn:exclusiveGateway id="captacao_admissao_asis_pj" name="Contratação PJ?">
+      <bpmn:documentation>Variante relatada no §5 e post-it 3458764683994847182; ponto de interface, não categorização contratual estabelecida pelo board.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f3</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f4</bpmn:outgoing><bpmn:outgoing>captacao_admissao_asis_f6</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:task id="captacao_admissao_asis_encaminhar_pj" name="Encaminhar para contratação PJ">
+      <bpmn:documentation>Interface para documentação, contrato e integração próprios; não executar automaticamente exames/ponto de CLT. Transcrição §5; fluxo PJ documentado separadamente.
+Referência ao arquivo ../contratacao_pj/contratacao_pj.xml, na pasta do fluxo PJ.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_pj_aprovado_sim</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f5</bpmn:outgoing></bpmn:task>
+    <bpmn:endEvent id="captacao_admissao_asis_fim_pj" name="Interface PJ registrada">
+      <bpmn:documentation>Fim deste recorte, sem afirmar conclusão do contrato PJ.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f5</bpmn:incoming></bpmn:endEvent>
+    <bpmn:exclusiveGateway id="captacao_admissao_asis_teste" name="Haverá teste operacional?">
+      <bpmn:documentation>Board 3458764683992246445 diz Área de produção?; transcrição §3 diz que pode haver teste para funções operacionais. Não tratar toda produção como teste obrigatório.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f6</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f7</bpmn:outgoing><bpmn:outgoing>captacao_admissao_asis_f8</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:task id="captacao_admissao_asis_executar_teste" name="Realizar teste e avaliação pelo líder">
+      <bpmn:documentation>Referência de uma semana a cerca de quinze dias, pagamento como freelancer e possível pedido de mais tempo pelo líder. Não validado como regra contratual. Transcrição §3; Miro 3458764683992339636.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f7</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f9</bpmn:outgoing></bpmn:task>
+    <bpmn:exclusiveGateway id="captacao_admissao_asis_aprovacao" name="Contratação aprovada?">
+      <bpmn:documentation>A aprovação após teste ou entrevista antecede admissão segundo §3. Critérios e tratamento da não aprovação não descritos. Complementa conexão ausente após teste no board.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f8</bpmn:incoming><bpmn:incoming>captacao_admissao_asis_f9</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f10</bpmn:outgoing><bpmn:outgoing>captacao_admissao_asis_f11</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:endEvent id="captacao_admissao_asis_fim_nao" name="Candidatura sem admissão neste percurso">
+      <bpmn:documentation>Não representa descarte obrigatório, devolutiva ou reinício da seleção; esses procedimentos não foram detalhados.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f11</bpmn:incoming></bpmn:endEvent>
+    <bpmn:task id="captacao_admissao_asis_documentos" name="RH recolhe e digitaliza documentos">
+      <bpmn:documentation>WhatsApp ou entrega física, com digitalização pelo RH. Transcrição §3; Miro 3458764683992339904 e 3458764683992449629.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f10</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f12</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_asis_admitir" name="RH providencia exame, cadastro e informações">
+      <bpmn:documentation>Reúne agendamento do exame admissional, cadastro no sistema contábil e envio das informações obrigatórias ao governo, sem inventar ordem administrativa detalhada. Houve início antes da conclusão de exame por urgência; é exceção relatada a corrigir. Agendamento não foi gargalo. Transcrição §§1 e 3; Miro 3458764683992449396.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f12</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f13</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_asis_integrar" name="Integrar e orientar pessoa no setor">
+      <bpmn:documentation>Apresentação, manual, uniforme quando aplicável e orientação do líder; entrega/assinatura nem sempre consistentes. Colaboradores experientes apoiam operacional. Transcrição §3; Miro 3458764683992659411, 3458764683992659509 e 3458764683992746253.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f13</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f14</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_asis_ponto" name="RH cadastra no ponto quando aplicável">
+      <bpmn:documentation>Transcrição §3 e Miro 3458764683992976137. Condição de aplicabilidade não detalhada; não estender a PJ.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f14</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_f15</bpmn:outgoing></bpmn:task>
+    <bpmn:endEvent id="captacao_admissao_asis_fim" name="Pessoa integrada e cadastros tratados">
+      <bpmn:documentation>Limite representacional do fluxo; conclusão e conferência formal do checklist não foram evidenciadas no AS-IS.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_asis_f15</bpmn:incoming></bpmn:endEvent>
+    <bpmn:exclusiveGateway id="captacao_admissao_asis_pj_aprovado" name="Prestador PJ aprovado?"><bpmn:documentation>A transcrição §5 inicia a variante PJ depois da aprovação. Esta decisão explicita essa condição antes da interface ../contratacao_pj/contratacao_pj.xml, sem criar critérios ou alçada de aprovação. Não aprovação encerra apenas este recorte da candidatura; devolutiva e continuidade da busca não foram detalhadas.</bpmn:documentation><bpmn:incoming>captacao_admissao_asis_f4</bpmn:incoming><bpmn:outgoing>captacao_admissao_asis_pj_aprovado_sim</bpmn:outgoing><bpmn:outgoing>captacao_admissao_asis_pj_aprovado_nao</bpmn:outgoing></bpmn:exclusiveGateway><bpmn:endEvent id="captacao_admissao_asis_pj_nao_aprovado" name="PJ sem aprovação neste percurso"><bpmn:documentation>Limite do recorte: sem encaminhamento para contratação PJ até aprovação. Não determina exclusão do cadastro, devolutiva ou reinício da seleção.</bpmn:documentation><bpmn:incoming>captacao_admissao_asis_pj_aprovado_nao</bpmn:incoming></bpmn:endEvent><bpmn:sequenceFlow id="captacao_admissao_asis_f0" sourceRef="captacao_admissao_asis_inicio" targetRef="captacao_admissao_asis_detalhar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f1" sourceRef="captacao_admissao_asis_detalhar" targetRef="captacao_admissao_asis_captar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f2" sourceRef="captacao_admissao_asis_captar" targetRef="captacao_admissao_asis_entrevistar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f3" sourceRef="captacao_admissao_asis_entrevistar" targetRef="captacao_admissao_asis_pj"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f4" sourceRef="captacao_admissao_asis_pj" targetRef="captacao_admissao_asis_pj_aprovado" name="Sim — PJ"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f5" sourceRef="captacao_admissao_asis_encaminhar_pj" targetRef="captacao_admissao_asis_fim_pj"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f6" sourceRef="captacao_admissao_asis_pj" targetRef="captacao_admissao_asis_teste" name="Não — funcionário"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f7" sourceRef="captacao_admissao_asis_teste" targetRef="captacao_admissao_asis_executar_teste" name="Sim — teste aplicável"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f8" sourceRef="captacao_admissao_asis_teste" targetRef="captacao_admissao_asis_aprovacao" name="Não — sem teste"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f9" sourceRef="captacao_admissao_asis_executar_teste" targetRef="captacao_admissao_asis_aprovacao"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f10" sourceRef="captacao_admissao_asis_aprovacao" targetRef="captacao_admissao_asis_documentos" name="Sim"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f11" sourceRef="captacao_admissao_asis_aprovacao" targetRef="captacao_admissao_asis_fim_nao" name="Não"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f12" sourceRef="captacao_admissao_asis_documentos" targetRef="captacao_admissao_asis_admitir"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f13" sourceRef="captacao_admissao_asis_admitir" targetRef="captacao_admissao_asis_integrar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f14" sourceRef="captacao_admissao_asis_integrar" targetRef="captacao_admissao_asis_ponto"/>
+    <bpmn:sequenceFlow id="captacao_admissao_asis_f15" sourceRef="captacao_admissao_asis_ponto" targetRef="captacao_admissao_asis_fim"/>
+  <bpmn:sequenceFlow id="captacao_admissao_asis_pj_aprovado_sim" sourceRef="captacao_admissao_asis_pj_aprovado" targetRef="captacao_admissao_asis_encaminhar_pj" name="Sim — aprovado"/><bpmn:sequenceFlow id="captacao_admissao_asis_pj_aprovado_nao" sourceRef="captacao_admissao_asis_pj_aprovado" targetRef="captacao_admissao_asis_pj_nao_aprovado" name="Não — sem aprovação"/></bpmn:process>
+  <bpmn:process id="captacao_admissao_tobe" name="Captação e admissão — TO-BE — proposta não validada" isExecutable="false">
+    <bpmn:documentation>Objetivo: documentar a captação de pessoas, a seleção e a admissão de funcionários e a interface com a contratação PJ. Limites: pedido de vaga até integração e cadastro no ponto, quando aplicável, ou encaminhamento para PJ. Entradas: necessidade da área, requisitos da vaga, currículos, fichas de entrevista, documentos e resultado de exame. Saídas: pessoa integrada/cadastrada ou candidatura não admitida neste percurso; rotina de encerramento de vaga e devolutiva a candidatos não descrita. Responsáveis: gestor solicita e participa da entrevista; RH (Isa e/ou Ronaldo) conduz recrutamento e admissão; líder avalia teste e orienta trabalho; candidato fornece dados; colaboradores experientes podem apoiar integração operacional. Interface: sistema contábil para cadastro e obrigações reportadas, sistema de ponto e fluxo de PJ. Fontes: ../transcricao.md §§1–3, 5 e 11; Miro grupo Captação / Admissão, widget 3458764683991367825, em ../fontes/miro/area_0.svg. 
+Fontes consultadas em 05/11/2026 (America/Sao_Paulo); data da reunião não informada. Transcrição revisada de reunião, não literal. Board: https://miro.com/app/board/uXjVHmYGPIM=/; cópias dos recortes em ../fontes/miro/. Modelos descritivos e não executáveis. AS-IS é relato sujeito à validação do setor; TO-BE é proposta não validada. Prazos e condições contratuais citados não foram validados como regras legais ou SLAs.
+
+Fontes: ../transcricao.md §§1–3, 5 e 11; Miro grupo Captação / Admissão, widget 3458764683991367825, em ../fontes/miro/area_0.svg. TO-BE — proposta não validada. Mudanças discutidas: requisição formal com requisitos, justificativa e prazo, aprovações aplicáveis e revisão do RH; banco de candidatos e indicadores do funil; triagem inicial remota pelo RH, entrevista presencial, dinâmica eventual e líder; dados/documentos remotos conferidos pelo RH; acompanhamento das pendências/status; tempo para exame, obrigações, uniforme/EPI e integração antes do primeiro dia; onboarding por função com confirmação de leitura; benefícios fixos e opcionais na admissão e pedidos posteriores. Impactos esperados, ainda sem medição: maior antecedência, rastreabilidade de candidatos e redução de pendências no início.
+O teste prático foi relatado no AS-IS; sua continuidade no TO-BE está desenhada como ponto de decisão a validar, não como aprovação da modalidade de contratação ou prazo. Não há automação assumida para integrações. Quinze dias para recrutamento e uma semana entre aprovação/início são referências discutidas, não SLAs. Critérios de aptidão, recusa, documentos e correção de pendências precisam ser detalhados. O término com pendências significa que o início não é liberado neste recorte; a rotina para regularizar/reprogramar não foi especificada.
+Aprovações necessárias conforme vaga, responsável por cada validação, critérios de triagem e avaliações, periodicidade de indicadores, consentimentos/acessos aos registros, benefícios e responsáveis por entrega permanecem pendentes. Relações PJ devem ser tratadas segundo contratos específicos, com referência ao fluxo próprio.
+Referência ao arquivo ../contratacao_pj/contratacao_pj.xml, na pasta do fluxo PJ.
+Interface PJ: a decisão de aprovação é explicitada no ramo PJ antes do encaminhamento, porque ../transcricao.md §5 descreve contratação depois da aprovação. Critérios, alçada e rotina para não aprovação não foram definidos; não se presume que toda pessoa entrevistada esteja aprovada.</bpmn:documentation>
+    <bpmn:startEvent id="captacao_admissao_tobe_inicio" name="Necessidade de pessoa identificada">
+      <bpmn:documentation>Mesmo gatilho de negócio do AS-IS. Proposta da transcrição §2.</bpmn:documentation>
+      <bpmn:outgoing>captacao_admissao_tobe_f0</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:task id="captacao_admissao_tobe_requisitar" name="Gestor formaliza requisição de vaga">
+      <bpmn:documentation>Função, requisitos, descrição, justificativa e prazo visível. Prazo mínimo de quinze dias foi referência discutida, sujeito à validação. Transcrição §2.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f0</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f1</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_tobe_validar" name="Revisar requisição e obter aprovações aplicáveis">
+      <bpmn:documentation>RH revisa antes da divulgação. Aprovação da gerência/direção quando necessária; critérios e responsáveis específicos não definidos. Não representa aprovação automática. Transcrição §2.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f1</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f2</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_tobe_captar" name="RH consulta banco, capta e registra contatos">
+      <bpmn:documentation>Banco reutilizável com currículos, entrevistas, avaliações e palavras-chave; registrar inscrições, contatos, entrevistas, comparecimentos, aprovados e tempo de fechamento. Transcrição §2; Miro 3458764683992552432 e 3458764683993396127.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f2</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f3</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_tobe_triagem" name="RH faz triagem inicial remota">
+      <bpmn:documentation>Cenário desejado, não prática atual. Critérios, reprovação e instrumentos ainda não definidos. Transcrição §2.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f3</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f4</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_tobe_entrevista" name="Realizar entrevista presencial com líder">
+      <bpmn:documentation>Proposta menciona eventual dinâmica e conversa com líder; dinâmica permanece possível, sem obrigação universal ou roteiro presumido. Transcrição §2.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f4</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f5</bpmn:outgoing></bpmn:task>
+    <bpmn:exclusiveGateway id="captacao_admissao_tobe_pj" name="Contratação PJ?">
+      <bpmn:documentation>Separar relação contratual conforme §5; condições ainda por validar.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f5</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f6</bpmn:outgoing><bpmn:outgoing>captacao_admissao_tobe_f8</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:task id="captacao_admissao_tobe_encaminhar_pj" name="Encaminhar para variante PJ">
+      <bpmn:documentation>Interface com fluxo próprio para documentos, contrato e integração; não herdar obrigações de funcionário. Transcrição §5.
+Referência ao arquivo ../contratacao_pj/contratacao_pj.xml, na pasta do fluxo PJ.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_pj_aprovado_sim</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f7</bpmn:outgoing></bpmn:task>
+    <bpmn:endEvent id="captacao_admissao_tobe_fim_pj" name="Interface PJ registrada">
+      <bpmn:documentation>Fim deste recorte; validação contratual no fluxo próprio.
+Referência ao arquivo ../contratacao_pj/contratacao_pj.xml, na pasta do fluxo PJ.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f7</bpmn:incoming></bpmn:endEvent>
+    <bpmn:exclusiveGateway id="captacao_admissao_tobe_teste" name="Teste operacional será aplicável?">
+      <bpmn:documentation>Continuidade do teste relatado no AS-IS requer validação; não é proposta nova nem regra legal. Transcrição §3.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f8</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f9</bpmn:outgoing><bpmn:outgoing>captacao_admissao_tobe_f10</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:task id="captacao_admissao_tobe_executar_teste" name="Realizar teste aplicável e avaliação">
+      <bpmn:documentation>Preserva variante relatada, com critérios, duração e modalidade contratual a validar. Avaliação pelo líder; referência de uma semana a cerca de quinze dias não vira SLA. Transcrição §3.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f9</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f11</bpmn:outgoing></bpmn:task>
+    <bpmn:exclusiveGateway id="captacao_admissao_tobe_aprovacao" name="Pessoa aprovada para admissão?">
+      <bpmn:documentation>Resultado de seleção/avaliação, com critérios pendentes. Transcrição §§2 e 3.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f10</bpmn:incoming><bpmn:incoming>captacao_admissao_tobe_f11</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f12</bpmn:outgoing><bpmn:outgoing>captacao_admissao_tobe_f13</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:endEvent id="captacao_admissao_tobe_fim_nao" name="Candidatura não aprovada neste percurso">
+      <bpmn:documentation>Registro no banco apoia futuras vagas; critérios e devolutiva ainda pendentes. Não se presume descarte obrigatório.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f13</bpmn:incoming></bpmn:endEvent>
+    <bpmn:task id="captacao_admissao_tobe_documentos" name="Candidato envia dados e documentos; RH confere">
+      <bpmn:documentation>Proposta de coleta remota por link e conferência do RH. Manter status de pendências; integração técnica não confirmada. Transcrição §3.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f12</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f14</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_tobe_preparar" name="Preparar exame, cadastros, itens e benefícios">
+      <bpmn:documentation>Reservar tempo para exame e comunicações antes do primeiro dia; preparar uniforme/EPI conforme função e medidas confirmadas; registrar benefícios fixos e escolha dos opcionais. Seguro de vida e Gympass são exemplos da reunião. Uma semana é cenário discutido, não prazo obrigatório. Transcrição §3; Miro 3458764683995821750 e 3458764683995888926.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f14</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f15</bpmn:outgoing></bpmn:task>
+    <bpmn:exclusiveGateway id="captacao_admissao_tobe_pronto" name="Pendências de admissão resolvidas?">
+      <bpmn:documentation>Critérios pretendidos incluem aptidão confirmada, documentação, cadastro e preparação de itens. Não se presume integração automática nem definição legal final; sequência administrativa a validar. Transcrição §3.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f15</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f16</bpmn:outgoing><bpmn:outgoing>captacao_admissao_tobe_f17</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:endEvent id="captacao_admissao_tobe_pendente" name="Início permanece pendente de regularização">
+      <bpmn:documentation>Resultado de modelagem da necessidade de corrigir início antes do exame; regras de reprogramação, correção e recusa ainda não detalhadas na fonte.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f17</bpmn:incoming></bpmn:endEvent>
+    <bpmn:task id="captacao_admissao_tobe_integrar" name="Realizar integração estruturada por função">
+      <bpmn:documentation>Manuais, regras, conteúdo da área e confirmação de leitura; conteúdo para novos líderes e apresentação de equipes foram ideias. Registrar entregas e orientações. Transcrição §3.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f16</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f18</bpmn:outgoing></bpmn:task>
+    <bpmn:task id="captacao_admissao_tobe_ponto" name="RH confirma cadastro no ponto aplicável">
+      <bpmn:documentation>Mantém etapa atual quando cabível, sem assumir integração automática. Sistema e responsável por conferência final a validar. Transcrição §§1 e 3.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f18</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_f19</bpmn:outgoing></bpmn:task>
+    <bpmn:endEvent id="captacao_admissao_tobe_fim" name="Pessoa integrada; admissão acompanhada">
+      <bpmn:documentation>Resultado esperado: visibilidade de status e evidências de preparação. Não equivale a aprovação final do TO-BE pelo setor.</bpmn:documentation>
+      <bpmn:incoming>captacao_admissao_tobe_f19</bpmn:incoming></bpmn:endEvent>
+    <bpmn:exclusiveGateway id="captacao_admissao_tobe_pj_aprovado" name="Prestador PJ aprovado?"><bpmn:documentation>A transcrição §5 inicia a variante PJ depois da aprovação. Esta decisão explicita essa condição antes da interface ../contratacao_pj/contratacao_pj.xml, sem criar critérios ou alçada de aprovação. Não aprovação encerra apenas este recorte da candidatura; devolutiva e continuidade da busca não foram detalhadas.</bpmn:documentation><bpmn:incoming>captacao_admissao_tobe_f6</bpmn:incoming><bpmn:outgoing>captacao_admissao_tobe_pj_aprovado_sim</bpmn:outgoing><bpmn:outgoing>captacao_admissao_tobe_pj_aprovado_nao</bpmn:outgoing></bpmn:exclusiveGateway><bpmn:endEvent id="captacao_admissao_tobe_pj_nao_aprovado" name="PJ sem aprovação neste percurso"><bpmn:documentation>Limite do recorte: sem encaminhamento para contratação PJ até aprovação. Não determina exclusão do cadastro, devolutiva ou reinício da seleção.</bpmn:documentation><bpmn:incoming>captacao_admissao_tobe_pj_aprovado_nao</bpmn:incoming></bpmn:endEvent><bpmn:sequenceFlow id="captacao_admissao_tobe_f0" sourceRef="captacao_admissao_tobe_inicio" targetRef="captacao_admissao_tobe_requisitar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f1" sourceRef="captacao_admissao_tobe_requisitar" targetRef="captacao_admissao_tobe_validar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f2" sourceRef="captacao_admissao_tobe_validar" targetRef="captacao_admissao_tobe_captar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f3" sourceRef="captacao_admissao_tobe_captar" targetRef="captacao_admissao_tobe_triagem"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f4" sourceRef="captacao_admissao_tobe_triagem" targetRef="captacao_admissao_tobe_entrevista"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f5" sourceRef="captacao_admissao_tobe_entrevista" targetRef="captacao_admissao_tobe_pj"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f6" sourceRef="captacao_admissao_tobe_pj" targetRef="captacao_admissao_tobe_pj_aprovado" name="Sim — PJ"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f7" sourceRef="captacao_admissao_tobe_encaminhar_pj" targetRef="captacao_admissao_tobe_fim_pj"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f8" sourceRef="captacao_admissao_tobe_pj" targetRef="captacao_admissao_tobe_teste" name="Não — funcionário"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f9" sourceRef="captacao_admissao_tobe_teste" targetRef="captacao_admissao_tobe_executar_teste" name="Sim — a validar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f10" sourceRef="captacao_admissao_tobe_teste" targetRef="captacao_admissao_tobe_aprovacao" name="Não"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f11" sourceRef="captacao_admissao_tobe_executar_teste" targetRef="captacao_admissao_tobe_aprovacao"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f12" sourceRef="captacao_admissao_tobe_aprovacao" targetRef="captacao_admissao_tobe_documentos" name="Sim"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f13" sourceRef="captacao_admissao_tobe_aprovacao" targetRef="captacao_admissao_tobe_fim_nao" name="Não"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f14" sourceRef="captacao_admissao_tobe_documentos" targetRef="captacao_admissao_tobe_preparar"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f15" sourceRef="captacao_admissao_tobe_preparar" targetRef="captacao_admissao_tobe_pronto"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f16" sourceRef="captacao_admissao_tobe_pronto" targetRef="captacao_admissao_tobe_integrar" name="Sim"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f17" sourceRef="captacao_admissao_tobe_pronto" targetRef="captacao_admissao_tobe_pendente" name="Não"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f18" sourceRef="captacao_admissao_tobe_integrar" targetRef="captacao_admissao_tobe_ponto"/>
+    <bpmn:sequenceFlow id="captacao_admissao_tobe_f19" sourceRef="captacao_admissao_tobe_ponto" targetRef="captacao_admissao_tobe_fim"/>
+  <bpmn:sequenceFlow id="captacao_admissao_tobe_pj_aprovado_sim" sourceRef="captacao_admissao_tobe_pj_aprovado" targetRef="captacao_admissao_tobe_encaminhar_pj" name="Sim — aprovado"/><bpmn:sequenceFlow id="captacao_admissao_tobe_pj_aprovado_nao" sourceRef="captacao_admissao_tobe_pj_aprovado" targetRef="captacao_admissao_tobe_pj_nao_aprovado" name="Não — sem aprovação"/></bpmn:process>
+  <bpmndi:BPMNDiagram id="captacao_admissao_asis_diagram" name="Captação e admissão ASIS">
+    <bpmndi:BPMNPlane id="captacao_admissao_asis_plane" bpmnElement="captacao_admissao_asis">
+      <bpmndi:BPMNShape id="captacao_admissao_asis_inicio_di" bpmnElement="captacao_admissao_asis_inicio">
+        <dc:Bounds x="80" y="325.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="20" y="377.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_detalhar_di" bpmnElement="captacao_admissao_asis_detalhar">
+        <dc:Bounds x="340" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_captar_di" bpmnElement="captacao_admissao_asis_captar">
+        <dc:Bounds x="600" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_entrevistar_di" bpmnElement="captacao_admissao_asis_entrevistar">
+        <dc:Bounds x="860" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_pj_di" bpmnElement="captacao_admissao_asis_pj">
+        <dc:Bounds x="1120" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1060" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_encaminhar_pj_di" bpmnElement="captacao_admissao_asis_encaminhar_pj">
+        <dc:Bounds x="1640.0" y="80.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_fim_pj_di" bpmnElement="captacao_admissao_asis_fim_pj">
+        <dc:Bounds x="1900.0" y="105.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1840.0" y="157.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_teste_di" bpmnElement="captacao_admissao_asis_teste">
+        <dc:Bounds x="1380" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1320" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_executar_teste_di" bpmnElement="captacao_admissao_asis_executar_teste">
+        <dc:Bounds x="1640" y="520.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_aprovacao_di" bpmnElement="captacao_admissao_asis_aprovacao">
+        <dc:Bounds x="1900" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1840" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_fim_nao_di" bpmnElement="captacao_admissao_asis_fim_nao">
+        <dc:Bounds x="2160" y="545.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2100" y="597.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_documentos_di" bpmnElement="captacao_admissao_asis_documentos">
+        <dc:Bounds x="2160" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_admitir_di" bpmnElement="captacao_admissao_asis_admitir">
+        <dc:Bounds x="2420" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_integrar_di" bpmnElement="captacao_admissao_asis_integrar">
+        <dc:Bounds x="2680" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_ponto_di" bpmnElement="captacao_admissao_asis_ponto">
+        <dc:Bounds x="2940" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_asis_fim_di" bpmnElement="captacao_admissao_asis_fim">
+        <dc:Bounds x="3200" y="325.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3140" y="377.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f0_di" bpmnElement="captacao_admissao_asis_f0">
+        <di:waypoint x="120" y="345.0"/>
+        <di:waypoint x="340" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f1_di" bpmnElement="captacao_admissao_asis_f1">
+        <di:waypoint x="520" y="345.0"/>
+        <di:waypoint x="600" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f2_di" bpmnElement="captacao_admissao_asis_f2">
+        <di:waypoint x="780" y="345.0"/>
+        <di:waypoint x="860" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f3_di" bpmnElement="captacao_admissao_asis_f3">
+        <di:waypoint x="1040" y="345.0"/>
+        <di:waypoint x="1120" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f6_di" bpmnElement="captacao_admissao_asis_f6">
+        <di:waypoint x="1180" y="345.0"/>
+        <di:waypoint x="1380" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1300" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f7_di" bpmnElement="captacao_admissao_asis_f7">
+        <di:waypoint x="1440" y="345.0"/>
+        <di:waypoint x="1540.0" y="345.0"/>
+        <di:waypoint x="1540.0" y="565.0"/>
+        <di:waypoint x="1640" y="565.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1460.0" y="525.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f8_di" bpmnElement="captacao_admissao_asis_f8">
+        <di:waypoint x="1440" y="345.0"/>
+        <di:waypoint x="1900" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1820" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f9_di" bpmnElement="captacao_admissao_asis_f9">
+        <di:waypoint x="1820" y="565.0"/>
+        <di:waypoint x="1860.0" y="565.0"/>
+        <di:waypoint x="1860.0" y="345.0"/>
+        <di:waypoint x="1900" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f10_di" bpmnElement="captacao_admissao_asis_f10">
+        <di:waypoint x="1960" y="345.0"/>
+        <di:waypoint x="2160" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2080" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f11_di" bpmnElement="captacao_admissao_asis_f11">
+        <di:waypoint x="1960" y="345.0"/>
+        <di:waypoint x="2060.0" y="345.0"/>
+        <di:waypoint x="2060.0" y="565.0"/>
+        <di:waypoint x="2160" y="565.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1980.0" y="525.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f12_di" bpmnElement="captacao_admissao_asis_f12">
+        <di:waypoint x="2340" y="345.0"/>
+        <di:waypoint x="2420" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f13_di" bpmnElement="captacao_admissao_asis_f13">
+        <di:waypoint x="2600" y="345.0"/>
+        <di:waypoint x="2680" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f14_di" bpmnElement="captacao_admissao_asis_f14">
+        <di:waypoint x="2860" y="345.0"/>
+        <di:waypoint x="2940" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_asis_f15_di" bpmnElement="captacao_admissao_asis_f15">
+        <di:waypoint x="3120" y="345.0"/>
+        <di:waypoint x="3200" y="345.0"/>
+      </bpmndi:BPMNEdge>
+    <bpmndi:BPMNShape id="captacao_admissao_asis_pj_aprovado_di" bpmnElement="captacao_admissao_asis_pj_aprovado"><dc:Bounds x="1440.0" y="95.0" width="60" height="60"/><bpmndi:BPMNLabel><dc:Bounds x="1380.0" y="167.0" width="180" height="55"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape id="captacao_admissao_asis_pj_nao_aprovado_di" bpmnElement="captacao_admissao_asis_pj_nao_aprovado"><dc:Bounds x="1640.0" y="-115.0" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="1580.0" y="-63.0" width="180" height="55"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id="captacao_admissao_asis_f4_di" bpmnElement="captacao_admissao_asis_f4"><di:waypoint x="1180.0" y="345.0"/><di:waypoint x="1310.0" y="345.0"/><di:waypoint x="1310.0" y="125.0"/><di:waypoint x="1440.0" y="125.0"/><bpmndi:BPMNLabel><dc:Bounds x="1230.0" y="85.0" width="160" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="captacao_admissao_asis_f5_di" bpmnElement="captacao_admissao_asis_f5"><di:waypoint x="1820.0" y="125.0"/><di:waypoint x="1900.0" y="125.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="captacao_admissao_asis_pj_aprovado_sim_di" bpmnElement="captacao_admissao_asis_pj_aprovado_sim"><di:waypoint x="1500.0" y="125.0"/><di:waypoint x="1640.0" y="125.0"/><bpmndi:BPMNLabel><dc:Bounds x="1560.0" y="85.0" width="160" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="captacao_admissao_asis_pj_aprovado_nao_di" bpmnElement="captacao_admissao_asis_pj_aprovado_nao"><di:waypoint x="1500.0" y="125.0"/><di:waypoint x="1570.0" y="125.0"/><di:waypoint x="1570.0" y="-95.0"/><di:waypoint x="1640.0" y="-95.0"/><bpmndi:BPMNLabel><dc:Bounds x="1490.0" y="-135.0" width="160" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="captacao_admissao_tobe_diagram" name="Captação e admissão TOBE">
+    <bpmndi:BPMNPlane id="captacao_admissao_tobe_plane" bpmnElement="captacao_admissao_tobe">
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_inicio_di" bpmnElement="captacao_admissao_tobe_inicio">
+        <dc:Bounds x="80" y="325.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="20" y="377.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_requisitar_di" bpmnElement="captacao_admissao_tobe_requisitar">
+        <dc:Bounds x="340" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_validar_di" bpmnElement="captacao_admissao_tobe_validar">
+        <dc:Bounds x="600" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_captar_di" bpmnElement="captacao_admissao_tobe_captar">
+        <dc:Bounds x="860" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_triagem_di" bpmnElement="captacao_admissao_tobe_triagem">
+        <dc:Bounds x="1120" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_entrevista_di" bpmnElement="captacao_admissao_tobe_entrevista">
+        <dc:Bounds x="1380" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_pj_di" bpmnElement="captacao_admissao_tobe_pj">
+        <dc:Bounds x="1640" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1580" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_encaminhar_pj_di" bpmnElement="captacao_admissao_tobe_encaminhar_pj">
+        <dc:Bounds x="2160.0" y="80.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_fim_pj_di" bpmnElement="captacao_admissao_tobe_fim_pj">
+        <dc:Bounds x="2420.0" y="105.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2360.0" y="157.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_teste_di" bpmnElement="captacao_admissao_tobe_teste">
+        <dc:Bounds x="1900" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1840" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_executar_teste_di" bpmnElement="captacao_admissao_tobe_executar_teste">
+        <dc:Bounds x="2160" y="520.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_aprovacao_di" bpmnElement="captacao_admissao_tobe_aprovacao">
+        <dc:Bounds x="2420" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2360" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_fim_nao_di" bpmnElement="captacao_admissao_tobe_fim_nao">
+        <dc:Bounds x="2680" y="545.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2620" y="597.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_documentos_di" bpmnElement="captacao_admissao_tobe_documentos">
+        <dc:Bounds x="2680" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_preparar_di" bpmnElement="captacao_admissao_tobe_preparar">
+        <dc:Bounds x="2940" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_pronto_di" bpmnElement="captacao_admissao_tobe_pronto">
+        <dc:Bounds x="3200" y="315.0" width="60" height="60"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3140" y="387.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_pendente_di" bpmnElement="captacao_admissao_tobe_pendente">
+        <dc:Bounds x="3460" y="545.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3400" y="597.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_integrar_di" bpmnElement="captacao_admissao_tobe_integrar">
+        <dc:Bounds x="3460" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_ponto_di" bpmnElement="captacao_admissao_tobe_ponto">
+        <dc:Bounds x="3720" y="300.0" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="captacao_admissao_tobe_fim_di" bpmnElement="captacao_admissao_tobe_fim">
+        <dc:Bounds x="3980" y="325.0" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3920" y="377.0" width="180" height="55"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f0_di" bpmnElement="captacao_admissao_tobe_f0">
+        <di:waypoint x="120" y="345.0"/>
+        <di:waypoint x="340" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f1_di" bpmnElement="captacao_admissao_tobe_f1">
+        <di:waypoint x="520" y="345.0"/>
+        <di:waypoint x="600" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f2_di" bpmnElement="captacao_admissao_tobe_f2">
+        <di:waypoint x="780" y="345.0"/>
+        <di:waypoint x="860" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f3_di" bpmnElement="captacao_admissao_tobe_f3">
+        <di:waypoint x="1040" y="345.0"/>
+        <di:waypoint x="1120" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f4_di" bpmnElement="captacao_admissao_tobe_f4">
+        <di:waypoint x="1300" y="345.0"/>
+        <di:waypoint x="1380" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f5_di" bpmnElement="captacao_admissao_tobe_f5">
+        <di:waypoint x="1560" y="345.0"/>
+        <di:waypoint x="1640" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f8_di" bpmnElement="captacao_admissao_tobe_f8">
+        <di:waypoint x="1700" y="345.0"/>
+        <di:waypoint x="1900" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1820" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f9_di" bpmnElement="captacao_admissao_tobe_f9">
+        <di:waypoint x="1960" y="345.0"/>
+        <di:waypoint x="2060.0" y="345.0"/>
+        <di:waypoint x="2060.0" y="565.0"/>
+        <di:waypoint x="2160" y="565.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1980.0" y="525.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f10_di" bpmnElement="captacao_admissao_tobe_f10">
+        <di:waypoint x="1960" y="345.0"/>
+        <di:waypoint x="2420" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2340" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f11_di" bpmnElement="captacao_admissao_tobe_f11">
+        <di:waypoint x="2340" y="565.0"/>
+        <di:waypoint x="2380.0" y="565.0"/>
+        <di:waypoint x="2380.0" y="345.0"/>
+        <di:waypoint x="2420" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f12_di" bpmnElement="captacao_admissao_tobe_f12">
+        <di:waypoint x="2480" y="345.0"/>
+        <di:waypoint x="2680" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2600" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f13_di" bpmnElement="captacao_admissao_tobe_f13">
+        <di:waypoint x="2480" y="345.0"/>
+        <di:waypoint x="2580.0" y="345.0"/>
+        <di:waypoint x="2580.0" y="565.0"/>
+        <di:waypoint x="2680" y="565.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2500.0" y="525.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f14_di" bpmnElement="captacao_admissao_tobe_f14">
+        <di:waypoint x="2860" y="345.0"/>
+        <di:waypoint x="2940" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f15_di" bpmnElement="captacao_admissao_tobe_f15">
+        <di:waypoint x="3120" y="345.0"/>
+        <di:waypoint x="3200" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f16_di" bpmnElement="captacao_admissao_tobe_f16">
+        <di:waypoint x="3260" y="345.0"/>
+        <di:waypoint x="3460" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3380" y="305.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f17_di" bpmnElement="captacao_admissao_tobe_f17">
+        <di:waypoint x="3260" y="345.0"/>
+        <di:waypoint x="3360.0" y="345.0"/>
+        <di:waypoint x="3360.0" y="565.0"/>
+        <di:waypoint x="3460" y="565.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3280.0" y="525.0" width="160" height="35"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f18_di" bpmnElement="captacao_admissao_tobe_f18">
+        <di:waypoint x="3640" y="345.0"/>
+        <di:waypoint x="3720" y="345.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="captacao_admissao_tobe_f19_di" bpmnElement="captacao_admissao_tobe_f19">
+        <di:waypoint x="3900" y="345.0"/>
+        <di:waypoint x="3980" y="345.0"/>
+      </bpmndi:BPMNEdge>
+    <bpmndi:BPMNShape id="captacao_admissao_tobe_pj_aprovado_di" bpmnElement="captacao_admissao_tobe_pj_aprovado"><dc:Bounds x="1960.0" y="95.0" width="60" height="60"/><bpmndi:BPMNLabel><dc:Bounds x="1900.0" y="167.0" width="180" height="55"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape id="captacao_admissao_tobe_pj_nao_aprovado_di" bpmnElement="captacao_admissao_tobe_pj_nao_aprovado"><dc:Bounds x="2160.0" y="-115.0" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="2100.0" y="-63.0" width="180" height="55"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id="captacao_admissao_tobe_f6_di" bpmnElement="captacao_admissao_tobe_f6"><di:waypoint x="1700.0" y="345.0"/><di:waypoint x="1830.0" y="345.0"/><di:waypoint x="1830.0" y="125.0"/><di:waypoint x="1960.0" y="125.0"/><bpmndi:BPMNLabel><dc:Bounds x="1750.0" y="85.0" width="160" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="captacao_admissao_tobe_f7_di" bpmnElement="captacao_admissao_tobe_f7"><di:waypoint x="2340.0" y="125.0"/><di:waypoint x="2420.0" y="125.0"/></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="captacao_admissao_tobe_pj_aprovado_sim_di" bpmnElement="captacao_admissao_tobe_pj_aprovado_sim"><di:waypoint x="2020.0" y="125.0"/><di:waypoint x="2160.0" y="125.0"/><bpmndi:BPMNLabel><dc:Bounds x="2080.0" y="85.0" width="160" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="captacao_admissao_tobe_pj_aprovado_nao_di" bpmnElement="captacao_admissao_tobe_pj_aprovado_nao"><di:waypoint x="2020.0" y="125.0"/><di:waypoint x="2090.0" y="125.0"/><di:waypoint x="2090.0" y="-95.0"/><di:waypoint x="2160.0" y="-95.0"/><bpmndi:BPMNLabel><dc:Bounds x="2010.0" y="-135.0" width="160" height="35"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

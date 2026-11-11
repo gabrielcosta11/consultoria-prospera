@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_gestao_beneficios" targetNamespace="https://prospera.local/documentacao/rh/gestao_beneficios" exporter="Documentação de processos Próspera" exporterVersion="1">
+  <bpmn:process id="gestao_beneficios_TOBE" name="TO-BE — Registro e escolha de benefícios (proposta parcial)" isExecutable="false">
+    <bpmn:documentation>Registro e escolha de benefícios
+Objetivo: dar clareza sobre benefícios fixos e opcionais e permitir escolha na admissão ou solicitação posterior. Início: admissão ou desejo de inclusão/alteração. Fim do recorte: escolha ou solicitação registrada; análise, elegibilidade, aprovação, envio à folha e efetivação não detalhados. Papéis: RH e colaborador. Entradas: catálogo e opção desejada; saídas: registro de benefícios e solicitação de opção/alteração. Seguro de vida e Gympass são exemplos relatados, não catálogo completo nem garantia de elegibilidade. Pendências: critérios, descontos, vigência, cancelamento, autorização, responsável por efetivação e possibilidade de consulta. Fluxo ../solicitacoes_internas/solicitacoes_internas.xml cobre triagem genérica, sem substituir concessão. Impacto esperado: maior clareza e acompanhamento; não medido.
+Fontes: ../transcricao.md, seção 3 (benefícios fixos/opcionais) e seção 10 (solicitações); ../fontes/miro/area_0.svg, widgets 3458764683995821750 (benefícios não claros) e 3458764683995888926 (sem lugar para acompanhar). Board: https://miro.com/app/board/uXjVHmYGPIM=/ . AS-IS: seguro de vida em grupo foi citado como fixo e Gympass como opcional com desconto em folha, mas não se descreveu uma sequência atual de adesão ou alteração. Não se inventa um processo AS-IS.
+Consulta das fontes: 05/11/2026 (America/Sao_Paulo). Data da reunião não informada. Nenhum processo foi validado pelo setor nesta documentação. Fluxos descritivos, não executáveis. A ordem das propostas organiza a leitura; não representa aprovação de procedimento, prazo ou integração técnica.</bpmn:documentation>
+    <bpmn:startEvent id="gestao_beneficios_TOBE_s" name="Admissão ou interesse em alteração">
+      <bpmn:documentation>Responsável: Colaborador / RH. Momentos explicitamente citados na seção 3.</bpmn:documentation>
+      <bpmn:outgoing>gestao_beneficios_TOBE_Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="gestao_beneficios_TOBE_catalogo" name="Registrar/consultar benefícios da pessoa">
+      <bpmn:documentation>Responsável: RH. Registro ou consulta dos benefícios aplicáveis à pessoa; não criar catálogo a cada solicitação. Fixos/opcionais devem ser confirmados conforme política; não presumir aplicabilidade PJ.</bpmn:documentation>
+      <bpmn:incoming>gestao_beneficios_TOBE_Flow_1</bpmn:incoming>
+      <bpmn:outgoing>gestao_beneficios_TOBE_Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="gestao_beneficios_TOBE_g" name="Há opção a solicitar?">
+      <bpmn:documentation>Responsável: Colaborador. Benefícios opcionais são escolha; não adesão obrigatória.</bpmn:documentation>
+      <bpmn:incoming>gestao_beneficios_TOBE_Flow_2</bpmn:incoming>
+      <bpmn:outgoing>gestao_beneficios_TOBE_Flow_3</bpmn:outgoing>
+      <bpmn:outgoing>gestao_beneficios_TOBE_Flow_4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="gestao_beneficios_TOBE_escolha" name="Registrar escolha ou solicitação de alteração">
+      <bpmn:documentation>Responsável: Colaborador. Possibilidade proposta na admissão ou posteriormente; encaminhamento via solicitações quando aplicável. Não implica concessão.</bpmn:documentation>
+      <bpmn:incoming>gestao_beneficios_TOBE_Flow_4</bpmn:incoming>
+      <bpmn:outgoing>gestao_beneficios_TOBE_Flow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="gestao_beneficios_TOBE_e" name="Registro concluído (recorte)">
+      <bpmn:documentation>Responsável: RH / colaborador. Não equivale a benefício efetivado nem desconto processado.</bpmn:documentation>
+      <bpmn:incoming>gestao_beneficios_TOBE_Flow_3</bpmn:incoming>
+      <bpmn:incoming>gestao_beneficios_TOBE_Flow_5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="gestao_beneficios_TOBE_Flow_1" sourceRef="gestao_beneficios_TOBE_s" targetRef="gestao_beneficios_TOBE_catalogo">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gestao_beneficios_TOBE_Flow_2" sourceRef="gestao_beneficios_TOBE_catalogo" targetRef="gestao_beneficios_TOBE_g">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gestao_beneficios_TOBE_Flow_3" sourceRef="gestao_beneficios_TOBE_g" targetRef="gestao_beneficios_TOBE_e" name="Sem solicitação opcional">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Sem solicitação opcional. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gestao_beneficios_TOBE_Flow_4" sourceRef="gestao_beneficios_TOBE_g" targetRef="gestao_beneficios_TOBE_escolha" name="Com solicitação">
+      <bpmn:documentation>Encadeamento descritivo. Condição de leitura: Com solicitação. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gestao_beneficios_TOBE_Flow_5" sourceRef="gestao_beneficios_TOBE_escolha" targetRef="gestao_beneficios_TOBE_e">
+      <bpmn:documentation>Encadeamento descritivo. Ver documentação do processo e das atividades para evidências e limitações.</bpmn:documentation>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="gestao_beneficios_TOBE_Diagram" name="TO-BE — Registro e escolha de benefícios (proposta parcial)">
+    <bpmndi:BPMNPlane id="gestao_beneficios_TOBE_Plane" bpmnElement="gestao_beneficios_TOBE">
+      <bpmndi:BPMNShape id="gestao_beneficios_TOBE_s_di" bpmnElement="gestao_beneficios_TOBE_s">
+        <dc:Bounds x="100" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="45" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gestao_beneficios_TOBE_catalogo_di" bpmnElement="gestao_beneficios_TOBE_catalogo">
+        <dc:Bounds x="360" y="180" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gestao_beneficios_TOBE_g_di" bpmnElement="gestao_beneficios_TOBE_g">
+        <dc:Bounds x="620" y="180" width="60" height="60" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="565" y="248" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gestao_beneficios_TOBE_escolha_di" bpmnElement="gestao_beneficios_TOBE_escolha">
+        <dc:Bounds x="880" y="380" width="180" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gestao_beneficios_TOBE_e_di" bpmnElement="gestao_beneficios_TOBE_e">
+        <dc:Bounds x="1140" y="180" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1085" y="228" width="150" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="gestao_beneficios_TOBE_Flow_1_di" bpmnElement="gestao_beneficios_TOBE_Flow_1">
+        <di:waypoint x="140" y="200.0" />
+        <di:waypoint x="360" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="gestao_beneficios_TOBE_Flow_2_di" bpmnElement="gestao_beneficios_TOBE_Flow_2">
+        <di:waypoint x="540" y="230.0" />
+        <di:waypoint x="620" y="210.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="gestao_beneficios_TOBE_Flow_3_di" bpmnElement="gestao_beneficios_TOBE_Flow_3">
+        <di:waypoint x="680" y="210.0" />
+        <di:waypoint x="1140" y="200.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="850.0" y="180.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="gestao_beneficios_TOBE_Flow_4_di" bpmnElement="gestao_beneficios_TOBE_Flow_4">
+        <di:waypoint x="680" y="210.0" />
+        <di:waypoint x="780.0" y="210.0" />
+        <di:waypoint x="780.0" y="430.0" />
+        <di:waypoint x="880" y="430.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="720.0" y="295.0" width="140" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="gestao_beneficios_TOBE_Flow_5_di" bpmnElement="gestao_beneficios_TOBE_Flow_5">
+        <di:waypoint x="1060" y="430.0" />
+        <di:waypoint x="1100.0" y="430.0" />
+        <di:waypoint x="1100.0" y="200.0" />
+        <di:waypoint x="1140" y="200.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
